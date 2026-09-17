@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Handraw Studio",
+      "hasCanvas": false,
+      "bodyTextLen": 12175,
+      "bodyTextHash": "0191512fe9e9aa8f82c9688fb53c65240593ced06efaba2ed1891e61aa690b5b",
+      "bodyTextPrefix": "H Handraw STUDIO Studio Thư viện EN 1:1 1K 2K Tạo ảnh Phong cách",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Handraw Studio",
+      "hasCanvas": false,
+      "bodyTextLen": 12142,
+      "bodyTextHash": "0b70187c4049493705d3b2f8182493c0bc9f5a6e31af85c411f953c78f3b7c26",
+      "bodyTextPrefix": "H Handraw EN Tạo ảnh Phong cách Kết quả Phong cách 261/261 · 0 đ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}

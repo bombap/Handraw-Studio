@@ -85,6 +85,7 @@ export function LiveCanvas() {
                     <div className="min-w-0">
                       <p className="truncate font-mono text-xs tabular-nums">
                         #{job.styleNumber}
+                        {job.layoutId ? ` · ${job.layoutId}` : ""}
                         {job.copies > 1 ? ` · ${job.copyIndex}/${job.copies}` : ""}
                       </p>
                       <p className="truncate text-xs text-ink-muted">{job.styleName}</p>

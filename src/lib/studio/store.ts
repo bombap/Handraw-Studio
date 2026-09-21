@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { dataUrlToBlob, makeSeed, uid } from "@/lib/utils";
 import { getStyle } from "./catalog";
+import { getLayout } from "./layout-catalog";
 import { buildPrompts, shouldUseStyleReference } from "./prompt";
 import { deleteImageBlob, saveImageBlob } from "./idb";
 import {
@@ -40,10 +41,11 @@ interface StudioState {
   durations: number[];
   themeHistory: string[];
   subjectNonce: number;
-  studioTab: "styles" | "results";
+  studioTab: "styles" | "layouts" | "results";
   characterLock: boolean;
   enhanceLevel: EnhanceLevel;
   copiesPerStyle: number;
+  layoutId: string | null;
 
   setLang: (lang: Lang) => void;
   setTheme: (theme: string) => void;
@@ -62,10 +64,11 @@ interface StudioState {
   setLightbox: (id: string | null) => void;
   pushThemeHistory: (theme: string) => void;
   setSubjectNonce: () => void;
-  setStudioTab: (tab: "styles" | "results") => void;
+  setStudioTab: (tab: "styles" | "layouts" | "results") => void;
   setCharacterLock: (v: boolean) => void;
   setEnhanceLevel: (level: EnhanceLevel) => void;
   setCopiesPerStyle: (n: number) => void;
+  setLayoutId: (id: string | null) => void;
 
   enqueueBatch: (userImageDataUrl?: string) => { ok: true; batchId: string; count: number } | { ok: false; error: string };
   patchJob: (id: string, patch: Partial<GenerateJob>) => void;
@@ -116,6 +119,7 @@ export const useStudio = create<StudioState>()(
       characterLock: false,
       enhanceLevel: "full",
       copiesPerStyle: 1,
+      layoutId: null,
 
       setLang: (lang) => set({ lang }),
       setTheme: (theme) => set({ theme }),
@@ -155,6 +159,7 @@ export const useStudio = create<StudioState>()(
       setCharacterLock: (characterLock) => set({ characterLock }),
       setEnhanceLevel: (enhanceLevel) => set({ enhanceLevel }),
       setCopiesPerStyle: (n) => set({ copiesPerStyle: Math.min(MAX_COPIES, Math.max(1, Math.round(n))) }),
+      setLayoutId: (layoutId) => set({ layoutId }),
 
       enqueueBatch: (userImageDataUrl) => {
         const s = get();
@@ -166,6 +171,7 @@ export const useStudio = create<StudioState>()(
         const batchId = uid("batch");
         const now = Date.now();
         const useStyleRef = shouldUseStyleReference();
+        const layout = getLayout(s.layoutId);
         const lock = s.characterLock && (pick.length > 1 || copies > 1);
         const jobs: GenerateJob[] = [];
         let blocked = 0;
@@ -178,7 +184,8 @@ export const useStudio = create<StudioState>()(
               (j.status === "queued" || j.status === "running") &&
               j.styleNumber === number &&
               j.theme === theme &&
-              j.aspectRatio === s.aspectRatio,
+              j.aspectRatio === s.aspectRatio &&
+              (j.layoutId ?? null) === (layout?.id ?? null),
           ).length;
           const toAdd = Math.min(copies, MAX_COPIES - inFlight);
           if (toAdd <= 0) {
@@ -199,6 +206,7 @@ export const useStudio = create<StudioState>()(
               copyIndex: c + 1,
               copies: toAdd,
               seed,
+              layout,
             });
             jobs.push({
               id: uid("job"),
@@ -220,6 +228,8 @@ export const useStudio = create<StudioState>()(
               copyIndex: c + 1,
               copies: toAdd,
               seed,
+              layoutId: layout?.id,
+              layoutName: layout ? (s.lang === "vi" ? layout.nameVi : layout.nameEn) : undefined,
             });
             seq += 1;
           }
@@ -329,6 +339,8 @@ export const useStudio = create<StudioState>()(
             createdAt: Date.now(),
             favorite: false,
             promptEn: job.promptEn,
+            layoutId: job.layoutId,
+            layoutName: job.layoutName,
           };
           set((s) => {
             if (s.gallery.some((g) => g.jobId === job.id)) {
@@ -400,6 +412,7 @@ export const useStudio = create<StudioState>()(
           activeJobId: current.activeJobId,
           lightboxId: current.lightboxId,
           studioTab: current.studioTab,
+          layoutId: typeof p.layoutId === "string" ? p.layoutId : null,
           search: current.search,
           themeHistory: p.themeHistory ?? [],
           characterLock: p.characterLock ?? false,
@@ -426,6 +439,7 @@ export const useStudio = create<StudioState>()(
         characterLock: s.characterLock,
         enhanceLevel: s.enhanceLevel,
         copiesPerStyle: s.copiesPerStyle,
+        layoutId: s.layoutId,
       }),
     },
   ),

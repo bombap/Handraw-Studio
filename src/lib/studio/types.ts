@@ -41,6 +41,20 @@ export interface StyleGroup {
   count: number;
 }
 
+export type LayoutCategory = "social-card" | "infographic" | "comic-storyboard";
+
+export interface Layout {
+  id: string;
+  category: LayoutCategory;
+  nameZh: string;
+  nameEn: string;
+  nameVi: string;
+  keywords: string[];
+  promptZh: string;
+  promptEn: string;
+  previewUrl: string;
+}
+
 export interface GenerateJob {
   id: string;
   batchId: string;
@@ -65,6 +79,8 @@ export interface GenerateJob {
   copyIndex: number;
   copies: number;
   seed: string;
+  layoutId?: string;
+  layoutName?: string;
 }
 
 export interface GalleryItem {
@@ -78,6 +94,8 @@ export interface GalleryItem {
   createdAt: number;
   favorite: boolean;
   promptEn: string;
+  layoutId?: string;
+  layoutName?: string;
 }
 
 export const ASPECT_OPTIONS: {

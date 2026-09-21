@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, ChevronDown, Clock3, ImagePlus, Link2, Loader2, Minus, Plus, Shuffle, Sparkles, Undo2, WandSparkles, X } from "lucide-react";
+import { Check, ChevronDown, Clock3, ImagePlus, LayoutTemplate, Link2, Loader2, Minus, Plus, Shuffle, Sparkles, Undo2, WandSparkles, X } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -8,6 +8,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { enhanceTheme } from "@/lib/studio/enhance";
 import { checkAiAvailable } from "@/lib/studio/generate";
 import { getStyle } from "@/lib/studio/catalog";
+import { getLayout } from "@/lib/studio/layout-catalog";
 import { t } from "@/lib/studio/i18n";
 import { userImageRef } from "@/lib/studio/session";
 import { pickSpark } from "@/lib/studio/sparks";
@@ -43,6 +44,9 @@ export function ComposePanel() {
   const setCharacterLock = useStudio((s) => s.setCharacterLock);
   const copiesPerStyle = useStudio((s) => s.copiesPerStyle);
   const setCopiesPerStyle = useStudio((s) => s.setCopiesPerStyle);
+  const layoutId = useStudio((s) => s.layoutId);
+  const setLayoutId = useStudio((s) => s.setLayoutId);
+  const setStudioTab = useStudio((s) => s.setStudioTab);
   const groupFilter = useStudio((s) => s.groupFilter);
   const subjectNonce = useStudio((s) => s.subjectNonce);
   const [preview, setPreview] = useState<string | null>(userImageRef.current);
@@ -485,31 +489,58 @@ export function ComposePanel() {
     </Tooltip>
   );
 
-  const chips =
-    selected.length > 0 ? (
-      <div className="chip-scroll flex gap-1.5 overflow-x-auto">
-        {selected.map((num) => {
-          const style = getStyle(num);
-          return (
-            <button
-              key={num}
-              type="button"
-              onClick={() => toggleStyle(num)}
-              className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full bg-surface pr-2 pl-0.5 shadow-[var(--shadow-border)]"
-            >
-              {style ? (
-                <img src={style.previewUrl} alt="" className="size-7 rounded-full object-cover" />
-              ) : null}
-              <span className="font-mono text-xs text-stamp tabular-nums">
-                #{num}
-                {copiesPerStyle > 1 ? ` ×${copiesPerStyle}` : ""}
-              </span>
-              <X className="size-3 text-ink-subtle" />
-            </button>
-          );
-        })}
-      </div>
-    ) : null;
+  const layout = getLayout(layoutId);
+
+  const chips = (
+    <div className="chip-scroll flex gap-1.5 overflow-x-auto">
+      <button
+        type="button"
+        onClick={() => setStudioTab("layouts")}
+        className={cn(
+          "inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full pr-2 pl-0.5 shadow-[var(--shadow-border)]",
+          layout ? "bg-ink text-bg" : "bg-surface text-ink-muted",
+        )}
+      >
+        {layout ? (
+          <img src={layout.previewUrl} alt="" className="size-7 rounded-full object-cover" />
+        ) : (
+          <span className="flex size-7 items-center justify-center">
+            <LayoutTemplate className="size-3.5" />
+          </span>
+        )}
+        <span className="text-xs">{layout ? layout.id : copy.layoutNone}</span>
+        {layout ? (
+          <X
+            className="size-3 opacity-70"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLayoutId(null);
+            }}
+          />
+        ) : null}
+      </button>
+      {selected.map((num) => {
+        const style = getStyle(num);
+        return (
+          <button
+            key={num}
+            type="button"
+            onClick={() => toggleStyle(num)}
+            className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full bg-surface pr-2 pl-0.5 shadow-[var(--shadow-border)]"
+          >
+            {style ? (
+              <img src={style.previewUrl} alt="" className="size-7 rounded-full object-cover" />
+            ) : null}
+            <span className="font-mono text-xs text-stamp tabular-nums">
+              #{num}
+              {copiesPerStyle > 1 ? ` ×${copiesPerStyle}` : ""}
+            </span>
+            <X className="size-3 text-ink-subtle" />
+          </button>
+        );
+      })}
+    </div>
+  );
 
   return (
     <section className="shrink-0 border-t border-line bg-bg-elevated/95 backdrop-blur-md lg:border-t-0 lg:border-b">

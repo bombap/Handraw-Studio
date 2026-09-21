@@ -96,6 +96,7 @@ async function runJob(id: string, userImageDataUrl: string | null) {
         copyIndex: job.copyIndex,
         copies: job.copies,
         seed: job.seed,
+        layoutId: job.layoutId,
       },
     });
 

@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getStyle, stylePreviewUrl } from "./catalog";
+import { getLayout, layoutPreviewUrl } from "./layout-catalog";
 import { buildPrompts, shouldUseStyleReference } from "./prompt";
 import type { AspectRatio, Resolution } from "./types";
 import { seedToInt } from "@/lib/utils";
@@ -17,6 +18,7 @@ export type GenerateInput = {
   copyIndex?: number;
   copies?: number;
   seed?: string;
+  layoutId?: string;
 };
 
 export type GenerateResult =
@@ -115,6 +117,7 @@ async function generateOnce(
 ): Promise<GenerateResult> {
   const style = getStyle(input.styleNumber);
   if (!style) return { ok: false, error: `Không có style #${input.styleNumber}` };
+  const layout = getLayout(input.layoutId);
 
   const useStyleRef = shouldUseStyleReference();
   const { zh, en } = buildPrompts({
@@ -127,11 +130,14 @@ async function generateOnce(
     copyIndex: input.copyIndex,
     copies: input.copies,
     seed: input.seed,
+    layout,
   });
 
   const urls: string[] = [];
   if (input.userImageDataUrl) urls.push(input.userImageDataUrl);
+  if (layout) urls.push(layoutPreviewUrl(layout.id, layout.category));
   if (useStyleRef) urls.push(stylePreviewUrl(style.number));
+  const refs = urls.slice(0, 3);
 
   const shared: Record<string, unknown> = {
     model,
@@ -143,9 +149,9 @@ async function generateOnce(
   if (input.seed) shared.seed = seedToInt(input.seed);
 
   const result =
-    urls.length === 0
+    refs.length === 0
       ? await callXai(apiKey, shared, "/images/generations")
-      : await editWithRefs(apiKey, shared, urls);
+      : await editWithRefs(apiKey, shared, refs);
 
   if (!result.ok) {
     return { ok: false, error: result.error, promptEn: en, promptZh: zh };

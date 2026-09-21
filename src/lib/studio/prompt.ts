@@ -1,5 +1,5 @@
 import { getStyle } from "./catalog";
-import type { AspectRatio, Style } from "./types";
+import type { AspectRatio, Layout, Style } from "./types";
 
 const ISOLATION_ZH =
   "所附风格图片仅用于参考画风。只提取参考图的风格特征，例如线条、笔触、媒介、材质、色彩倾向和整体视觉语言；不要使用、复制或延续参考图中的任何主体、人物、动物、服装、道具、动作、姿态、场景、背景、构图、布局、文字或故事。最终画面内容完全以用户提供的主题为准。";
@@ -13,6 +13,11 @@ const LOCK_EN =
   "This is one plate in a series. Keep the same character identity, age, face, hair, wardrobe, and key props. Only the drawing style changes — do not recast the person.";
 const CONTENT_EN =
   "If a subject photograph or sketch is also attached, treat that image as the content source: keep the subject's identity, key objects, and scene intent, and restyle everything into the chosen hand-drawn look.";
+
+const LAYOUT_ISO_ZH =
+  "若同时附上排版参考图，只取其版式、分栏、分镜格子、图文位置和阅读顺序；不要复制参考图中的人物、配色、道具或故事。用用户主题填入该版式，并以所选手绘风格绘制全部画面。";
+const LAYOUT_ISO_EN =
+  "If a layout reference is attached, follow only its structure: columns, panels, type placement, and reading order. Do not copy its characters, colors, props, or story. Fill that structure with the user's theme, drawn entirely in the chosen hand-drawn style.";
 
 function positiveTraits(traits: string): string {
   return traits
@@ -47,6 +52,7 @@ export function buildPrompts(opts: {
   copyIndex?: number;
   copies?: number;
   seed?: string;
+  layout?: Layout;
 }): { zh: string; en: string } {
   const { style, theme } = opts;
   const traits = positiveTraits(style.traits);
@@ -76,14 +82,21 @@ export function buildPrompts(opts: {
     zh += LOCK_ZH;
     en += ` ${LOCK_EN}`;
   }
+  if (opts.layout) {
+    zh += `排版编号：${opts.layout.id} · ${opts.layout.nameZh}。${opts.layout.promptZh}${LAYOUT_ISO_ZH}`;
+    en += ` Layout id: ${opts.layout.id} · ${opts.layout.nameEn}. ${opts.layout.promptEn} ${LAYOUT_ISO_EN}`;
+  }
   const copies = opts.copies ?? 1;
   const copyIndex = opts.copyIndex ?? 1;
   const seed = opts.seed?.trim();
-  if (copies > 1 || seed) {
+  if (!opts.layout && (copies > 1 || seed)) {
     const angle = VARIANT_EN[(copyIndex - 1) % VARIANT_EN.length];
     const angleZh = VARIANT_ZH[(copyIndex - 1) % VARIANT_ZH.length];
     zh += `这是同一风格的第${copyIndex}/${Math.max(copies, 1)}张独立变体，种子 ${seed || copyIndex}：构图倾向「${angleZh}」。保持风格、媒介和主体身份，但画面不得与其他变体雷同。`;
     en += ` Independent variation ${copyIndex} of ${Math.max(copies, 1)}, seed ${seed || copyIndex}. Composition bias: ${angle}. Keep the medium, style, and subject identity, but the frame must not match other variations.`;
+  } else if (opts.layout && seed) {
+    zh += `独立出图种子 ${seed}。严格遵守所选排版，不要改格子结构。`;
+    en += ` Unique seed ${seed}. Obey the chosen layout; do not change the panel structure.`;
   }
 
   return { zh, en };

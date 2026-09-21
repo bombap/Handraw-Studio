@@ -92,7 +92,10 @@ export function GalleryView() {
               </button>
               <div className="flex items-start justify-between gap-2 px-2.5 py-2">
                 <div className="min-w-0">
-                  <p className="truncate font-mono text-xs tabular-nums">#{item.styleNumber}</p>
+                  <p className="truncate font-mono text-xs tabular-nums">
+                    #{item.styleNumber}
+                    {item.layoutId ? ` · ${item.layoutId}` : ""}
+                  </p>
                   <p className="truncate text-xs text-ink-muted">{item.theme}</p>
                 </div>
                 <div className="flex shrink-0">

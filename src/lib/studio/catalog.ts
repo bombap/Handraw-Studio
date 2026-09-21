@@ -19,7 +19,8 @@ const GROUP_META: Record<
   D: { range: "083–123", labelVi: "Minh họa Nhật", labelEn: "Japanese illustration" },
   E: { range: "124–154", labelVi: "Minh họa Trung Quốc", labelEn: "Chinese illustration" },
   F: { range: "155–200", labelVi: "Mạng / chất liệu", labelEn: "Web / medium / regional" },
-  G: { range: "201–261", labelVi: "Bổ sung đương đại", labelEn: "Contemporary supplement" },
+  G: { range: "201–216", labelVi: "Bổ sung đương đại", labelEn: "Contemporary supplement" },
+  H: { range: "217–274", labelVi: "Khác / đương đại", labelEn: "Other / contemporary" },
 };
 
 export const GROUPS: StyleGroup[] = (Object.keys(GROUP_META) as StyleGroupId[]).map((id) => ({

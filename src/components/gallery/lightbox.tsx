@@ -3,10 +3,11 @@ import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { StoredImage } from "@/components/studio/stored-image";
-import { getImageObjectUrl } from "@/lib/studio/idb";
+import { getImageBlob } from "@/lib/studio/idb";
 import { t } from "@/lib/studio/i18n";
 import { useStudio } from "@/lib/studio/store";
 import { useImageAsSubject } from "@/lib/studio/subject";
+import { copyToClipboard, downloadBlob } from "@/lib/utils";
 
 export function Lightbox() {
   const lang = useStudio((s) => s.lang);
@@ -20,26 +21,48 @@ export function Lightbox() {
   const toggleFav = useStudio((s) => s.toggleGalleryFavorite);
   const deleteItem = useStudio((s) => s.deleteGalleryItem);
   const item = id ? gallery.find((g) => g.id === id) : undefined;
-  const job = id ? jobs.find((j) => j.id === id || j.imageId === id) : undefined;
+  const job = id ? jobs.find((j) => j.imageId === id || j.id === id) : undefined;
 
   if (!id || !item) return null;
 
   const current = item;
   const imageId = id;
-  const prompt = job?.promptEn ?? current.promptEn;
+  const prompt = (job?.promptEn || current.promptEn || "").trim();
 
   async function download() {
-    const url = await getImageObjectUrl(imageId);
-    if (!url) return;
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `handraw-${current.styleNumber}-${current.id}.png`;
-    a.click();
+    const blob = await getImageBlob(imageId);
+    if (!blob) {
+      toast.error(copy.downloadFail);
+      return;
+    }
+    const ext = blob.type.includes("jpeg") || blob.type.includes("jpg") ? "jpg" : blob.type.includes("webp") ? "webp" : "png";
+    const filename = `handraw-${current.styleNumber}-${current.id.slice(-8)}.${ext}`;
+    const ok = await downloadBlob(blob, filename);
+    if (!ok) toast.error(copy.downloadFail);
   }
 
   async function copyPrompt() {
-    await navigator.clipboard.writeText(prompt);
-    toast.success(copy.copied);
+    if (!prompt) {
+      toast.error(copy.copyFail);
+      return;
+    }
+    const ok = await copyToClipboard(prompt);
+    if (ok) {
+      toast.success(copy.copied);
+      return;
+    }
+    toast.error(copy.copyFail);
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = prompt;
+      ta.style.cssText = "position:fixed;inset:20% 10%;z-index:80;width:80%;height:40%;padding:12px";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      window.setTimeout(() => ta.remove(), 8000);
+    } catch {
+      /* ignore */
+    }
   }
 
   return (

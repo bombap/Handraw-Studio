@@ -13,6 +13,75 @@ export function uid(prefix = "id"): string {
   return `${prefix}_${Math.random().toString(36).slice(2, 10)}${Date.now().toString(36)}`;
 }
 
+export function makeSeed(): string {
+  if (typeof crypto !== "undefined" && crypto.getRandomValues) {
+    return crypto.getRandomValues(new Uint32Array(1))[0].toString(16).padStart(8, "0");
+  }
+  return Math.floor(Math.random() * 0xffffffff)
+    .toString(16)
+    .padStart(8, "0");
+}
+
+export function seedToInt(seed: string): number {
+  const n = Number.parseInt(seed.replace(/[^a-f0-9]/gi, "").slice(0, 8) || "1", 16);
+  return Number.isFinite(n) ? n >>> 0 : 1;
+}
+
+export async function copyToClipboard(text: string): Promise<boolean> {
+  const value = text.trim();
+  if (!value) return false;
+  try {
+    await navigator.clipboard.writeText(value);
+    return true;
+  } catch {
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = value;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;left:-9999px;top:0";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      ta.setSelectionRange(0, value.length);
+      const ok = document.execCommand("copy");
+      ta.remove();
+      return ok;
+    } catch {
+      return false;
+    }
+  }
+}
+
+export async function downloadBlob(blob: Blob, filename: string): Promise<boolean> {
+  const file = new File([blob], filename, { type: blob.type || "image/png" });
+  const coarse = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+  if (coarse && typeof navigator.share === "function" && navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: filename });
+      return true;
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") return false;
+    }
+  }
+  try {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.rel = "noopener";
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    window.setTimeout(() => {
+      a.remove();
+      URL.revokeObjectURL(url);
+    }, 1500);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export async function resizeImageDataUrl(
   dataUrl: string,
   maxEdge = 1280,

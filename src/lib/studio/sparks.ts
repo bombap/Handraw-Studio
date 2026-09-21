@@ -99,6 +99,20 @@ const SPARKS: Record<StyleGroupId, { vi: string[]; en: string[] }> = {
       "A teen bedroom, old posters, striped sun through curtains, one toy robot",
     ],
   },
+  H: {
+    vi: [
+      "Nhân vật que diêm đội nón lá, đứng giữa ruộng lúa chín",
+      "Cô bé trong rừng thông, áo khoác rêu, cầm lồng đèn giấy",
+      "Tàu điện đêm mưa, một người ôm guitar nhìn cửa sổ mờ hơi nước",
+      "Lão nông ngồi bậc thềm gạch, rổ ớt đỏ và một con gà giấy",
+    ],
+    en: [
+      "A stick-figure farmer in a leaf hat standing in ripe rice fields",
+      "A child in a moss-green coat holding a paper lantern in a pine forest",
+      "A night tram in the rain, someone hugging a guitar at a fogged window",
+      "An old farmer on a brick stoop, a basket of red chilies and a paper hen",
+    ],
+  },
 };
 
 export function pickSpark(lang: Lang, groups: StyleGroupId[], exclude?: string): string {

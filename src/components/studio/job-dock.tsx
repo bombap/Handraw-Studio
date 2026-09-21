@@ -7,6 +7,7 @@ import { StoredImage } from "@/components/studio/stored-image";
 import { getStyle } from "@/lib/studio/catalog";
 import { t } from "@/lib/studio/i18n";
 import { useStudio } from "@/lib/studio/store";
+import { wakeQueue } from "@/lib/studio/queue";
 import type { JobStatus } from "@/lib/studio/types";
 import { cn, formatDuration } from "@/lib/utils";
 
@@ -84,7 +85,14 @@ export function JobDock() {
           ))}
         </div>
         <div className="flex items-center gap-1">
-          <Button size="sm" variant="secondary" onClick={() => setPaused(!paused)}>
+          <Button
+            size="sm"
+            variant="secondary"
+            onClick={() => {
+              if (paused) wakeQueue();
+              else setPaused(true);
+            }}
+          >
             {paused ? <Play className="size-3.5" /> : <Pause className="size-3.5" />}
             <span className="hidden sm:inline">{paused ? copy.resume : copy.pause}</span>
           </Button>
@@ -144,7 +152,10 @@ export function JobDock() {
                   </button>
                   <div className="flex items-start justify-between gap-1 px-1 pt-1.5 pb-0.5">
                     <div className="min-w-0">
-                      <p className="truncate font-mono text-xs tabular-nums">#{job.styleNumber}</p>
+                      <p className="truncate font-mono text-xs tabular-nums">
+                        #{job.styleNumber}
+                        {job.copies > 1 ? ` · ${job.copyIndex}/${job.copies}` : ""}
+                      </p>
                       <Badge variant={STATUS_VARIANT[job.status]} className="mt-0.5">
                         {copy[job.status]}
                       </Badge>

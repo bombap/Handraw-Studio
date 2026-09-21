@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { startJobRunner } from "@/lib/studio/queue";
-import { userImageRef } from "@/lib/studio/session";
+import { ensureRunner } from "@/lib/studio/queue";
 import { useStudio } from "@/lib/studio/store";
 
 let hydrateOnce: Promise<void> | null = null;
@@ -15,15 +14,8 @@ function ensureHydrated() {
 
 export function JobRunner() {
   useEffect(() => {
-    let stop: (() => void) | undefined;
-    let cancelled = false;
-    void ensureHydrated().then(() => {
-      if (!cancelled) stop = startJobRunner(userImageRef);
-    });
-    return () => {
-      cancelled = true;
-      stop?.();
-    };
+    void ensureHydrated();
+    ensureRunner();
   }, []);
   return null;
 }

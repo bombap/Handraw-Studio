@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { getStyle, stylePreviewUrl } from "./catalog";
 import { buildPrompts, shouldUseStyleReference } from "./prompt";
 import type { AspectRatio, Resolution } from "./types";
+import { seedToInt } from "@/lib/utils";
 
 const MODEL = "grok-imagine-image-2.0";
 const FALLBACK_MODEL = "grok-imagine-image-quality";
@@ -13,6 +14,9 @@ export type GenerateInput = {
   resolution: Resolution;
   userImageDataUrl?: string;
   characterLock?: boolean;
+  copyIndex?: number;
+  copies?: number;
+  seed?: string;
 };
 
 export type GenerateResult =
@@ -120,19 +124,23 @@ async function generateOnce(
     hasUserImage: Boolean(input.userImageDataUrl),
     useStyleRef,
     characterLock: input.characterLock,
+    copyIndex: input.copyIndex,
+    copies: input.copies,
+    seed: input.seed,
   });
 
   const urls: string[] = [];
   if (input.userImageDataUrl) urls.push(input.userImageDataUrl);
   if (useStyleRef) urls.push(stylePreviewUrl(style.number));
 
-  const shared = {
+  const shared: Record<string, unknown> = {
     model,
     prompt: en,
     n: 1,
     aspect_ratio: input.aspectRatio,
     resolution: input.resolution === "2k" ? "2k" : "1k",
   };
+  if (input.seed) shared.seed = seedToInt(input.seed);
 
   const result =
     urls.length === 0

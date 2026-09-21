@@ -22,6 +22,21 @@ function positiveTraits(traits: string): string {
     .join("; ");
 }
 
+const VARIANT_EN = [
+  "wider establishing crop with more environment",
+  "closer crop on the subject",
+  "three-quarter pose and a diagonal composition",
+  "subject offset left with more negative space on the right",
+  "slightly lower camera with more vertical space",
+];
+const VARIANT_ZH = [
+  "更宽的场景取景，多留环境",
+  "更近的主体特写",
+  "四分之三侧面与对角线构图",
+  "主体偏左，右侧多留白",
+  "略低机位，多留纵向空间",
+];
+
 export function buildPrompts(opts: {
   style: Style;
   theme: string;
@@ -29,6 +44,9 @@ export function buildPrompts(opts: {
   hasUserImage?: boolean;
   useStyleRef?: boolean;
   characterLock?: boolean;
+  copyIndex?: number;
+  copies?: number;
+  seed?: string;
 }): { zh: string; en: string } {
   const { style, theme } = opts;
   const traits = positiveTraits(style.traits);
@@ -57,6 +75,15 @@ export function buildPrompts(opts: {
   if (opts.characterLock) {
     zh += LOCK_ZH;
     en += ` ${LOCK_EN}`;
+  }
+  const copies = opts.copies ?? 1;
+  const copyIndex = opts.copyIndex ?? 1;
+  const seed = opts.seed?.trim();
+  if (copies > 1 || seed) {
+    const angle = VARIANT_EN[(copyIndex - 1) % VARIANT_EN.length];
+    const angleZh = VARIANT_ZH[(copyIndex - 1) % VARIANT_ZH.length];
+    zh += `这是同一风格的第${copyIndex}/${Math.max(copies, 1)}张独立变体，种子 ${seed || copyIndex}：构图倾向「${angleZh}」。保持风格、媒介和主体身份，但画面不得与其他变体雷同。`;
+    en += ` Independent variation ${copyIndex} of ${Math.max(copies, 1)}, seed ${seed || copyIndex}. Composition bias: ${angle}. Keep the medium, style, and subject identity, but the frame must not match other variations.`;
   }
 
   return { zh, en };

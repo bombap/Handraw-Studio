@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { Check, Heart, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { filterStyles, GROUPS, getStyle } from "@/lib/studio/catalog";
+import { filterStyles, GROUPS, getStyle, STYLES } from "@/lib/studio/catalog";
 import { t } from "@/lib/studio/i18n";
 import { useStudio } from "@/lib/studio/store";
 import type { Style } from "@/lib/studio/types";
@@ -47,7 +47,8 @@ export function StyleGrid({ compact = false }: { compact?: boolean }) {
               </h2>
               <p className="mt-0.5 text-xs text-ink-subtle tabular-nums">
                 {styles.length}
-                {copy.of}261 · {selected.length} {copy.selected}
+                {copy.of}
+                {STYLES.length} · {selected.length} {copy.selected}
               </p>
             </div>
             <div className="flex gap-1">

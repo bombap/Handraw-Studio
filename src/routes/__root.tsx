@@ -16,7 +16,7 @@ export const Route = createRootRoute({
       { title: APP_NAME },
       {
         name: "description",
-        content: "Studio tạo ảnh theo 261 phong cách vẽ tay. Chọn style, viết chủ đề, generate song song.",
+        content: "Studio tạo ảnh theo 274 phong cách vẽ tay. Chọn style, viết chủ đề, generate song song.",
       },
       { name: "theme-color", content: "#efe8d8" },
     ],

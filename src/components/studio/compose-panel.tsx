@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Clock3, ImagePlus, Link2, Loader2, Shuffle, Sparkles, Undo2, WandSparkles, X } from "lucide-react";
+import { Check, ChevronDown, Clock3, ImagePlus, Link2, Loader2, Minus, Plus, Shuffle, Sparkles, Undo2, WandSparkles, X } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -13,7 +13,7 @@ import { userImageRef } from "@/lib/studio/session";
 import { pickSpark } from "@/lib/studio/sparks";
 import { useStudio } from "@/lib/studio/store";
 import { clearSubject, setSubjectDataUrl } from "@/lib/studio/subject";
-import { ASPECT_OPTIONS, MAX_BATCH, type EnhanceLevel, type Resolution, type StyleGroupId } from "@/lib/studio/types";
+import { ASPECT_OPTIONS, MAX_BATCH, MAX_COPIES, type EnhanceLevel, type Resolution, type StyleGroupId } from "@/lib/studio/types";
 import {
   cn,
   extractClipboardImage,
@@ -41,6 +41,8 @@ export function ComposePanel() {
   const setEnhanceLevel = useStudio((s) => s.setEnhanceLevel);
   const characterLock = useStudio((s) => s.characterLock);
   const setCharacterLock = useStudio((s) => s.setCharacterLock);
+  const copiesPerStyle = useStudio((s) => s.copiesPerStyle);
+  const setCopiesPerStyle = useStudio((s) => s.setCopiesPerStyle);
   const groupFilter = useStudio((s) => s.groupFilter);
   const subjectNonce = useStudio((s) => s.subjectNonce);
   const [preview, setPreview] = useState<string | null>(userImageRef.current);
@@ -189,7 +191,7 @@ export function ComposePanel() {
     setTheme(spark);
   }
 
-  const n = Math.min(selected.length, MAX_BATCH);
+  const n = Math.min(selected.length, MAX_BATCH) * copiesPerStyle;
   const generateLabel = busy || running > 0 ? copy.generating : n > 0 ? copy.generateN(n) : copy.generate;
   const levels: { id: EnhanceLevel; label: string; hint: string }[] = [
     { id: "short", label: copy.enhanceShort, hint: copy.enhanceShortHint },
@@ -405,21 +407,25 @@ export function ComposePanel() {
           <ChevronDown className="size-3.5 text-ink-subtle" />
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-64">
-        <p className="mb-2 text-xs font-medium text-ink-muted">{copy.aspect}</p>
-        <div className="grid grid-cols-4 gap-1.5">
+      <PopoverContent className="w-72 p-2" align="end">
+        <p className="mb-1.5 px-2 text-xs font-medium text-ink-muted">{copy.aspect}</p>
+        <div className="flex max-h-80 flex-col gap-0.5 overflow-y-auto">
           {ASPECT_OPTIONS.map((opt) => (
             <button
               key={opt.id}
               type="button"
               onClick={() => setAspectRatio(opt.id)}
               className={cn(
-                "flex h-14 flex-col items-center justify-center gap-1 rounded-md text-xs",
-                aspectRatio === opt.id ? "bg-ink text-bg" : "bg-bg-elevated text-ink-muted hover:text-ink",
+                "flex h-11 items-center gap-3 rounded-md px-2 text-left",
+                aspectRatio === opt.id ? "bg-ink text-bg" : "text-ink hover:bg-stamp-soft",
               )}
             >
               <RatioGlyph w={opt.w} h={opt.h} />
-              {opt.label}
+              <span className="font-mono text-sm tabular-nums">{opt.id}</span>
+              <span className={cn("text-xs", aspectRatio === opt.id ? "text-bg/70" : "text-ink-muted")}>
+                {lang === "vi" ? opt.nameVi : opt.nameEn}
+              </span>
+              {aspectRatio === opt.id ? <Check className="ml-auto size-3.5" /> : null}
             </button>
           ))}
         </div>
@@ -445,6 +451,40 @@ export function ComposePanel() {
     </div>
   );
 
+  const copiesControl = (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <div
+          className="flex h-12 shrink-0 items-center rounded-lg bg-surface p-1 shadow-[var(--shadow-border)] lg:h-11 lg:rounded-md"
+          aria-label={copy.copies}
+        >
+          <button
+            type="button"
+            disabled={copiesPerStyle <= 1}
+            onClick={() => setCopiesPerStyle(copiesPerStyle - 1)}
+            className="flex size-10 items-center justify-center rounded-md text-ink-muted hover:text-ink disabled:opacity-30 lg:size-9"
+            aria-label="−"
+          >
+            <Minus className="size-3.5" />
+          </button>
+          <span className="min-w-8 text-center text-sm font-medium tabular-nums lg:text-xs">
+            ×{copiesPerStyle}
+          </span>
+          <button
+            type="button"
+            disabled={copiesPerStyle >= MAX_COPIES}
+            onClick={() => setCopiesPerStyle(copiesPerStyle + 1)}
+            className="flex size-10 items-center justify-center rounded-md text-ink-muted hover:text-ink disabled:opacity-30 lg:size-9"
+            aria-label="+"
+          >
+            <Plus className="size-3.5" />
+          </button>
+        </div>
+      </TooltipTrigger>
+      <TooltipContent>{copy.copiesHint}</TooltipContent>
+    </Tooltip>
+  );
+
   const chips =
     selected.length > 0 ? (
       <div className="chip-scroll flex gap-1.5 overflow-x-auto">
@@ -460,7 +500,10 @@ export function ComposePanel() {
               {style ? (
                 <img src={style.previewUrl} alt="" className="size-7 rounded-full object-cover" />
               ) : null}
-              <span className="font-mono text-xs text-stamp tabular-nums">#{num}</span>
+              <span className="font-mono text-xs text-stamp tabular-nums">
+                #{num}
+                {copiesPerStyle > 1 ? ` ×${copiesPerStyle}` : ""}
+              </span>
               <X className="size-3 text-ink-subtle" />
             </button>
           );
@@ -556,6 +599,7 @@ export function ComposePanel() {
             />
             {ratioControl}
             {resolutionControl}
+            <span className="hidden lg:inline-flex">{copiesControl}</span>
             <span className="hidden lg:inline-flex">{lockBtn("md")}</span>
             <Button
               className="hidden h-11 shrink-0 px-4 lg:inline-flex"
@@ -569,6 +613,7 @@ export function ComposePanel() {
           <div className="flex gap-2 lg:hidden">
             {lockBtn("sm")}
             {surpriseBtn("sm")}
+            {copiesControl}
             <Button
               className="h-12 min-w-0 flex-1 text-base"
               disabled={busy || n === 0}

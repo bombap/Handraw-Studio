@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { dataUrlToBlob, uid } from "@/lib/utils";
+import { dataUrlToBlob, makeSeed, uid } from "@/lib/utils";
 import { getStyle } from "./catalog";
 import { buildPrompts, shouldUseStyleReference } from "./prompt";
 import { deleteImageBlob, saveImageBlob } from "./idb";
 import {
   DEFAULT_CONCURRENCY,
   MAX_BATCH,
+  MAX_COPIES,
   MAX_CONCURRENCY,
   MAX_GALLERY_ITEMS,
   MAX_JOBS,
@@ -42,6 +43,7 @@ interface StudioState {
   studioTab: "styles" | "results";
   characterLock: boolean;
   enhanceLevel: EnhanceLevel;
+  copiesPerStyle: number;
 
   setLang: (lang: Lang) => void;
   setTheme: (theme: string) => void;
@@ -63,6 +65,7 @@ interface StudioState {
   setStudioTab: (tab: "styles" | "results") => void;
   setCharacterLock: (v: boolean) => void;
   setEnhanceLevel: (level: EnhanceLevel) => void;
+  setCopiesPerStyle: (n: number) => void;
 
   enqueueBatch: (userImageDataUrl?: string) => { ok: true; batchId: string; count: number } | { ok: false; error: string };
   patchJob: (id: string, patch: Partial<GenerateJob>) => void;
@@ -85,6 +88,8 @@ function trimGallery(items: GalleryItem[]): GalleryItem[] {
     .sort((a, b) => Number(b.favorite) - Number(a.favorite) || b.createdAt - a.createdAt)
     .slice(0, MAX_GALLERY_ITEMS);
 }
+
+const savingJobs = new Set<string>();
 
 export const useStudio = create<StudioState>()(
   persist(
@@ -110,6 +115,7 @@ export const useStudio = create<StudioState>()(
       studioTab: "styles",
       characterLock: false,
       enhanceLevel: "full",
+      copiesPerStyle: 1,
 
       setLang: (lang) => set({ lang }),
       setTheme: (theme) => set({ theme }),
@@ -148,6 +154,7 @@ export const useStudio = create<StudioState>()(
       setStudioTab: (studioTab) => set({ studioTab }),
       setCharacterLock: (characterLock) => set({ characterLock }),
       setEnhanceLevel: (enhanceLevel) => set({ enhanceLevel }),
+      setCopiesPerStyle: (n) => set({ copiesPerStyle: Math.min(MAX_COPIES, Math.max(1, Math.round(n))) }),
 
       enqueueBatch: (userImageDataUrl) => {
         const s = get();
@@ -155,57 +162,71 @@ export const useStudio = create<StudioState>()(
         if (!theme) return { ok: false, error: "needTheme" };
         if (s.selected.length === 0) return { ok: false, error: "needStyle" };
         const pick = s.selected.slice(0, MAX_BATCH);
+        const copies = Math.min(MAX_COPIES, Math.max(1, s.copiesPerStyle));
         const batchId = uid("batch");
         const now = Date.now();
         const useStyleRef = shouldUseStyleReference();
-        const lock = s.characterLock && pick.length > 1;
+        const lock = s.characterLock && (pick.length > 1 || copies > 1);
         const jobs: GenerateJob[] = [];
         let blocked = 0;
-        pick.forEach((number, index) => {
+        let seq = 0;
+        pick.forEach((number) => {
           const style = getStyle(number);
           if (!style) return;
-          const dup = s.jobs.some(
+          const inFlight = s.jobs.filter(
             (j) =>
               (j.status === "queued" || j.status === "running") &&
               j.styleNumber === number &&
               j.theme === theme &&
               j.aspectRatio === s.aspectRatio,
-          );
-          if (dup) {
+          ).length;
+          const toAdd = Math.min(copies, MAX_COPIES - inFlight);
+          if (toAdd <= 0) {
             blocked += 1;
             return;
           }
-          const waitsForAnchor = lock && !userImageDataUrl && index > 0;
-          const hasUserImage = Boolean(userImageDataUrl) || waitsForAnchor;
-          const prompts = buildPrompts({
-            style,
-            theme,
-            aspectRatio: s.aspectRatio,
-            hasUserImage,
-            useStyleRef,
-            characterLock: lock,
-          });
-          jobs.push({
-            id: uid("job"),
-            batchId,
-            styleNumber: style.number,
-            styleName: style.generationName,
-            theme,
-            promptEn: prompts.en,
-            promptZh: prompts.zh,
-            aspectRatio: s.aspectRatio,
-            resolution: s.resolution,
-            hasUserImage,
-            usedStyleRef: useStyleRef,
-            status: "queued",
-            createdAt: now + index,
-            retryCount: 0,
-            characterLock: lock,
-            waitsForAnchor,
-          });
+          for (let c = 0; c < toAdd; c++) {
+            const waitsForAnchor = lock && !userImageDataUrl && seq > 0;
+            const hasUserImage = Boolean(userImageDataUrl) || waitsForAnchor;
+            const seed = makeSeed();
+            const prompts = buildPrompts({
+              style,
+              theme,
+              aspectRatio: s.aspectRatio,
+              hasUserImage,
+              useStyleRef,
+              characterLock: lock,
+              copyIndex: c + 1,
+              copies: toAdd,
+              seed,
+            });
+            jobs.push({
+              id: uid("job"),
+              batchId,
+              styleNumber: style.number,
+              styleName: style.generationName,
+              theme,
+              promptEn: prompts.en,
+              promptZh: prompts.zh,
+              aspectRatio: s.aspectRatio,
+              resolution: s.resolution,
+              hasUserImage,
+              usedStyleRef: useStyleRef,
+              status: "queued",
+              createdAt: now + seq,
+              retryCount: 0,
+              characterLock: lock,
+              waitsForAnchor,
+              copyIndex: c + 1,
+              copies: toAdd,
+              seed,
+            });
+            seq += 1;
+          }
         });
         if (jobs.length === 0) return { ok: false, error: blocked > 0 ? "inFlight" : "needStyle" };
         set((prev) => ({ jobs: [...jobs, ...prev.jobs].slice(0, MAX_JOBS), paused: false }));
+        void import("./queue").then((m) => m.wakeQueue());
         return { ok: true, batchId, count: jobs.length };
       },
 
@@ -232,7 +253,7 @@ export const useStudio = create<StudioState>()(
           ),
         })),
 
-      retryJob: (id) =>
+      retryJob: (id) => {
         set((s) => ({
           paused: false,
           jobs: s.jobs.map((j) =>
@@ -244,12 +265,16 @@ export const useStudio = create<StudioState>()(
                   retryCount: j.retryCount + 1,
                   startedAt: undefined,
                   finishedAt: undefined,
+                  imageId: undefined,
+                  seed: makeSeed(),
                 }
               : j,
           ),
-        })),
+        }));
+        void import("./queue").then((m) => m.wakeQueue());
+      },
 
-      retryFailed: () =>
+      retryFailed: () => {
         set((s) => ({
           paused: false,
           jobs: s.jobs.map((j) =>
@@ -261,42 +286,83 @@ export const useStudio = create<StudioState>()(
                   retryCount: j.retryCount + 1,
                   startedAt: undefined,
                   finishedAt: undefined,
+                  imageId: undefined,
+                  seed: makeSeed(),
                 }
               : j,
           ),
-        })),
+        }));
+        void import("./queue").then((m) => m.wakeQueue());
+      },
 
       addGalleryFromJob: async (job, dataUrl) => {
-        const imageId = uid("img");
-        await saveImageBlob(imageId, dataUrlToBlob(dataUrl));
-        const item: GalleryItem = {
-          id: imageId,
-          jobId: job.id,
-          batchId: job.batchId,
-          styleNumber: job.styleNumber,
-          styleName: job.styleName,
-          theme: job.theme,
-          aspectRatio: job.aspectRatio,
-          createdAt: Date.now(),
-          favorite: false,
-          promptEn: job.promptEn,
-        };
-        set((s) => {
-          const gallery = trimGallery([item, ...s.gallery.filter((g) => g.id !== imageId)]);
-          const dropped = s.gallery.filter((g) => !gallery.some((x) => x.id === g.id));
-          for (const d of dropped) void deleteImageBlob(d.id);
-          return {
-            gallery,
+        if (savingJobs.has(job.id)) return;
+        const current = get().jobs.find((j) => j.id === job.id);
+        if (current?.status === "done" && current.imageId) return;
+        if (get().gallery.some((g) => g.jobId === job.id)) {
+          set((s) => ({
             jobs: s.jobs.map((j) =>
-              j.id === job.id
-                ? { ...j, status: "done" as JobStatus, imageId, finishedAt: Date.now() }
+              j.id === job.id && !j.imageId
+                ? {
+                    ...j,
+                    status: "done" as JobStatus,
+                    imageId: s.gallery.find((g) => g.jobId === job.id)?.id,
+                    finishedAt: j.finishedAt ?? Date.now(),
+                  }
                 : j,
             ),
-            durations: job.startedAt
-              ? [...s.durations, Date.now() - job.startedAt].slice(-20)
-              : s.durations,
+          }));
+          return;
+        }
+        savingJobs.add(job.id);
+        try {
+          const imageId = uid("img");
+          await saveImageBlob(imageId, dataUrlToBlob(dataUrl));
+          const item: GalleryItem = {
+            id: imageId,
+            jobId: job.id,
+            batchId: job.batchId,
+            styleNumber: job.styleNumber,
+            styleName: job.styleName,
+            theme: job.theme,
+            aspectRatio: job.aspectRatio,
+            createdAt: Date.now(),
+            favorite: false,
+            promptEn: job.promptEn,
           };
-        });
+          set((s) => {
+            if (s.gallery.some((g) => g.jobId === job.id)) {
+              return {
+                jobs: s.jobs.map((j) =>
+                  j.id === job.id
+                    ? {
+                        ...j,
+                        status: "done" as JobStatus,
+                        imageId: j.imageId ?? s.gallery.find((g) => g.jobId === job.id)?.id,
+                        finishedAt: j.finishedAt ?? Date.now(),
+                      }
+                    : j,
+                ),
+              };
+            }
+            const gallery = trimGallery([item, ...s.gallery]);
+            const dropped = s.gallery.filter((g) => !gallery.some((x) => x.id === g.id));
+            for (const d of dropped) void deleteImageBlob(d.id);
+            return {
+              gallery,
+              jobs: s.jobs.map((j) =>
+                j.id === job.id
+                  ? { ...j, status: "done" as JobStatus, imageId, finishedAt: Date.now() }
+                  : j,
+              ),
+              durations: job.startedAt
+                ? [...s.durations, Date.now() - job.startedAt].slice(-20)
+                : s.durations,
+            };
+          });
+        } finally {
+          savingJobs.delete(job.id);
+        }
       },
 
       toggleGalleryFavorite: (id) =>
@@ -330,6 +396,7 @@ export const useStudio = create<StudioState>()(
           ...current,
           ...p,
           jobs: current.jobs,
+          paused: false,
           activeJobId: current.activeJobId,
           lightboxId: current.lightboxId,
           studioTab: current.studioTab,
@@ -338,6 +405,10 @@ export const useStudio = create<StudioState>()(
           characterLock: p.characterLock ?? false,
           enhanceLevel:
             p.enhanceLevel === "short" || p.enhanceLevel === "cinematic" ? p.enhanceLevel : "full",
+          copiesPerStyle:
+            typeof p.copiesPerStyle === "number"
+              ? Math.min(MAX_COPIES, Math.max(1, Math.round(p.copiesPerStyle)))
+              : 1,
           gallery: Array.isArray(p.gallery) ? p.gallery : current.gallery,
         };
       },
@@ -354,6 +425,7 @@ export const useStudio = create<StudioState>()(
         themeHistory: s.themeHistory,
         characterLock: s.characterLock,
         enhanceLevel: s.enhanceLevel,
+        copiesPerStyle: s.copiesPerStyle,
       }),
     },
   ),

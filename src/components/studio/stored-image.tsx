@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { getImageObjectUrl, peekImageObjectUrl } from "@/lib/studio/idb";
+import { getImageObjectUrl, peekImageObjectUrl, subscribeImageCache } from "@/lib/studio/idb";
 
 export function StoredImage({
   id,
@@ -15,16 +15,23 @@ export function StoredImage({
 
   useEffect(() => {
     let alive = true;
-    const cached = peekImageObjectUrl(id);
-    if (cached) {
-      setUrl(cached);
-      return;
-    }
-    void getImageObjectUrl(id).then((next) => {
-      if (alive) setUrl(next);
+    const load = () => {
+      const cached = peekImageObjectUrl(id);
+      if (cached) {
+        setUrl(cached);
+        return;
+      }
+      void getImageObjectUrl(id).then((next) => {
+        if (alive) setUrl(next);
+      });
+    };
+    load();
+    const unsub = subscribeImageCache((changed) => {
+      if (changed === id) load();
     });
     return () => {
       alive = false;
+      unsub();
     };
   }, [id]);
 

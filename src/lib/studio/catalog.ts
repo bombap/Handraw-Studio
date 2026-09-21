@@ -31,10 +31,10 @@ export const GROUPS: StyleGroup[] = (Object.keys(GROUP_META) as StyleGroupId[]).
   count: 0,
 }));
 
-function previewUrl(number: string): string {
+export function stylePreviewUrl(number: string): string {
   const n = Number.parseInt(number, 10);
   const bucket = n <= 200 ? "001-200" : "201-400";
-  return `https://cdn.jsdelivr.net/gh/yang0/handraw-style@master/images/individual/${bucket}/${number}.png`;
+  return `https://cdn.jsdelivr.net/gh/yang0/handraw-style@master/images/individual/${bucket}/${number}.webp`;
 }
 
 function groupIdFromRaw(group: string): StyleGroupId {
@@ -55,7 +55,7 @@ const parsed = (rawStyles as RawStyle[]).map((item): Style => {
     reference: item.reference,
     generationName: item.generation_name,
     traits: item.traits,
-    previewUrl: previewUrl(item.number),
+    previewUrl: stylePreviewUrl(item.number),
   };
 });
 

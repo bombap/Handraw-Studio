@@ -82,3 +82,4 @@ export const MAX_BATCH = 12;
 export const MAX_CONCURRENCY = 4;
 export const DEFAULT_CONCURRENCY = 2;
 export const MAX_GALLERY_ITEMS = 120;
+export const MAX_JOBS = 80;

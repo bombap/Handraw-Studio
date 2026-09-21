@@ -9,6 +9,7 @@ import {
   MAX_BATCH,
   MAX_CONCURRENCY,
   MAX_GALLERY_ITEMS,
+  MAX_JOBS,
   type AspectRatio,
   type EnhanceLevel,
   type GalleryItem,
@@ -159,6 +160,7 @@ export const useStudio = create<StudioState>()(
         const useStyleRef = shouldUseStyleReference();
         const lock = s.characterLock && pick.length > 1;
         const jobs: GenerateJob[] = [];
+        let blocked = 0;
         pick.forEach((number, index) => {
           const style = getStyle(number);
           if (!style) return;
@@ -169,7 +171,10 @@ export const useStudio = create<StudioState>()(
               j.theme === theme &&
               j.aspectRatio === s.aspectRatio,
           );
-          if (dup) return;
+          if (dup) {
+            blocked += 1;
+            return;
+          }
           const waitsForAnchor = lock && !userImageDataUrl && index > 0;
           const hasUserImage = Boolean(userImageDataUrl) || waitsForAnchor;
           const prompts = buildPrompts({
@@ -193,14 +198,14 @@ export const useStudio = create<StudioState>()(
             hasUserImage,
             usedStyleRef: useStyleRef,
             status: "queued",
-            createdAt: now,
+            createdAt: now + index,
             retryCount: 0,
             characterLock: lock,
             waitsForAnchor,
           });
         });
-        if (jobs.length === 0) return { ok: false, error: "needStyle" };
-        set((prev) => ({ jobs: [...jobs, ...prev.jobs], paused: false }));
+        if (jobs.length === 0) return { ok: false, error: blocked > 0 ? "inFlight" : "needStyle" };
+        set((prev) => ({ jobs: [...jobs, ...prev.jobs].slice(0, MAX_JOBS), paused: false }));
         return { ok: true, batchId, count: jobs.length };
       },
 
@@ -262,7 +267,7 @@ export const useStudio = create<StudioState>()(
         })),
 
       addGalleryFromJob: async (job, dataUrl) => {
-        const imageId = job.id;
+        const imageId = uid("img");
         await saveImageBlob(imageId, dataUrlToBlob(dataUrl));
         const item: GalleryItem = {
           id: imageId,
@@ -324,9 +329,16 @@ export const useStudio = create<StudioState>()(
         return {
           ...current,
           ...p,
+          jobs: current.jobs,
+          activeJobId: current.activeJobId,
+          lightboxId: current.lightboxId,
+          studioTab: current.studioTab,
+          search: current.search,
           themeHistory: p.themeHistory ?? [],
           characterLock: p.characterLock ?? false,
-          enhanceLevel: p.enhanceLevel === "short" || p.enhanceLevel === "cinematic" ? p.enhanceLevel : "full",
+          enhanceLevel:
+            p.enhanceLevel === "short" || p.enhanceLevel === "cinematic" ? p.enhanceLevel : "full",
+          gallery: Array.isArray(p.gallery) ? p.gallery : current.gallery,
         };
       },
       partialize: (s) => ({
@@ -337,9 +349,6 @@ export const useStudio = create<StudioState>()(
         resolution: s.resolution,
         concurrency: s.concurrency,
         styleFavorites: s.styleFavorites,
-        jobs: s.jobs.map((j) =>
-          j.status === "running" ? { ...j, status: "queued" as JobStatus, startedAt: undefined } : j,
-        ),
         gallery: s.gallery,
         durations: s.durations,
         themeHistory: s.themeHistory,

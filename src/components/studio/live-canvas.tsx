@@ -14,9 +14,12 @@ export function LiveCanvas() {
   const copy = t(lang);
   const jobs = useStudio((s) => s.jobs);
   const setLightbox = useStudio((s) => s.setLightbox);
-  const latestBatch = jobs[0]?.batchId;
+  const latestBatch = useMemo(() => {
+    if (jobs.length === 0) return undefined;
+    return jobs.reduce((best, job) => (job.createdAt >= best.createdAt ? job : best)).batchId;
+  }, [jobs]);
   const batchJobs = useMemo(
-    () => (latestBatch ? jobs.filter((j) => j.batchId === latestBatch) : jobs.slice(0, 8)),
+    () => (latestBatch ? jobs.filter((j) => j.batchId === latestBatch) : []),
     [jobs, latestBatch],
   );
   const show = batchJobs.length > 0 ? batchJobs : jobs.filter((j) => j.status === "done").slice(0, 8);

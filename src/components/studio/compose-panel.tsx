@@ -122,7 +122,9 @@ export function ComposePanel() {
       const result = enqueueBatch(userImageRef.current ?? undefined);
       if (!result.ok) {
         const key = result.error;
-        toast.error(key === "needTheme" || key === "needStyle" ? copy[key] : result.error);
+        toast.error(
+          key === "needTheme" || key === "needStyle" || key === "inFlight" ? copy[key] : result.error,
+        );
         return;
       }
       toast.success(

@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getStyle } from "./catalog";
+import { getStyle, stylePreviewUrl } from "./catalog";
 import { buildPrompts, shouldUseStyleReference } from "./prompt";
 import type { AspectRatio, Resolution } from "./types";
 
@@ -24,12 +24,6 @@ export type GenerateResult =
       usedStyleRef: boolean;
     }
   | { ok: false; error: string; promptEn?: string; promptZh?: string };
-
-function stylePreviewUrl(number: string): string {
-  const n = Number.parseInt(number, 10);
-  const bucket = n <= 200 ? "001-200" : "201-400";
-  return `https://cdn.jsdelivr.net/gh/yang0/handraw-style@master/images/individual/${bucket}/${number}.png`;
-}
 
 function imageRef(url: string) {
   return { url, type: "image_url" as const };
@@ -71,6 +65,36 @@ async function callXai(
   return { ok: true, url };
 }
 
+function isFatalStatus(status: number, error: string): boolean {
+  if (status === 401 || status === 403 || status === 429) return true;
+  return /quota|rate limit|insufficient/i.test(error);
+}
+
+/** Imagine edits: `image` is a URL string or string[]; objects `{url,type}` only work as a single `image`. */
+async function editWithRefs(
+  apiKey: string,
+  shared: Record<string, unknown>,
+  urls: string[],
+): Promise<Awaited<ReturnType<typeof callXai>>> {
+  const attempts: Record<string, unknown>[] = [];
+  if (urls.length === 1) {
+    attempts.push({ image: { url: urls[0], type: "image_url" } });
+    attempts.push({ image: urls[0] });
+  } else {
+    attempts.push({ image: urls });
+    attempts.push({ images: urls.map((url) => ({ url })) });
+    attempts.push({ images: urls.map((url) => imageRef(url)) });
+  }
+
+  let last: Awaited<ReturnType<typeof callXai>> | undefined;
+  for (const extra of attempts) {
+    last = await callXai(apiKey, { ...shared, ...extra }, "/images/edits");
+    if (last.ok) return last;
+    if (isFatalStatus(last.status, last.error)) return last;
+  }
+  return last ?? { ok: false, status: 0, error: "Không gửi được ảnh tham chiếu" };
+}
+
 async function urlToDataUrl(url: string): Promise<string> {
   if (url.startsWith("data:")) return url;
   const res = await fetch(url);
@@ -98,9 +122,9 @@ async function generateOnce(
     characterLock: input.characterLock,
   });
 
-  const refs: { url: string; type: "image_url" }[] = [];
-  if (input.userImageDataUrl) refs.push(imageRef(input.userImageDataUrl));
-  if (useStyleRef) refs.push(imageRef(stylePreviewUrl(style.number)));
+  const urls: string[] = [];
+  if (input.userImageDataUrl) urls.push(input.userImageDataUrl);
+  if (useStyleRef) urls.push(stylePreviewUrl(style.number));
 
   const shared = {
     model,
@@ -110,20 +134,10 @@ async function generateOnce(
     resolution: input.resolution === "2k" ? "2k" : "1k",
   };
 
-  let result: Awaited<ReturnType<typeof callXai>>;
-  if (refs.length === 0) {
-    result = await callXai(apiKey, shared, "/images/generations");
-  } else if (refs.length === 1) {
-    result = await callXai(apiKey, { ...shared, image: refs[0] }, "/images/edits");
-    if (!result.ok && /image|images/i.test(result.error)) {
-      result = await callXai(apiKey, { ...shared, images: refs }, "/images/edits");
-    }
-  } else {
-    result = await callXai(apiKey, { ...shared, images: refs }, "/images/edits");
-    if (!result.ok) {
-      result = await callXai(apiKey, { ...shared, image: refs }, "/images/edits");
-    }
-  }
+  const result =
+    urls.length === 0
+      ? await callXai(apiKey, shared, "/images/generations")
+      : await editWithRefs(apiKey, shared, urls);
 
   if (!result.ok) {
     return { ok: false, error: result.error, promptEn: en, promptZh: zh };

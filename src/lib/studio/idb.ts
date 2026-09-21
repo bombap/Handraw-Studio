@@ -3,6 +3,7 @@ const DB_VERSION = 1;
 const STORE = "images";
 
 const urlCache = new Map<string, string>();
+const listeners = new Set<(id: string) => void>();
 
 function openDb(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
@@ -16,6 +17,17 @@ function openDb(): Promise<IDBDatabase> {
   });
 }
 
+function notify(id: string) {
+  listeners.forEach((fn) => fn(id));
+}
+
+export function subscribeImageCache(listener: (id: string) => void): () => void {
+  listeners.add(listener);
+  return () => {
+    listeners.delete(listener);
+  };
+}
+
 export async function saveImageBlob(id: string, blob: Blob): Promise<void> {
   const db = await openDb();
   await new Promise<void>((resolve, reject) => {
@@ -27,6 +39,7 @@ export async function saveImageBlob(id: string, blob: Blob): Promise<void> {
   const prev = urlCache.get(id);
   if (prev) URL.revokeObjectURL(prev);
   urlCache.set(id, URL.createObjectURL(blob));
+  notify(id);
 }
 
 export async function getImageBlob(id: string): Promise<Blob | undefined> {
@@ -50,6 +63,7 @@ export async function deleteImageBlob(id: string): Promise<void> {
   const prev = urlCache.get(id);
   if (prev) URL.revokeObjectURL(prev);
   urlCache.delete(id);
+  notify(id);
 }
 
 export async function getImageObjectUrl(id: string): Promise<string | undefined> {

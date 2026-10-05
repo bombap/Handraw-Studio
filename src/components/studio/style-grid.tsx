@@ -1,14 +1,15 @@
 import type { ReactNode } from "react";
-import { useMemo, useState } from "react";
-import { Check, Heart, Search } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Check, ChevronDown, Heart, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { filterStyles, GROUPS, getStyle, STYLES } from "@/lib/studio/catalog";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { filterStyles, GROUPS, getStyle, normalizeStyleId } from "@/lib/studio/catalog";
 import { t } from "@/lib/studio/i18n";
 import { useStudio } from "@/lib/studio/store";
 import type { Style } from "@/lib/studio/types";
 import { cn } from "@/lib/utils";
 import { StyleDetail } from "./style-detail";
+import { VirtualGrid } from "./virtual-grid";
 
 export function StyleGrid({ compact = false }: { compact?: boolean }) {
   const lang = useStudio((s) => s.lang);
@@ -26,11 +27,20 @@ export function StyleGrid({ compact = false }: { compact?: boolean }) {
   const toggleFav = useStudio((s) => s.toggleStyleFavorite);
   const copy = t(lang);
   const [detail, setDetail] = useState<string | null>(null);
+  const [groupOpen, setGroupOpen] = useState(false);
 
   const styles = useMemo(
     () => filterStyles({ query: search, group: groupFilter, favorites, onlyFavorites }),
     [search, groupFilter, favorites, onlyFavorites],
   );
+  const exactId = normalizeStyleId(search);
+  const scrollTo = exactId ? styles.findIndex((style) => style.number === exactId) : -1;
+
+  useEffect(() => {
+    if (!exactId || !getStyle(exactId)) return;
+    if (groupFilter !== "all") setGroupFilter("all");
+    if (onlyFavorites) setOnlyFavorites(false);
+  }, [exactId, groupFilter, onlyFavorites, setGroupFilter, setOnlyFavorites]);
 
   const visibleNumbers = styles.map((s) => s.number);
   const allVisibleSelected =
@@ -38,96 +48,105 @@ export function StyleGrid({ compact = false }: { compact?: boolean }) {
 
   return (
     <section className="flex min-h-0 flex-1 flex-col bg-bg">
-      <div className={cn("flex flex-col border-b border-line px-3 sm:px-5", compact ? "gap-2 py-2" : "gap-3 py-3 sm:py-4")}>
-        {compact ? null : (
-          <div className="flex items-end justify-between gap-3">
-            <div>
-              <h2 className="font-display text-xl leading-tight font-medium tracking-tight">
-                {copy.styles}
-              </h2>
-              <p className="mt-0.5 text-xs text-ink-subtle tabular-nums">
-                {styles.length}
-                {copy.of}
-                {STYLES.length} · {selected.length} {copy.selected}
-              </p>
-            </div>
-            <div className="flex gap-1">
-              <button
-                type="button"
-                className="h-9 rounded-full px-3 text-xs text-ink-muted hover:bg-stamp-soft hover:text-ink"
+      <div className="flex items-center gap-1.5 border-b border-line px-3 py-2 sm:px-4">
+        <Popover open={groupOpen} onOpenChange={setGroupOpen}>
+          <PopoverTrigger asChild>
+            <button
+              type="button"
+              className="inline-flex h-10 max-w-[42%] shrink-0 items-center gap-1 rounded-full bg-surface px-3 text-xs font-medium shadow-[var(--shadow-border)]"
+            >
+              <span className="truncate">
+                {onlyFavorites
+                  ? copy.favorites
+                  : groupFilter === "all"
+                    ? copy.allGroups
+                    : lang === "vi"
+                      ? GROUPS.find((g) => g.id === groupFilter)?.labelVi
+                      : GROUPS.find((g) => g.id === groupFilter)?.labelEn}
+              </span>
+              <ChevronDown className="size-3.5 shrink-0 text-ink-subtle" />
+            </button>
+          </PopoverTrigger>
+          <PopoverContent className="w-64 p-1" align="start">
+            <GroupChip
+              active={groupFilter === "all" && !onlyFavorites}
+              onClick={() => {
+                setGroupFilter("all");
+                setOnlyFavorites(false);
+                setGroupOpen(false);
+              }}
+            >
+              {copy.allGroups}
+            </GroupChip>
+            {GROUPS.map((g) => (
+              <GroupChip
+                key={g.id}
+                active={groupFilter === g.id && !onlyFavorites}
                 onClick={() => {
-                  if (allVisibleSelected) {
-                    setSelected(selected.filter((n) => !visibleNumbers.includes(n)));
-                  } else {
-                    setSelected([...new Set([...selected, ...visibleNumbers])]);
-                  }
+                  setGroupFilter(g.id);
+                  setOnlyFavorites(false);
+                  setGroupOpen(false);
                 }}
               >
-                {copy.selectAllVisible}
-              </button>
-              {selected.length > 0 ? (
-                <button
-                  type="button"
-                  className="h-9 rounded-full px-3 text-xs text-ink-muted hover:bg-stamp-soft hover:text-ink"
-                  onClick={clearSelected}
-                >
-                  {copy.clear}
-                </button>
-              ) : null}
-            </div>
-          </div>
-        )}
-        <div className="relative">
+                <span className="font-mono text-[10px] text-ink-subtle">{g.id}</span>
+                {lang === "vi" ? g.labelVi : g.labelEn}
+                <span className="ml-auto tabular-nums text-ink-subtle">{g.count}</span>
+              </GroupChip>
+            ))}
+            <GroupChip
+              active={onlyFavorites}
+              onClick={() => {
+                setOnlyFavorites(!onlyFavorites);
+                setGroupFilter("all");
+                setGroupOpen(false);
+              }}
+            >
+              {copy.favorites}
+            </GroupChip>
+          </PopoverContent>
+        </Popover>
+        <div className="relative min-w-0 flex-1">
           <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-ink-subtle" />
           <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={copy.searchStyles}
-            className={cn("pl-9 text-base lg:text-sm", compact && "h-10")}
+            className="h-10 pl-9 text-base lg:text-sm"
           />
         </div>
-        <div className="chip-scroll -mx-1 flex gap-1.5 overflow-x-auto px-1 pb-0.5">
-          <GroupChip
-            active={groupFilter === "all" && !onlyFavorites}
-            onClick={() => {
-              setGroupFilter("all");
-              setOnlyFavorites(false);
-            }}
+        {!allVisibleSelected ? (
+          <button
+            type="button"
+            className="hidden h-10 shrink-0 rounded-full px-2.5 text-xs text-ink-muted hover:bg-stamp-soft hover:text-ink sm:inline"
+            onClick={() => setSelected([...new Set([...selected, ...visibleNumbers])])}
           >
-            {copy.allGroups}
-          </GroupChip>
-          {GROUPS.map((g) => (
-            <GroupChip
-              key={g.id}
-              active={groupFilter === g.id}
-              title={lang === "vi" ? g.labelVi : g.labelEn}
-              onClick={() => {
-                setGroupFilter(g.id);
-                setOnlyFavorites(false);
-              }}
-            >
-              {g.id}
-            </GroupChip>
-          ))}
-          <GroupChip
-            active={onlyFavorites}
-            onClick={() => {
-              setOnlyFavorites(!onlyFavorites);
-              setGroupFilter("all");
-            }}
+            {copy.selectAllVisible}
+          </button>
+        ) : null}
+        {selected.length > 0 ? (
+          <button
+            type="button"
+            className="inline-flex h-10 shrink-0 items-center gap-1 rounded-full bg-stamp px-2.5 text-xs font-medium text-stamp-fg tabular-nums"
+            onClick={clearSelected}
           >
-            {copy.favorites}
-          </GroupChip>
-        </div>
+            {selected.length}
+            <span className="hidden sm:inline">{copy.clear}</span>
+          </button>
+        ) : null}
       </div>
-      <ScrollArea className="min-h-0 flex-1">
-        {styles.length === 0 ? (
-          <p className="p-8 text-sm text-ink-muted">{copy.noResults}</p>
-        ) : (
-          <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 sm:p-5 xl:grid-cols-3 2xl:grid-cols-4">
-            {styles.map((style) => (
+      {styles.length === 0 ? (
+        <p className="p-8 text-sm text-ink-muted">{copy.noResults}</p>
+      ) : (
+        <VirtualGrid
+          count={styles.length}
+          minColWidth={148}
+          maxCols={4}
+          scrollToIndex={scrollTo >= 0 ? scrollTo : null}
+          rowHeight={(width) => width + 68}
+          render={(index) => {
+            const style = styles[index];
+            return (
               <StyleCard
-                key={style.number}
                 style={style}
                 selected={selected.includes(style.number)}
                 favored={favorites.includes(style.number)}
@@ -135,10 +154,10 @@ export function StyleGrid({ compact = false }: { compact?: boolean }) {
                 onFav={() => toggleFav(style.number)}
                 onDetail={() => setDetail(style.number)}
               />
-            ))}
-          </div>
-        )}
-      </ScrollArea>
+            );
+          }}
+        />
+      )}
       <StyleDetail
         style={detail ? getStyle(detail) : undefined}
         open={Boolean(detail)}
@@ -155,22 +174,19 @@ export function StyleGrid({ compact = false }: { compact?: boolean }) {
 function GroupChip({
   active,
   onClick,
-  title,
   children,
 }: {
   active: boolean;
   onClick: () => void;
-  title?: string;
   children: ReactNode;
 }) {
   return (
     <button
       type="button"
-      title={title}
       onClick={onClick}
       className={cn(
-        "h-9 shrink-0 rounded-full px-3 text-xs font-medium whitespace-nowrap",
-        active ? "bg-ink text-bg" : "bg-bg-elevated text-ink-muted hover:text-ink",
+        "flex h-10 w-full items-center gap-2 rounded-md px-2 text-left text-sm",
+        active ? "bg-ink text-bg [&_span]:text-bg/70" : "text-ink hover:bg-stamp-soft",
       )}
     >
       {children}
@@ -196,40 +212,35 @@ function StyleCard({
   return (
     <div
       className={cn(
-        "group relative rounded-xl bg-surface p-1 shadow-[var(--shadow-border)] transition-[box-shadow,transform] duration-150 ease-out",
-        "hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)]",
+        "group relative flex h-full flex-col rounded-xl bg-surface p-1 shadow-[var(--shadow-border)]",
         selected && "ring-2 ring-stamp ring-offset-2 ring-offset-bg",
       )}
     >
-      <button type="button" onClick={onToggle} className="block w-full text-left">
-        <div className="relative aspect-square overflow-hidden rounded-lg bg-bg-elevated">
-          <img
-            src={style.previewUrl}
-            alt={`#${style.number} ${style.generationName}`}
-            loading="lazy"
-            decoding="async"
-            className="img-outline size-full object-cover"
-          />
-          <span
-            className={cn(
-              "absolute top-1.5 left-1.5 rounded-sm px-1.5 py-0.5 font-mono text-xs tabular-nums",
-              selected ? "bg-stamp text-stamp-fg" : "bg-ink/80 text-bg-elevated",
-            )}
-          >
-            {style.number}
+      <button type="button" onClick={onToggle} className="relative min-h-0 flex-1 overflow-hidden rounded-lg bg-bg-elevated text-left outline-none">
+        <img
+          src={style.previewUrl}
+          alt={`#${style.number} ${style.generationName}`}
+          loading="lazy"
+          decoding="async"
+          className="img-outline size-full object-cover"
+        />
+        <span
+          className={cn(
+            "absolute top-1.5 left-1.5 rounded-sm px-1.5 py-0.5 font-mono text-xs tabular-nums",
+            selected ? "bg-stamp text-stamp-fg" : "bg-ink/80 text-bg-elevated",
+          )}
+        >
+          {style.number}
+        </span>
+        {selected ? (
+          <span className="absolute right-1.5 bottom-1.5 flex size-6 items-center justify-center rounded-full bg-stamp text-stamp-fg">
+            <Check className="size-3.5" />
           </span>
-          {selected ? (
-            <span className="absolute right-1.5 bottom-1.5 flex size-6 items-center justify-center rounded-full bg-stamp text-stamp-fg">
-              <Check className="size-3.5" />
-            </span>
-          ) : null}
-        </div>
-        <div className="px-2 pt-2 pb-1.5">
-          <p className="line-clamp-2 min-h-8 text-xs leading-snug font-medium">
-            {style.generationName}
-          </p>
-          <p className="mt-0.5 truncate text-xs text-ink-subtle">{style.reference}</p>
-        </div>
+        ) : null}
+      </button>
+      <button type="button" onClick={onDetail} className="shrink-0 px-2 pt-2 pb-1.5 text-left outline-none">
+        <p className="line-clamp-2 min-h-8 text-xs leading-snug font-medium">{style.generationName}</p>
+        <p className="mt-0.5 truncate text-xs text-ink-subtle">{style.reference}</p>
       </button>
       <div className="absolute top-2.5 right-2.5 flex gap-1">
         <button
@@ -247,16 +258,6 @@ function StyleCard({
           <Heart className={cn("size-3.5", favored && "fill-stamp text-stamp")} />
         </button>
       </div>
-      <button
-        type="button"
-        onClick={onDetail}
-        className={cn(
-          "absolute right-2.5 bottom-10 h-7 items-center rounded-full bg-ink px-2.5 text-xs text-bg",
-          selected ? "hidden" : "hidden group-hover:inline-flex",
-        )}
-      >
-        {style.groupId}
-      </button>
     </div>
   );
 }

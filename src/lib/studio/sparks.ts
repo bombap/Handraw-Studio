@@ -1,7 +1,7 @@
 import type { Lang, StyleGroupId } from "./types";
 
 const SPARKS: Record<StyleGroupId, { vi: string[]; en: string[] }> = {
-  A: {
+  FA: {
     vi: [
       "Một con mèo đeo kính đọc báo trên ghế công viên lúc tan tầm",
       "Ông cụ mặc vest đạp xe máy chở một chậu mai giữa Sài Gòn giờ cao điểm",
@@ -15,7 +15,7 @@ const SPARKS: Record<StyleGroupId, { vi: string[]; en: string[] }> = {
       "A woman holding an umbrella in April sun, checking her watch, then the sky",
     ],
   },
-  B: {
+  FB: {
     vi: [
       "Đứa trẻ đội chảo làm mũ, đi tìm mặt trăng rơi sau hàng rào",
       "Cáo nhỏ pha trà cho thỏ trong bếp gỗ có cửa sổ nhìn ra tuyết",
@@ -29,7 +29,7 @@ const SPARKS: Record<StyleGroupId, { vi: string[]; en: string[] }> = {
       "A grandmother telling stories by an oil lamp, a grandchild hugging a pillow",
     ],
   },
-  C: {
+  FC: {
     vi: [
       "Cô gái tóc húi cua, áo khoác rộng, đứng trên sân thượng lúc magic hour",
       "Anh chàng tai nghe to, balo một quai, ngồi bậc cầu thang ăn bánh mì",
@@ -43,7 +43,7 @@ const SPARKS: Record<StyleGroupId, { vi: string[]; en: string[] }> = {
       "A night walker in a clear raincoat, neon city stacked behind them",
     ],
   },
-  D: {
+  FD: {
     vi: [
       "Nữ sinh tan học, đứng trú mưa dưới mái hiên cửa hàng tạp hóa",
       "Quầy ramune hè, ánh nắng xuyên qua rèm noren, một ly đầy đá",
@@ -57,7 +57,7 @@ const SPARKS: Record<StyleGroupId, { vi: string[]; en: string[] }> = {
       "A tiny station at 6 p.m., a forgotten school bag on the bench",
     ],
   },
-  E: {
+  FE: {
     vi: [
       "Dạ yến dưới đèn lồng, khói trà và một chiếc bình men rạn",
       "Cầu đá cong sau mưa, người áo dài cầm dù dầu đi một mình",
@@ -71,7 +71,7 @@ const SPARKS: Record<StyleGroupId, { vi: string[]; en: string[] }> = {
       "An autumn lake, two paper boats, distant mountains lost in mist",
     ],
   },
-  F: {
+  FH: {
     vi: [
       "Bàn làm việc đêm, màn hình code, ly trà sữa đổ một ít lên phím",
       "Tiệm photocopy cũ, ánh đèn huỳnh quang, một con tem dán lệch",
@@ -85,7 +85,7 @@ const SPARKS: Record<StyleGroupId, { vi: string[]; en: string[] }> = {
       "A 2 a.m. convenience store, a nodding clerk, rain on the glass",
     ],
   },
-  G: {
+  FG: {
     vi: [
       "Hai người ngồi trên nóc xe bus hai tầng, thành phố loang màu hoàng hôn",
       "Cô gái vẽ mural trên tường gạch, sơn vẩy lên giày và gò má",
@@ -99,7 +99,7 @@ const SPARKS: Record<StyleGroupId, { vi: string[]; en: string[] }> = {
       "A teen bedroom, old posters, striped sun through curtains, one toy robot",
     ],
   },
-  H: {
+  FF: {
     vi: [
       "Nhân vật que diêm đội nón lá, đứng giữa ruộng lúa chín",
       "Cô bé trong rừng thông, áo khoác rêu, cầm lồng đèn giấy",

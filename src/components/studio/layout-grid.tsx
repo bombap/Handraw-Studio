@@ -1,14 +1,14 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Check, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { filterLayouts, LAYOUT_GROUPS, LAYOUTS } from "@/lib/studio/layout-catalog";
+import { filterLayouts, getLayout, LAYOUT_GROUPS, LAYOUTS, normalizeLayoutId } from "@/lib/studio/layout-catalog";
 import { t } from "@/lib/studio/i18n";
 import { useStudio } from "@/lib/studio/store";
 import type { Layout, LayoutCategory } from "@/lib/studio/types";
 import { cn } from "@/lib/utils";
+import { VirtualGrid } from "./virtual-grid";
 
-export function LayoutGrid({ compact = false }: { compact?: boolean }) {
+export function LayoutGrid({ compact = false, onPicked }: { compact?: boolean; onPicked?: () => void }) {
   const lang = useStudio((s) => s.lang);
   const copy = t(lang);
   const layoutId = useStudio((s) => s.layoutId);
@@ -17,6 +17,13 @@ export function LayoutGrid({ compact = false }: { compact?: boolean }) {
   const [category, setCategory] = useState<LayoutCategory | "all">("all");
 
   const layouts = useMemo(() => filterLayouts({ query, category }), [query, category]);
+  const exactId = normalizeLayoutId(query);
+  const scrollTo = exactId ? layouts.findIndex((layout) => layout.id === exactId) : -1;
+
+  useEffect(() => {
+    if (!exactId || !getLayout(exactId)) return;
+    if (category !== "all") setCategory("all");
+  }, [exactId, category]);
 
   return (
     <section className="flex min-h-0 flex-1 flex-col bg-bg">
@@ -68,23 +75,32 @@ export function LayoutGrid({ compact = false }: { compact?: boolean }) {
           ))}
         </div>
       </div>
-      <ScrollArea className="min-h-0 flex-1">
-        {layouts.length === 0 ? (
-          <p className="p-8 text-sm text-ink-muted">{copy.noLayouts}</p>
-        ) : (
-          <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 sm:p-5 xl:grid-cols-3">
-            {layouts.map((layout) => (
+      {layouts.length === 0 ? (
+        <p className="p-8 text-sm text-ink-muted">{copy.noLayouts}</p>
+      ) : (
+        <VirtualGrid
+          count={layouts.length}
+          minColWidth={148}
+          maxCols={3}
+          scrollToIndex={scrollTo >= 0 ? scrollTo : null}
+          rowHeight={(width) => width * 1.28 + 52}
+          render={(index) => {
+            const layout = layouts[index];
+            return (
               <LayoutCard
-                key={layout.id}
                 layout={layout}
                 selected={layoutId === layout.id}
                 name={lang === "vi" ? layout.nameVi : layout.nameEn}
-                onToggle={() => setLayoutId(layoutId === layout.id ? null : layout.id)}
+                onToggle={() => {
+                  const next = layoutId === layout.id ? null : layout.id;
+                  setLayoutId(next);
+                  if (next) onPicked?.();
+                }}
               />
-            ))}
-          </div>
-        )}
-      </ScrollArea>
+            );
+          }}
+        />
+      )}
     </section>
   );
 }
@@ -105,12 +121,12 @@ function LayoutCard({
       type="button"
       onClick={onToggle}
       className={cn(
-        "group relative rounded-xl bg-surface p-1 text-left shadow-[var(--shadow-border)] transition-[box-shadow,transform] duration-150 ease-out",
+        "group relative flex h-full flex-col rounded-xl bg-surface p-1 text-left shadow-[var(--shadow-border)] transition-[box-shadow,transform] duration-150 ease-out",
         "hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)]",
         selected && "ring-2 ring-stamp ring-offset-2 ring-offset-bg",
       )}
     >
-      <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-bg-elevated">
+      <div className="relative min-h-0 flex-1 overflow-hidden rounded-lg bg-bg-elevated">
         <img
           src={layout.previewUrl}
           alt={`${layout.id} ${name}`}
@@ -132,7 +148,7 @@ function LayoutCard({
           </span>
         ) : null}
       </div>
-      <p className="mt-1.5 line-clamp-2 px-1 pb-1 text-xs leading-snug text-ink">{name}</p>
+      <p className="mt-1.5 line-clamp-2 shrink-0 px-1 pb-1 text-xs leading-snug text-ink">{name}</p>
     </button>
   );
 }

@@ -1,9 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getStyle, stylePreviewUrl } from "./catalog";
-import { getLayout, layoutPreviewUrl } from "./layout-catalog";
-import { buildPrompts, shouldUseStyleReference } from "./prompt";
+import { getColor } from "./color-catalog";
+import { getLayout, layoutPreviewUrl, loadLayoutPrompts } from "./layout-catalog";
+import { buildPrompts, promptForImage, shouldUseStyleReference } from "./prompt";
 import type { AspectRatio, Resolution } from "./types";
 import { seedToInt } from "@/lib/utils";
+import { getXaiApiKey } from "./xai-key";
 
 const MODEL = "grok-imagine-image-2.0";
 const FALLBACK_MODEL = "grok-imagine-image-quality";
@@ -19,6 +21,7 @@ export type GenerateInput = {
   copies?: number;
   seed?: string;
   layoutId?: string;
+  colorId?: string;
 };
 
 export type GenerateResult =
@@ -117,7 +120,9 @@ async function generateOnce(
 ): Promise<GenerateResult> {
   const style = getStyle(input.styleNumber);
   if (!style) return { ok: false, error: `Không có style #${input.styleNumber}` };
+  if (input.layoutId) await loadLayoutPrompts();
   const layout = getLayout(input.layoutId);
+  const color = getColor(input.colorId);
 
   const useStyleRef = shouldUseStyleReference();
   const { zh, en } = buildPrompts({
@@ -131,6 +136,7 @@ async function generateOnce(
     copies: input.copies,
     seed: input.seed,
     layout,
+    color,
   });
 
   const urls: string[] = [];
@@ -141,7 +147,7 @@ async function generateOnce(
 
   const shared: Record<string, unknown> = {
     model,
-    prompt: en,
+    prompt: promptForImage(zh, en, input.theme),
     n: 1,
     aspect_ratio: input.aspectRatio,
     resolution: input.resolution === "2k" ? "2k" : "1k",
@@ -173,13 +179,13 @@ async function generateOnce(
 export const generateStyledImage = createServerFn({ method: "POST" })
   .validator((input: GenerateInput) => input)
   .handler(async ({ data }): Promise<GenerateResult> => {
-    const apiKey = process.env.XAI_API_KEY?.trim();
+    const apiKey = await getXaiApiKey();
     if (!apiKey) {
       return { ok: false, error: "AI is not available in this environment" };
     }
     const theme = data.theme.trim();
     if (!theme) return { ok: false, error: "Theme is required" };
-    if (!/^\d{3}$/.test(data.styleNumber)) {
+    if (!/^(?:FA|FB|FC|FD|FE|FF|FG|FH)-\d{3}$/.test(data.styleNumber)) {
       return { ok: false, error: "Invalid style number" };
     }
     if (data.userImageDataUrl && data.userImageDataUrl.length > 6_500_000) {
@@ -194,5 +200,5 @@ export const generateStyledImage = createServerFn({ method: "POST" })
   });
 
 export const checkAiAvailable = createServerFn({ method: "POST" }).handler(async () => {
-  return { available: Boolean(process.env.XAI_API_KEY?.trim()) };
+  return { available: Boolean(await getXaiApiKey()) };
 });

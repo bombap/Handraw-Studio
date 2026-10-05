@@ -1,15 +1,19 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { t as cn } from "./utils-OVG4zYKs.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
+import { x as useNavigate } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
-import { h as Heart, o as Search } from "../_libs/lucide-react.mjs";
-import { a as Lightbox, c as t, i as Input, l as useStudio, n as AppShell, o as StoredImage } from "./lightbox-DOZGoTkJ.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/gallery-BApFSrB9.js
+import { c as cn } from "./utils-V5r_Ws4e.mjs";
+import { S as Heart, l as Search, x as ImagePlus } from "../_libs/lucide-react.mjs";
+import { n as toast } from "../_libs/sonner.mjs";
+import { a as t, c as useStudio } from "./router-CpCNZqBL.mjs";
+import { i as StoredImage, n as Input, r as Lightbox, s as useImageAsSubject } from "./lightbox-CHvPi9b0.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/gallery-C3qq0kpc.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function GalleryView() {
 	const lang = useStudio((s) => s.lang);
 	const copy = t(lang);
+	const navigate = useNavigate();
 	const gallery = useStudio((s) => s.gallery);
 	const setLightbox = useStudio((s) => s.setLightbox);
 	const toggleFav = useStudio((s) => s.toggleGalleryFavorite);
@@ -88,17 +92,37 @@ function GalleryView() {
 							className: "min-w-0",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 								className: "truncate font-mono text-xs tabular-nums",
-								children: ["#", item.styleNumber]
+								children: [
+									"#",
+									item.styleNumber,
+									item.layoutId ? ` · ${item.layoutId}` : ""
+								]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "truncate text-xs text-ink-muted",
 								children: item.theme
 							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-							type: "button",
-							className: "flex size-8 shrink-0 items-center justify-center text-ink-subtle hover:text-stamp",
-							onClick: () => toggleFav(item.id),
-							"aria-label": copy.favorites,
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Heart, { className: cn("size-3.5", item.favorite && "fill-stamp text-stamp") })
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex shrink-0",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "button",
+								className: "flex size-8 items-center justify-center text-ink-subtle hover:text-ink",
+								onClick: () => {
+									useImageAsSubject(item.id).then((ok) => {
+										if (ok) {
+											toast.success(copy.usedAsSubject);
+											navigate({ to: "/" });
+										}
+									});
+								},
+								"aria-label": copy.useAsSubject,
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ImagePlus, { className: "size-3.5" })
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "button",
+								className: "flex size-8 shrink-0 items-center justify-center text-ink-subtle hover:text-stamp",
+								onClick: () => toggleFav(item.id),
+								"aria-label": copy.favorites,
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Heart, { className: cn("size-3.5", item.favorite && "fill-stamp text-stamp") })
+							})]
 						})]
 					})]
 				}, item.id))
@@ -108,7 +132,7 @@ function GalleryView() {
 	});
 }
 function GalleryPage() {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AppShell, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GalleryView, {}) });
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GalleryView, {});
 }
 //#endregion
 export { GalleryPage as component };

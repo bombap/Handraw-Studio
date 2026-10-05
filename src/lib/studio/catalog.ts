@@ -13,14 +13,14 @@ const GROUP_META: Record<
   StyleGroupId,
   { range: string; labelVi: string; labelEn: string }
 > = {
-  A: { range: "001–035", labelVi: "Xã luận / hài hước", labelEn: "Editorial cartoon" },
-  B: { range: "036–054", labelVi: "Picture book kể chuyện", labelEn: "Narrative picture book" },
-  C: { range: "055–082", labelVi: "Nhân vật đồ họa", labelEn: "Modern graphic figures" },
-  D: { range: "083–123", labelVi: "Minh họa Nhật", labelEn: "Japanese illustration" },
-  E: { range: "124–154", labelVi: "Minh họa Trung Quốc", labelEn: "Chinese illustration" },
-  F: { range: "155–200", labelVi: "Mạng / chất liệu", labelEn: "Web / medium / regional" },
-  G: { range: "201–216", labelVi: "Bổ sung đương đại", labelEn: "Contemporary supplement" },
-  H: { range: "217–274", labelVi: "Khác / đương đại", labelEn: "Other / contemporary" },
+  FA: { range: "001–040", labelVi: "Xã luận / hài", labelEn: "Editorial humor" },
+  FB: { range: "001–056", labelVi: "Picture book", labelEn: "Picture book" },
+  FC: { range: "001–031", labelVi: "Đồ họa hiện đại", labelEn: "Modern graphic" },
+  FD: { range: "001–042", labelVi: "Minh họa Nhật", labelEn: "Japanese illustration" },
+  FE: { range: "001–067", labelVi: "Quốc phong / thủ công", labelEn: "Chinese craft" },
+  FF: { range: "001–017", labelVi: "Đất sét / giấy", labelEn: "Clay, felt & paper" },
+  FG: { range: "001–016", labelVi: "Anime / cel", labelEn: "Anime & cel" },
+  FH: { range: "001–043", labelVi: "Chất liệu thí nghiệm", labelEn: "Mixed media" },
 };
 
 export const GROUPS: StyleGroup[] = (Object.keys(GROUP_META) as StyleGroupId[]).map((id) => ({
@@ -33,14 +33,19 @@ export const GROUPS: StyleGroup[] = (Object.keys(GROUP_META) as StyleGroupId[]).
 }));
 
 export function stylePreviewUrl(number: string): string {
-  const n = Number.parseInt(number, 10);
-  const bucket = n <= 200 ? "001-200" : "201-400";
-  return `https://cdn.jsdelivr.net/gh/yang0/handraw-style@master/images/individual/${bucket}/${number}.webp`;
+  const folder = number.slice(0, 2);
+  return `https://cdn.jsdelivr.net/gh/yang0/handraw-style@master/images/individual/${folder}/${number}.webp`;
+}
+
+export function normalizeStyleId(raw: string): string | null {
+  const match = raw.trim().match(/^(?:#)?(FA|FB|FC|FD|FE|FF|FG|FH)[-\s]?(\d{1,3})$/i);
+  if (!match) return null;
+  return `${match[1].toUpperCase()}-${match[2].padStart(3, "0")}`;
 }
 
 function groupIdFromRaw(group: string): StyleGroupId {
-  const letter = group.trim()[0] as StyleGroupId;
-  return GROUP_META[letter] ? letter : "A";
+  const id = group.trim().slice(0, 2) as StyleGroupId;
+  return GROUP_META[id] ? id : "FA";
 }
 
 const parsed = (rawStyles as RawStyle[]).map((item): Style => {
@@ -82,12 +87,14 @@ export function filterStyles(opts: {
   onlyFavorites?: boolean;
 }): Style[] {
   const q = opts.query.trim().toLowerCase();
+  const exact = normalizeStyleId(opts.query);
   return STYLES.filter((s) => {
     if (opts.group !== "all" && s.groupId !== opts.group) return false;
     if (opts.onlyFavorites && opts.favorites && !opts.favorites.includes(s.number)) return false;
     if (!q) return true;
+    if (exact && s.number === exact) return true;
     return (
-      s.number.includes(q) ||
+      s.number.toLowerCase().includes(q) ||
       s.generationName.toLowerCase().includes(q) ||
       s.reference.toLowerCase().includes(q) ||
       s.traits.toLowerCase().includes(q) ||

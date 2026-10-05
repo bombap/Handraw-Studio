@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { ImagePlus, Loader2 } from "lucide-react";
+import { Check, Clapperboard, ImagePlus, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Lightbox } from "@/components/gallery/lightbox";
-import { StoredImage } from "@/components/studio/stored-image";
+import { StoredImage, StoredVideo } from "@/components/studio/stored-image";
 import { getStyle } from "@/lib/studio/catalog";
 import { t } from "@/lib/studio/i18n";
 import { useStudio } from "@/lib/studio/store";
@@ -14,6 +14,8 @@ export function LiveCanvas() {
   const copy = t(lang);
   const jobs = useStudio((s) => s.jobs);
   const setLightbox = useStudio((s) => s.setLightbox);
+  const videoPick = useStudio((s) => s.videoPick);
+  const toggleVideo = useStudio((s) => s.toggleVideoPick);
   const latestBatch = useMemo(() => {
     if (jobs.length === 0) return undefined;
     return jobs.reduce((best, job) => (job.createdAt >= best.createdAt ? job : best)).batchId;
@@ -47,8 +49,25 @@ export function LiveCanvas() {
               return (
                 <article
                   key={job.id}
-                  className="rise-in overflow-hidden rounded-xl bg-surface p-1 shadow-[var(--shadow-border)]"
+                  className="rise-in relative overflow-hidden rounded-xl bg-surface p-1 shadow-[var(--shadow-border)]"
                 >
+                  {job.imageId && job.kind !== "video" ? (
+                    <button
+                      type="button"
+                      onClick={() => toggleVideo(job.imageId!)}
+                      className={cn(
+                        "absolute top-2 left-2 z-10 flex size-7 items-center justify-center rounded-full",
+                        videoPick.includes(job.imageId) ? "bg-stamp text-stamp-fg" : "bg-surface/90 text-ink",
+                      )}
+                      aria-label={copy.videoPick}
+                    >
+                      {videoPick.includes(job.imageId) ? (
+                        <Check className="size-3.5" />
+                      ) : (
+                        <Clapperboard className="size-3.5" />
+                      )}
+                    </button>
+                  ) : null}
                   <button
                     type="button"
                     className="relative block w-full overflow-hidden rounded-lg"
@@ -57,7 +76,9 @@ export function LiveCanvas() {
                     disabled={!job.imageId}
                   >
                     <div className="absolute inset-0">
-                      {job.imageId ? (
+                      {job.kind === "video" && job.imageId ? (
+                        <StoredVideo id={job.imageId} controls={false} className="pointer-events-none size-full" />
+                      ) : job.imageId ? (
                         <StoredImage
                           id={job.imageId}
                           alt={`#${job.styleNumber} ${job.theme}`}

@@ -1,19 +1,9 @@
-import { n as TSS_SERVER_FUNCTION, t as createServerFn } from "./ssr.mjs";
-import { a as shouldUseStyleReference, i as getStyle, n as buildPrompts } from "./prompt-DPJN2OUm.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/generate-DhglbcAz.js
-var createServerRpc = (serverFnMeta, splitImportFn) => {
-	const url = "/_serverFn/" + serverFnMeta.id;
-	return Object.assign(splitImportFn, {
-		url,
-		serverFnMeta,
-		[TSS_SERVER_FUNCTION]: true
-	});
-};
+import { t as createServerFn } from "./ssr.mjs";
+import { n as getXaiApiKey, t as createServerRpc } from "./xai-key-BEpxXzzf.mjs";
+import { C as promptForImage, D as stylePreviewUrl, E as shouldUseStyleReference, T as seedToInt, _ as getLayout, b as layoutPreviewUrl, g as getColor, s as buildPrompts, v as getStyle } from "./utils-V5r_Ws4e.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/generate-DhaqiIgz.js
 var MODEL = "grok-imagine-image-2.0";
 var FALLBACK_MODEL = "grok-imagine-image-quality";
-function stylePreviewUrl(number) {
-	return `https://cdn.jsdelivr.net/gh/yang0/handraw-style@master/images/individual/${Number.parseInt(number, 10) <= 200 ? "001-200" : "201-400"}/${number}.png`;
-}
 function imageRef(url) {
 	return {
 		url,
@@ -55,6 +45,39 @@ async function callXai(apiKey, body, path) {
 		url
 	};
 }
+function isFatalStatus(status, error) {
+	if (status === 401 || status === 403 || status === 429) return true;
+	return /quota|rate limit|insufficient/i.test(error);
+}
+/** Imagine edits: `image` is a URL string or string[]; objects `{url,type}` only work as a single `image`. */
+async function editWithRefs(apiKey, shared, urls) {
+	const attempts = [];
+	if (urls.length === 1) {
+		attempts.push({ image: {
+			url: urls[0],
+			type: "image_url"
+		} });
+		attempts.push({ image: urls[0] });
+	} else {
+		attempts.push({ image: urls });
+		attempts.push({ images: urls.map((url) => ({ url })) });
+		attempts.push({ images: urls.map((url) => imageRef(url)) });
+	}
+	let last;
+	for (const extra of attempts) {
+		last = await callXai(apiKey, {
+			...shared,
+			...extra
+		}, "/images/edits");
+		if (last.ok) return last;
+		if (isFatalStatus(last.status, last.error)) return last;
+	}
+	return last ?? {
+		ok: false,
+		status: 0,
+		error: "Không gửi được ảnh tham chiếu"
+	};
+}
 async function urlToDataUrl(url) {
 	if (url.startsWith("data:")) return url;
 	const res = await fetch(url);
@@ -68,45 +91,36 @@ async function generateOnce(apiKey, model, input) {
 		ok: false,
 		error: `Không có style #${input.styleNumber}`
 	};
+	const layout = getLayout(input.layoutId);
+	const color = getColor(input.colorId);
 	const useStyleRef = shouldUseStyleReference();
 	const { zh, en } = buildPrompts({
 		style,
 		theme: input.theme,
 		aspectRatio: input.aspectRatio,
 		hasUserImage: Boolean(input.userImageDataUrl),
-		useStyleRef
+		useStyleRef,
+		characterLock: input.characterLock,
+		copyIndex: input.copyIndex,
+		copies: input.copies,
+		seed: input.seed,
+		layout,
+		color
 	});
-	const refs = [];
-	if (input.userImageDataUrl) refs.push(imageRef(input.userImageDataUrl));
-	if (useStyleRef) refs.push(imageRef(stylePreviewUrl(style.number)));
+	const urls = [];
+	if (input.userImageDataUrl) urls.push(input.userImageDataUrl);
+	if (layout) urls.push(layoutPreviewUrl(layout.id, layout.category));
+	if (useStyleRef) urls.push(stylePreviewUrl(style.number));
+	const refs = urls.slice(0, 3);
 	const shared = {
 		model,
-		prompt: en,
+		prompt: promptForImage(zh, en, input.theme),
 		n: 1,
 		aspect_ratio: input.aspectRatio,
 		resolution: input.resolution === "2k" ? "2k" : "1k"
 	};
-	let result;
-	if (refs.length === 0) result = await callXai(apiKey, shared, "/images/generations");
-	else if (refs.length === 1) {
-		result = await callXai(apiKey, {
-			...shared,
-			image: refs[0]
-		}, "/images/edits");
-		if (!result.ok && /image|images/i.test(result.error)) result = await callXai(apiKey, {
-			...shared,
-			images: refs
-		}, "/images/edits");
-	} else {
-		result = await callXai(apiKey, {
-			...shared,
-			images: refs
-		}, "/images/edits");
-		if (!result.ok) result = await callXai(apiKey, {
-			...shared,
-			image: refs
-		}, "/images/edits");
-	}
+	if (input.seed) shared.seed = seedToInt(input.seed);
+	const result = refs.length === 0 ? await callXai(apiKey, shared, "/images/generations") : await editWithRefs(apiKey, shared, refs);
 	if (!result.ok) return {
 		ok: false,
 		error: result.error,
@@ -136,7 +150,7 @@ var generateStyledImage_createServerFn_handler = createServerRpc({
 	filename: "src/lib/studio/generate.ts"
 }, (opts) => generateStyledImage.__executeServer(opts));
 var generateStyledImage = createServerFn({ method: "POST" }).validator((input) => input).handler(generateStyledImage_createServerFn_handler, async ({ data }) => {
-	const apiKey = process.env.XAI_API_KEY?.trim();
+	const apiKey = await getXaiApiKey();
 	if (!apiKey) return {
 		ok: false,
 		error: "AI is not available in this environment"
@@ -146,7 +160,7 @@ var generateStyledImage = createServerFn({ method: "POST" }).validator((input) =
 		ok: false,
 		error: "Theme is required"
 	};
-	if (!/^\d{3}$/.test(data.styleNumber)) return {
+	if (!/^(?:FA|FB|FC|FD|FE|FF|FG|FH)-\d{3}$/.test(data.styleNumber)) return {
 		ok: false,
 		error: "Invalid style number"
 	};
@@ -170,7 +184,7 @@ var checkAiAvailable_createServerFn_handler = createServerRpc({
 	filename: "src/lib/studio/generate.ts"
 }, (opts) => checkAiAvailable.__executeServer(opts));
 var checkAiAvailable = createServerFn({ method: "POST" }).handler(checkAiAvailable_createServerFn_handler, async () => {
-	return { available: Boolean(process.env.XAI_API_KEY?.trim()) };
+	return { available: Boolean(await getXaiApiKey()) };
 });
 //#endregion
 export { checkAiAvailable_createServerFn_handler, generateStyledImage_createServerFn_handler };

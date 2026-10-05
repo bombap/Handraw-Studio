@@ -9,13 +9,20 @@ export type AspectRatio =
   | "21:9"
   | "5:2";
 
-export type StyleGroupId = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
+export type StyleGroupId = "FA" | "FB" | "FC" | "FD" | "FE" | "FF" | "FG" | "FH";
 
 export type Lang = "vi" | "en";
 
 export type EnhanceLevel = "short" | "full" | "cinematic";
 
 export type Resolution = "1k" | "2k";
+
+export type JobKind = "image" | "video";
+
+export type ComposeMode = "image" | "video";
+
+export const VIDEO_DURATION_MIN = 1;
+export const VIDEO_DURATION_MAX = 15;
 
 export type JobStatus = "queued" | "running" | "done" | "error" | "cancelled";
 
@@ -41,7 +48,26 @@ export interface StyleGroup {
   count: number;
 }
 
-export type LayoutCategory = "social-card" | "infographic" | "comic-storyboard";
+export type ColorGroup = "blue" | "green" | "red" | "pink" | "earth";
+
+export interface ThemeColor {
+  id: string;
+  group: ColorGroup;
+  nameZh: string;
+  nameEn: string;
+  nameVi: string;
+  hex: string;
+  promptZh: string;
+  promptEn: string;
+  previewUrl: string;
+}
+
+export type LayoutCategory =
+  | "social-card"
+  | "infographic"
+  | "comic-storyboard"
+  | "ip-character"
+  | "ecommerce";
 
 export interface Layout {
   id: string;
@@ -81,6 +107,12 @@ export interface GenerateJob {
   seed: string;
   layoutId?: string;
   layoutName?: string;
+  colorId?: string;
+  colorName?: string;
+  kind?: JobKind;
+  sourceImageId?: string;
+  videoRequestId?: string;
+  videoDuration?: number;
 }
 
 export interface GalleryItem {
@@ -96,6 +128,8 @@ export interface GalleryItem {
   promptEn: string;
   layoutId?: string;
   layoutName?: string;
+  kind?: JobKind;
+  sourceImageId?: string;
 }
 
 export const ASPECT_OPTIONS: {

@@ -2,7 +2,7 @@ import { Download, Heart, ImagePlus, Trash2, X } from "lucide-react";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { StoredImage } from "@/components/studio/stored-image";
+import { StoredImage, StoredVideo } from "@/components/studio/stored-image";
 import { getImageBlob } from "@/lib/studio/idb";
 import { t } from "@/lib/studio/i18n";
 import { useStudio } from "@/lib/studio/store";
@@ -35,7 +35,13 @@ export function Lightbox() {
       toast.error(copy.downloadFail);
       return;
     }
-    const ext = blob.type.includes("jpeg") || blob.type.includes("jpg") ? "jpg" : blob.type.includes("webp") ? "webp" : "png";
+    const ext = current.kind === "video"
+      ? "mp4"
+      : blob.type.includes("jpeg") || blob.type.includes("jpg")
+        ? "jpg"
+        : blob.type.includes("webp")
+          ? "webp"
+          : "png";
     const filename = `handraw-${current.styleNumber}-${current.id.slice(-8)}.${ext}`;
     const ok = await downloadBlob(blob, filename);
     if (!ok) toast.error(copy.downloadFail);
@@ -84,11 +90,15 @@ export function Lightbox() {
         >
           <X className="size-4" />
         </button>
-        <StoredImage
-          id={current.id}
-          alt={`#${current.styleNumber} ${current.theme}`}
-          className="max-h-[70vh] w-full object-contain"
-        />
+        {current.kind === "video" ? (
+          <StoredVideo id={current.id} className="max-h-[70vh] w-full" />
+        ) : (
+          <StoredImage
+            id={current.id}
+            alt={`#${current.styleNumber} ${current.theme}`}
+            className="max-h-[70vh] w-full object-contain"
+          />
+        )}
         <div className="flex flex-col gap-3 border-t border-line p-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="min-w-0">
             <p className="font-display text-lg font-medium tracking-tight">
@@ -97,6 +107,7 @@ export function Lightbox() {
             <p className="text-sm text-ink-muted">{current.theme}</p>
           </div>
           <div className="flex flex-wrap gap-1.5">
+            {current.kind === "video" ? null : (
             <Button
               size="sm"
               variant="secondary"
@@ -113,6 +124,7 @@ export function Lightbox() {
               <ImagePlus className="size-3.5" />
               {copy.useAsSubject}
             </Button>
+            )}
             <Button size="sm" variant="secondary" onClick={() => void copyPrompt()}>
               {copy.copyPrompt}
             </Button>

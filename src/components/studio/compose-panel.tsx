@@ -1,20 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, ChevronDown, Clock3, ImagePlus, LayoutTemplate, Link2, Loader2, Minus, Plus, Shuffle, Sparkles, Undo2, WandSparkles, X } from "lucide-react";
+import { ArrowUp, ChevronDown, Clapperboard, Clock3, ImageIcon, ImagePlus, Loader2, Shuffle, Undo2, WandSparkles, X } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
+import { ColorControl, CopiesControl, LockControl, RatioControl, ResolutionControl } from "@/components/studio/compose-batch";
+import { LayoutGrid } from "@/components/studio/layout-grid";
+import { StoredImage } from "@/components/studio/stored-image";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { getStyle } from "@/lib/studio/catalog";
+import { getColor } from "@/lib/studio/color-catalog";
 import { enhanceTheme } from "@/lib/studio/enhance";
 import { checkAiAvailable } from "@/lib/studio/generate";
-import { getStyle } from "@/lib/studio/catalog";
 import { getLayout } from "@/lib/studio/layout-catalog";
 import { t } from "@/lib/studio/i18n";
 import { userImageRef } from "@/lib/studio/session";
 import { pickSpark } from "@/lib/studio/sparks";
 import { useStudio } from "@/lib/studio/store";
 import { clearSubject, setSubjectDataUrl } from "@/lib/studio/subject";
-import { ASPECT_OPTIONS, MAX_BATCH, MAX_COPIES, type EnhanceLevel, type Resolution, type StyleGroupId } from "@/lib/studio/types";
+import { MAX_BATCH, VIDEO_DURATION_MAX, VIDEO_DURATION_MIN, type EnhanceLevel, type StyleGroupId } from "@/lib/studio/types";
 import {
   cn,
   extractClipboardImage,
@@ -29,38 +32,46 @@ export function ComposePanel() {
   const theme = useStudio((s) => s.theme);
   const setTheme = useStudio((s) => s.setTheme);
   const selected = useStudio((s) => s.selected);
-  const toggleStyle = useStudio((s) => s.toggleStyle);
   const aspectRatio = useStudio((s) => s.aspectRatio);
   const setAspectRatio = useStudio((s) => s.setAspectRatio);
   const resolution = useStudio((s) => s.resolution);
-  const setResolution = useStudio((s) => s.setResolution);
   const enqueueBatch = useStudio((s) => s.enqueueBatch);
   const jobs = useStudio((s) => s.jobs);
   const themeHistory = useStudio((s) => s.themeHistory);
   const pushThemeHistory = useStudio((s) => s.pushThemeHistory);
   const enhanceLevel = useStudio((s) => s.enhanceLevel);
   const setEnhanceLevel = useStudio((s) => s.setEnhanceLevel);
-  const characterLock = useStudio((s) => s.characterLock);
-  const setCharacterLock = useStudio((s) => s.setCharacterLock);
   const copiesPerStyle = useStudio((s) => s.copiesPerStyle);
-  const setCopiesPerStyle = useStudio((s) => s.setCopiesPerStyle);
+  const characterLock = useStudio((s) => s.characterLock);
   const layoutId = useStudio((s) => s.layoutId);
   const setLayoutId = useStudio((s) => s.setLayoutId);
-  const setStudioTab = useStudio((s) => s.setStudioTab);
+  const colorId = useStudio((s) => s.colorId);
+  const composeMode = useStudio((s) => s.composeMode);
+  const setComposeMode = useStudio((s) => s.setComposeMode);
+  const videoPick = useStudio((s) => s.videoPick);
+  const videoPrompt = useStudio((s) => s.videoPrompt);
+  const setVideoPrompt = useStudio((s) => s.setVideoPrompt);
+  const videoDuration = useStudio((s) => s.videoDuration);
+  const setVideoDuration = useStudio((s) => s.setVideoDuration);
+  const toggleVideoPick = useStudio((s) => s.toggleVideoPick);
+  const gallery = useStudio((s) => s.gallery);
+  const enqueueVideos = useStudio((s) => s.enqueueVideos);
   const groupFilter = useStudio((s) => s.groupFilter);
   const subjectNonce = useStudio((s) => s.subjectNonce);
   const [preview, setPreview] = useState<string | null>(userImageRef.current);
   const [busy, setBusy] = useState(false);
   const [enhancing, setEnhancing] = useState(false);
   const [undoTheme, setUndoTheme] = useState<string | null>(null);
-  const [focused, setFocused] = useState(false);
+  const [layoutOpen, setLayoutOpen] = useState(false);
   const [dragging, setDragging] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const areaRef = useRef<HTMLTextAreaElement>(null);
   const running = jobs.filter((j) => j.status === "queued" || j.status === "running").length;
-  const currentAspect = ASPECT_OPTIONS.find((o) => o.id === aspectRatio) ?? ASPECT_OPTIONS[0];
   const isMac = typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform);
   const mod = isMac ? "⌘" : "Ctrl";
+  const layout = getLayout(layoutId);
+  const color = getColor(colorId);
+  const videoMode = composeMode === "video";
 
   useEffect(() => {
     setPreview(userImageRef.current);
@@ -70,9 +81,9 @@ export function ComposePanel() {
     const el = areaRef.current;
     if (!el) return;
     el.style.height = "auto";
-    const cap = window.matchMedia("(min-width: 1024px)").matches ? 96 : 168;
-    el.style.height = `${Math.min(el.scrollHeight, cap)}px`;
-  }, [theme]);
+    const cap = window.matchMedia("(min-width: 1024px)").matches ? 160 : 180;
+    el.style.height = `${Math.min(Math.max(el.scrollHeight, 44), cap)}px`;
+  }, [theme, videoPrompt, videoMode]);
 
   async function onFile(file: File, source: "pick" | "paste" | "drop" = "pick") {
     if (!file.type.startsWith("image/")) {
@@ -125,7 +136,7 @@ export function ComposePanel() {
         return;
       }
       pushThemeHistory(theme);
-      const result = enqueueBatch(userImageRef.current ?? undefined);
+      const result = await enqueueBatch(userImageRef.current ?? undefined);
       if (!result.ok) {
         const key = result.error;
         toast.error(
@@ -195,6 +206,29 @@ export function ComposePanel() {
     setTheme(spark);
   }
 
+  async function makeVideos() {
+    if (!videoPrompt.trim() || videoStills.length === 0) {
+      toast.error(copy.videoNeed);
+      return;
+    }
+    setBusy(true);
+    try {
+      const avail = await checkAiAvailable();
+      if (!avail.available) {
+        toast.error(copy.aiUnavailable);
+        return;
+      }
+      const result = await enqueueVideos();
+      if (!result.ok) {
+        toast.error(copy.videoNeed);
+        return;
+      }
+      toast.success(copy.videoQueued(result.count));
+    } finally {
+      setBusy(false);
+    }
+  }
+
   const n = Math.min(selected.length, MAX_BATCH) * copiesPerStyle;
   const generateLabel = busy || running > 0 ? copy.generating : n > 0 ? copy.generateN(n) : copy.generate;
   const levels: { id: EnhanceLevel; label: string; hint: string }[] = [
@@ -202,473 +236,339 @@ export function ComposePanel() {
     { id: "full", label: copy.enhanceFull, hint: copy.enhanceFullHint },
     { id: "cinematic", label: copy.enhanceCinematic, hint: copy.enhanceCinematicHint },
   ];
+  const layoutName = layout ? (lang === "vi" ? layout.nameVi : layout.nameEn) : copy.layoutNone;
+  const videoStills = gallery.filter((g) => videoPick.includes(g.id) && g.kind !== "video");
+  const summary = videoMode
+    ? aspectRatio
+    : [
+        aspectRatio,
+        resolution.toUpperCase(),
+        copiesPerStyle > 1 ? `×${copiesPerStyle}` : null,
+        layout?.id,
+        color?.id,
+        characterLock ? copy.characterLock : null,
+      ]
+        .filter(Boolean)
+        .join(" · ");
 
-  const enhanceBtn = (surface: "ink" | "paper") => (
-    <div
-      className={cn(
-        "inline-flex overflow-hidden",
-        surface === "ink" ? "rounded-full" : "rounded-md shadow-[var(--shadow-border)]",
-      )}
-    >
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <button
-            type="button"
-            disabled={enhancing}
-            onClick={() => void enhance()}
-            className={cn(
-              "inline-flex items-center gap-1.5 text-xs font-medium hover:opacity-90 disabled:opacity-40",
-              surface === "ink" ? "h-9 bg-ink px-3 text-bg" : "h-11 bg-surface px-2.5 text-ink",
-            )}
-            aria-label={copy.enhance}
-          >
-            {enhancing ? <Loader2 className="size-3.5 animate-spin" /> : <WandSparkles className="size-3.5" />}
-            {surface === "ink" ? (enhancing ? copy.enhancing : copy.enhance) : null}
-          </button>
-        </TooltipTrigger>
-        <TooltipContent>{copy.enhanceHint}</TooltipContent>
-      </Tooltip>
-      <Popover>
-        <PopoverTrigger asChild>
-          <button
-            type="button"
-            className={cn(
-              "inline-flex items-center justify-center border-l border-white/20",
-              surface === "ink" ? "h-9 w-7 bg-ink text-bg" : "h-11 w-8 bg-surface text-ink-muted",
-            )}
-            aria-label={copy.enhanceFull}
-          >
-            <ChevronDown className="size-3.5" />
-          </button>
-        </PopoverTrigger>
-        <PopoverContent className="w-56" align="end">
-          <p className="mb-2 text-xs font-medium text-ink-muted">{copy.enhance}</p>
-          <div className="flex flex-col gap-1">
-            {levels.map((item) => (
+  const iconBtn =
+    "inline-flex size-8 shrink-0 items-center justify-center rounded-full text-ink-muted hover:bg-bg hover:text-ink disabled:opacity-40";
+
+  return (
+    <section className="shrink-0 px-3 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:px-4 lg:pb-4">
+      <label htmlFor="theme-input" className="sr-only">
+        {copy.themeLabel}
+      </label>
+      <div
+        className={cn(
+          "cursor-text rounded-[28px] bg-surface p-2 shadow-[var(--shadow-border)]",
+          dragging && "ring-2 ring-stamp",
+        )}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) areaRef.current?.focus();
+        }}
+        onDragOver={(e) => {
+          e.preventDefault();
+          setDragging(true);
+        }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={(e) => {
+          e.preventDefault();
+          setDragging(false);
+          const file = e.dataTransfer.files[0];
+          if (file) void onFile(file, "drop");
+        }}
+      >
+        {videoMode ? (
+          videoStills.length > 0 ? (
+            <div className="mb-1 flex gap-1.5 overflow-x-auto px-1">
+              {videoStills.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => toggleVideoPick(item.id)}
+                  className="relative shrink-0"
+                  aria-label={copy.clear}
+                >
+                  <StoredImage id={item.id} alt="" className="size-12 rounded-xl" />
+                  <span className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-ink text-bg">
+                    <X className="size-2.5" />
+                  </span>
+                </button>
+              ))}
+            </div>
+          ) : null
+        ) : preview ? (
+          <div className="mb-1 ml-1 w-fit">
+            <div className="relative size-14">
+              <img src={preview} alt="" className="img-outline size-14 rounded-2xl object-cover" />
               <button
-                key={item.id}
                 type="button"
                 onClick={() => {
-                  setEnhanceLevel(item.id);
-                  void enhance(item.id);
+                  clearSubject();
+                  setPreview(null);
                 }}
-                className={cn(
-                  "rounded-md px-2 py-2 text-left",
-                  enhanceLevel === item.id ? "bg-ink text-bg" : "hover:bg-stamp-soft",
-                )}
+                className="absolute -top-1.5 -right-1.5 flex size-5 items-center justify-center rounded-full bg-ink text-bg"
+                aria-label={copy.removeImage}
               >
-                <span className="block text-sm font-medium">{item.label}</span>
-                <span className={cn("block text-xs", enhanceLevel === item.id ? "text-bg/70" : "text-ink-subtle")}>
-                  {item.hint}
-                </span>
+                <X className="size-3" />
               </button>
-            ))}
+            </div>
           </div>
-        </PopoverContent>
-      </Popover>
-    </div>
-  );
-
-  const surpriseBtn = (size: "sm" | "md") => (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <button
-          type="button"
-          onClick={surprise}
-          className={cn(
-            "inline-flex items-center justify-center bg-surface text-ink-muted shadow-[var(--shadow-border)] hover:text-ink",
-            size === "sm" ? "size-12 rounded-lg" : "size-11 rounded-md",
-          )}
-          aria-label={copy.surprise}
-        >
-          <Shuffle className="size-3.5" />
-        </button>
-      </TooltipTrigger>
-      <TooltipContent>{copy.surpriseHint}</TooltipContent>
-    </Tooltip>
-  );
-
-  const lockBtn = (size: "sm" | "md") => (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <button
-          type="button"
-          onClick={() => setCharacterLock(!characterLock)}
-          className={cn(
-            "inline-flex items-center justify-center gap-1.5 shadow-[var(--shadow-border)]",
-            size === "sm" ? "h-12 rounded-lg px-3" : "size-11 rounded-md",
-            characterLock ? "bg-ink text-bg" : "bg-surface text-ink-muted hover:text-ink",
-          )}
-          aria-pressed={characterLock}
-          aria-label={copy.characterLock}
-        >
-          <Link2 className="size-3.5" />
-          {size === "sm" ? <span className="text-xs font-medium">{copy.characterLock}</span> : null}
-        </button>
-      </TooltipTrigger>
-      <TooltipContent>{copy.characterLockHint}</TooltipContent>
-    </Tooltip>
-  );
-
-  const historyBtn = (size: "sm" | "md") =>
-    themeHistory.length > 0 ? (
-      <Popover>
-        <PopoverTrigger asChild>
-          <button
-            type="button"
-            className={cn(
-              "inline-flex items-center justify-center bg-surface text-ink-muted shadow-[var(--shadow-border)] hover:text-ink",
-              size === "sm" ? "size-9 rounded-full" : "size-11 rounded-md",
-            )}
-            aria-label={copy.history}
-          >
-            <Clock3 className="size-3.5" />
-          </button>
-        </PopoverTrigger>
-        <PopoverContent className="w-80" align="end">
-          <p className="mb-2 text-xs font-medium text-ink-muted">{copy.history}</p>
-          <ul className="flex max-h-64 flex-col gap-1 overflow-auto">
-            {themeHistory.map((item) => (
-              <li key={item}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setUndoTheme(theme);
-                    setTheme(item);
-                  }}
-                  className="line-clamp-3 w-full rounded-md px-2 py-2 text-left text-sm leading-snug text-ink hover:bg-stamp-soft"
-                >
-                  {item}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </PopoverContent>
-      </Popover>
-    ) : null;
-
-  const undoBtn = (size: "sm" | "md") =>
-    undoTheme != null ? (
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <button
-            type="button"
-            onClick={undo}
-            className={cn(
-              "inline-flex items-center justify-center bg-surface text-ink-muted shadow-[var(--shadow-border)] hover:text-ink",
-              size === "sm" ? "size-9 rounded-full" : "size-11 rounded-md",
-            )}
-            aria-label={copy.undoEnhance}
-          >
-            <Undo2 className="size-3.5" />
-          </button>
-        </TooltipTrigger>
-        <TooltipContent>{copy.undoEnhance}</TooltipContent>
-      </Tooltip>
-    ) : null;
-
-  const attachControl = preview ? (
-    <div className="relative size-12 shrink-0 overflow-hidden rounded-lg shadow-[var(--shadow-border)] lg:size-11 lg:rounded-md">
-      <img src={preview} alt="" className="img-outline size-full object-cover" />
-      <button
-        type="button"
-        onClick={() => {
-          clearSubject();
-          setPreview(null);
-        }}
-        className="absolute inset-0 flex items-center justify-center bg-ink/50 text-bg"
-        aria-label={copy.removeImage}
-      >
-        <X className="size-4" />
-      </button>
-    </div>
-  ) : (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <button
-          type="button"
-          onClick={() => fileRef.current?.click()}
-          className="flex size-12 shrink-0 items-center justify-center rounded-lg border border-dashed border-line-strong bg-surface text-ink-muted hover:border-stamp hover:text-ink lg:size-11 lg:rounded-md"
-          aria-label={copy.attach}
-        >
-          <ImagePlus className="size-5 lg:size-4" />
-        </button>
-      </TooltipTrigger>
-      <TooltipContent>{copy.attachHint}</TooltipContent>
-    </Tooltip>
-  );
-
-  const ratioControl = (
-    <Popover>
-      <PopoverTrigger asChild>
-        <button
-          type="button"
-          className="inline-flex h-12 min-w-12 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-surface px-3 text-sm font-medium text-ink shadow-[var(--shadow-border)] lg:h-11 lg:rounded-md lg:px-2.5 lg:text-xs"
-          aria-label={copy.aspect}
-        >
-          <RatioGlyph w={currentAspect.w} h={currentAspect.h} />
-          <span className="tabular-nums">{currentAspect.label}</span>
-          <ChevronDown className="size-3.5 text-ink-subtle" />
-        </button>
-      </PopoverTrigger>
-      <PopoverContent className="w-72 p-2" align="end">
-        <p className="mb-1.5 px-2 text-xs font-medium text-ink-muted">{copy.aspect}</p>
-        <div className="flex max-h-80 flex-col gap-0.5 overflow-y-auto">
-          {ASPECT_OPTIONS.map((opt) => (
+        ) : null}
+        <textarea
+          id="theme-input"
+          ref={areaRef}
+          value={videoMode ? videoPrompt : theme}
+          onChange={(e) => {
+            if (videoMode) setVideoPrompt(e.target.value);
+            else {
+              setTheme(e.target.value);
+              if (undoTheme != null) setUndoTheme(null);
+            }
+          }}
+          onPaste={(e) => {
+            const file = extractClipboardImage(e);
+            if (!file) return;
+            e.preventDefault();
+            const text = e.clipboardData.getData("text/plain").trim();
+            void onFile(file, "paste");
+            if (text && !theme.trim()) setTheme(text);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+              e.preventDefault();
+              if (videoMode) void makeVideos();
+              else void generate();
+            }
+            if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "e") {
+              e.preventDefault();
+              void enhance();
+            }
+          }}
+          placeholder={videoMode ? copy.videoPlaceholder : copy.themePlaceholder}
+          title={`${copy.pasteHint.replace("Ctrl", mod)}`}
+          rows={1}
+          className="max-h-44 min-h-11 w-full resize-none border-0 bg-transparent px-2 py-1.5 text-base leading-relaxed text-ink outline-none placeholder:text-ink-subtle focus:outline-none lg:text-sm"
+          aria-label={copy.themeLabel}
+        />
+        <div className="flex items-center gap-0.5 px-0.5 pt-1">
+          <div className="flex h-8 shrink-0 items-center rounded-full bg-bg p-0.5">
             <button
-              key={opt.id}
               type="button"
-              onClick={() => setAspectRatio(opt.id)}
+              onClick={() => setComposeMode("image")}
               className={cn(
-                "flex h-11 items-center gap-3 rounded-md px-2 text-left",
-                aspectRatio === opt.id ? "bg-ink text-bg" : "text-ink hover:bg-stamp-soft",
+                "inline-flex h-7 items-center gap-1 rounded-full px-2 text-xs font-medium",
+                videoMode ? "text-ink-muted" : "bg-surface text-ink shadow-[var(--shadow-border)]",
               )}
             >
-              <RatioGlyph w={opt.w} h={opt.h} />
-              <span className="font-mono text-sm tabular-nums">{opt.id}</span>
-              <span className={cn("text-xs", aspectRatio === opt.id ? "text-bg/70" : "text-ink-muted")}>
-                {lang === "vi" ? opt.nameVi : opt.nameEn}
-              </span>
-              {aspectRatio === opt.id ? <Check className="ml-auto size-3.5" /> : null}
+              <ImageIcon className="size-3.5" />
+              <span className="hidden sm:inline">{copy.modeImage}</span>
             </button>
-          ))}
-        </div>
-      </PopoverContent>
-    </Popover>
-  );
-
-  const resolutionControl = (
-    <div className="flex h-12 flex-1 items-center rounded-lg bg-surface p-1 shadow-[var(--shadow-border)] lg:h-11 lg:flex-none lg:rounded-md">
-      {(["1k", "2k"] as Resolution[]).map((r) => (
-        <button
-          key={r}
-          type="button"
-          onClick={() => setResolution(r)}
-          className={cn(
-            "h-10 flex-1 rounded-md px-2 text-sm font-medium uppercase lg:h-9 lg:min-w-10 lg:flex-none lg:text-xs",
-            resolution === r ? "bg-ink text-bg" : "text-ink-muted hover:text-ink",
+            <button
+              type="button"
+              onClick={() => setComposeMode("video")}
+              className={cn(
+                "inline-flex h-7 items-center gap-1 rounded-full px-2 text-xs font-medium",
+                videoMode ? "bg-surface text-ink shadow-[var(--shadow-border)]" : "text-ink-muted",
+              )}
+            >
+              <Clapperboard className="size-3.5" />
+              <span className="hidden sm:inline">{copy.modeVideo}</span>
+            </button>
+          </div>
+          {videoMode ? (
+            <label className="ml-1 flex h-8 min-w-0 items-center gap-2 rounded-full bg-bg px-2.5">
+              <input
+                type="range"
+                min={VIDEO_DURATION_MIN}
+                max={VIDEO_DURATION_MAX}
+                step={1}
+                value={videoDuration}
+                onChange={(e) => setVideoDuration(Number(e.target.value))}
+                className="h-1 w-16 cursor-pointer accent-stamp sm:w-28"
+                aria-label={copy.videoPrompt}
+              />
+              <span className="w-7 shrink-0 text-xs text-ink tabular-nums">{videoDuration}s</span>
+            </label>
+          ) : (
+            <>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button type="button" onClick={() => fileRef.current?.click()} className={iconBtn} aria-label={copy.attach}>
+                <ImagePlus className="size-4" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>{copy.attachHint}</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button type="button" onClick={surprise} className={iconBtn} aria-label={copy.surprise}>
+                <Shuffle className="size-4" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>{copy.surpriseHint}</TooltipContent>
+          </Tooltip>
+          <div className="inline-flex items-center">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  type="button"
+                  disabled={enhancing}
+                  onClick={() => void enhance()}
+                  className={iconBtn}
+                  aria-label={copy.enhance}
+                >
+                  {enhancing ? <Loader2 className="size-4 animate-spin" /> : <WandSparkles className="size-4" />}
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>{copy.enhanceHint}</TooltipContent>
+            </Tooltip>
+            <Popover>
+              <PopoverTrigger asChild>
+                <button type="button" className={cn(iconBtn, "w-5")} aria-label={copy.enhance}>
+                  <ChevronDown className="size-3.5" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-56" align="start">
+                <p className="mb-2 text-xs font-medium text-ink-muted">{copy.enhance}</p>
+                <div className="flex flex-col gap-1">
+                  {levels.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => {
+                        setEnhanceLevel(item.id);
+                        void enhance(item.id);
+                      }}
+                      className={cn(
+                        "rounded-md px-2 py-2 text-left",
+                        enhanceLevel === item.id ? "bg-ink text-bg" : "hover:bg-stamp-soft",
+                      )}
+                    >
+                      <span className="block text-sm font-medium">{item.label}</span>
+                      <span className={cn("block text-xs", enhanceLevel === item.id ? "text-bg/70" : "text-ink-subtle")}>
+                        {item.hint}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
+          {undoTheme != null ? (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button type="button" onClick={undo} className={iconBtn} aria-label={copy.undoEnhance}>
+                  <Undo2 className="size-4" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>{copy.undoEnhance}</TooltipContent>
+            </Tooltip>
+          ) : null}
+          {themeHistory.length > 0 ? (
+            <Popover>
+              <PopoverTrigger asChild>
+                <button type="button" className={iconBtn} aria-label={copy.history}>
+                  <Clock3 className="size-4" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80" align="start">
+                <p className="mb-2 text-xs font-medium text-ink-muted">{copy.history}</p>
+                <ul className="flex max-h-64 flex-col gap-1 overflow-auto">
+                  {themeHistory.map((item) => (
+                    <li key={item}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setUndoTheme(theme);
+                          setTheme(item);
+                        }}
+                        className="line-clamp-3 w-full rounded-md px-2 py-2 text-left text-sm leading-snug hover:bg-stamp-soft"
+                      >
+                        {item}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </PopoverContent>
+            </Popover>
+          ) : null}
+            </>
           )}
-        >
-          {r}
-        </button>
-      ))}
-    </div>
-  );
 
-  const copiesControl = (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <div
-          className="flex h-12 shrink-0 items-center rounded-lg bg-surface p-1 shadow-[var(--shadow-border)] lg:h-11 lg:rounded-md"
-          aria-label={copy.copies}
-        >
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className="ml-0.5 inline-flex h-8 max-w-[46%] items-center gap-1 truncate rounded-full bg-bg px-2.5 text-xs text-ink-muted hover:text-ink sm:max-w-none"
+              >
+                <span className="truncate">{summary}</span>
+                <ChevronDown className="size-3 shrink-0" />
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[min(92vw,24rem)]" align="start">
+              {videoMode ? (
+                <RatioControl />
+              ) : (
+                <>
+              <div className="flex flex-wrap items-center gap-2">
+                <RatioControl />
+                <ResolutionControl />
+                <CopiesControl />
+                <ColorControl />
+                <LockControl size="sm" />
+              </div>
+              <div className="mt-3 flex items-center gap-2 border-t border-line pt-3">
+                <button
+                  type="button"
+                  onClick={() => setLayoutOpen(true)}
+                  className="min-w-0 flex-1 truncate text-left text-sm"
+                >
+                  <span className="block text-[10px] tracking-wide text-ink-subtle uppercase">{copy.layouts}</span>
+                  <span className="block truncate">{layout ? `${layout.id} · ${layoutName}` : copy.pickLayout}</span>
+                </button>
+                {layout ? (
+                  <button type="button" className="text-xs text-stamp" onClick={() => setLayoutId(null)}>
+                    {copy.layoutClear}
+                  </button>
+                ) : null}
+              </div>
+                </>
+              )}
+            </PopoverContent>
+          </Popover>
+
           <button
             type="button"
-            disabled={copiesPerStyle <= 1}
-            onClick={() => setCopiesPerStyle(copiesPerStyle - 1)}
-            className="flex size-10 items-center justify-center rounded-md text-ink-muted hover:text-ink disabled:opacity-30 lg:size-9"
-            aria-label="−"
+            disabled={busy || (videoMode ? videoStills.length === 0 || !videoPrompt.trim() : n === 0)}
+            onClick={() => void (videoMode ? makeVideos() : generate())}
+            className="ml-auto flex size-9 shrink-0 items-center justify-center rounded-full bg-stamp text-stamp-fg transition-opacity disabled:bg-line disabled:text-ink-subtle"
+            aria-label={videoMode ? copy.videoMake(videoStills.length) : generateLabel}
           >
-            <Minus className="size-3.5" />
+            {busy ? <Loader2 className="size-4 animate-spin" /> : <ArrowUp className="size-4" />}
           </button>
-          <span className="min-w-8 text-center text-sm font-medium tabular-nums lg:text-xs">
-            ×{copiesPerStyle}
-          </span>
-          <button
-            type="button"
-            disabled={copiesPerStyle >= MAX_COPIES}
-            onClick={() => setCopiesPerStyle(copiesPerStyle + 1)}
-            className="flex size-10 items-center justify-center rounded-md text-ink-muted hover:text-ink disabled:opacity-30 lg:size-9"
-            aria-label="+"
-          >
-            <Plus className="size-3.5" />
-          </button>
-        </div>
-      </TooltipTrigger>
-      <TooltipContent>{copy.copiesHint}</TooltipContent>
-    </Tooltip>
-  );
-
-  const layout = getLayout(layoutId);
-
-  const chips = (
-    <div className="chip-scroll flex gap-1.5 overflow-x-auto">
-      <button
-        type="button"
-        onClick={() => setStudioTab("layouts")}
-        className={cn(
-          "inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full pr-2 pl-0.5 shadow-[var(--shadow-border)]",
-          layout ? "bg-ink text-bg" : "bg-surface text-ink-muted",
-        )}
-      >
-        {layout ? (
-          <img src={layout.previewUrl} alt="" className="size-7 rounded-full object-cover" />
-        ) : (
-          <span className="flex size-7 items-center justify-center">
-            <LayoutTemplate className="size-3.5" />
-          </span>
-        )}
-        <span className="text-xs">{layout ? layout.id : copy.layoutNone}</span>
-        {layout ? (
-          <X
-            className="size-3 opacity-70"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLayoutId(null);
-            }}
-          />
-        ) : null}
-      </button>
-      {selected.map((num) => {
-        const style = getStyle(num);
-        return (
-          <button
-            key={num}
-            type="button"
-            onClick={() => toggleStyle(num)}
-            className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full bg-surface pr-2 pl-0.5 shadow-[var(--shadow-border)]"
-          >
-            {style ? (
-              <img src={style.previewUrl} alt="" className="size-7 rounded-full object-cover" />
-            ) : null}
-            <span className="font-mono text-xs text-stamp tabular-nums">
-              #{num}
-              {copiesPerStyle > 1 ? ` ×${copiesPerStyle}` : ""}
-            </span>
-            <X className="size-3 text-ink-subtle" />
-          </button>
-        );
-      })}
-    </div>
-  );
-
-  return (
-    <section className="shrink-0 border-t border-line bg-bg-elevated/95 backdrop-blur-md lg:border-t-0 lg:border-b">
-      <div className="flex flex-col gap-2.5 px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:px-5 lg:py-2.5">
-        {chips}
-        <label htmlFor="theme-input" className="sr-only">
-          {copy.themeLabel}
-        </label>
-        <div className="flex flex-col gap-2.5 lg:flex-row lg:items-center">
-          <div
-            className={cn(
-              "relative lg:min-w-0 lg:flex-1",
-              dragging && "rounded-lg ring-2 ring-stamp ring-offset-2 ring-offset-bg",
-            )}
-            onDragOver={(e) => {
-              e.preventDefault();
-              setDragging(true);
-            }}
-            onDragLeave={() => setDragging(false)}
-            onDrop={(e) => {
-              e.preventDefault();
-              setDragging(false);
-              const file = e.dataTransfer.files[0];
-              if (file) void onFile(file, "drop");
-            }}
-          >
-            <Textarea
-              id="theme-input"
-              ref={areaRef}
-              value={theme}
-              onChange={(e) => {
-                setTheme(e.target.value);
-                if (undoTheme != null) setUndoTheme(null);
-              }}
-              onFocus={() => setFocused(true)}
-              onBlur={() => setFocused(false)}
-              onPaste={(e) => {
-                const file = extractClipboardImage(e);
-                if (!file) return;
-                e.preventDefault();
-                const text = e.clipboardData.getData("text/plain").trim();
-                void onFile(file, "paste");
-                if (text && !theme.trim()) setTheme(text);
-              }}
-              onKeyDown={(e) => {
-                if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
-                  e.preventDefault();
-                  void generate();
-                }
-                if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "e") {
-                  e.preventDefault();
-                  void enhance();
-                }
-              }}
-              placeholder={copy.themePlaceholder}
-              title={`${copy.pasteHint.replace("Ctrl", mod)} · ${copy.generateKbd.replace("Ctrl", mod)}`}
-              rows={3}
-              className="min-h-28 w-full px-3.5 pt-3 pb-11 text-base leading-relaxed lg:h-11 lg:min-h-11 lg:max-h-24 lg:py-2.5 lg:pr-3 lg:pb-2.5 lg:text-sm"
-              aria-label={copy.themeLabel}
-            />
-            <div className="absolute right-2 bottom-2 flex items-center gap-1 lg:hidden">
-              {undoBtn("sm")}
-              {enhanceBtn("ink")}
-            </div>
-            {focused && !preview && !theme.trim() ? (
-              <p className="pointer-events-none absolute bottom-3 left-3 max-w-[40%] truncate text-[0.65rem] text-ink-subtle lg:hidden">
-                {copy.pasteHint.replace("Ctrl", mod)}
-              </p>
-            ) : null}
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="hidden lg:inline-flex">{surpriseBtn("md")}</span>
-            <span className="hidden lg:inline-flex">{historyBtn("md")}</span>
-            <span className="hidden lg:inline-flex">{undoBtn("md")}</span>
-            <span className="hidden lg:inline-flex">{enhanceBtn("paper")}</span>
-            {attachControl}
-            <input
-              ref={fileRef}
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) void onFile(file);
-                e.target.value = "";
-              }}
-            />
-            {ratioControl}
-            {resolutionControl}
-            <span className="hidden lg:inline-flex">{copiesControl}</span>
-            <span className="hidden lg:inline-flex">{lockBtn("md")}</span>
-            <Button
-              className="hidden h-11 shrink-0 px-4 lg:inline-flex"
-              disabled={busy || n === 0}
-              onClick={() => void generate()}
-            >
-              <Sparkles className="size-4" />
-              {generateLabel}
-            </Button>
-          </div>
-          <div className="flex gap-2 lg:hidden">
-            {lockBtn("sm")}
-            {surpriseBtn("sm")}
-            {copiesControl}
-            <Button
-              className="h-12 min-w-0 flex-1 text-base"
-              disabled={busy || n === 0}
-              onClick={() => void generate()}
-            >
-              <Sparkles className="size-4" />
-              {generateLabel}
-            </Button>
-          </div>
         </div>
       </div>
-    </section>
-  );
-}
 
-function RatioGlyph({ w, h }: { w: number; h: number }) {
-  const max = Math.max(w, h);
-  return (
-    <span
-      className="inline-block rounded-[1px] border border-current opacity-80"
-      style={{
-        width: `${6 + (w / max) * 10}px`,
-        height: `${6 + (h / max) * 10}px`,
-      }}
-    />
+      <input
+        ref={fileRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) void onFile(file);
+          e.target.value = "";
+        }}
+      />
+
+      <Dialog open={layoutOpen} onOpenChange={setLayoutOpen}>
+        <DialogContent className="flex h-[min(88vh,820px)] w-[min(96vw,920px)] flex-col overflow-hidden p-0">
+          <DialogTitle className="sr-only">{copy.layouts}</DialogTitle>
+          <LayoutGrid onPicked={() => setLayoutOpen(false)} />
+        </DialogContent>
+      </Dialog>
+    </section>
   );
 }

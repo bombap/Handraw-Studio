@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { Heart, ImagePlus, Search } from "lucide-react";
+import { Check, Clapperboard, Heart, ImagePlus, Search } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Lightbox } from "@/components/gallery/lightbox";
@@ -17,6 +17,8 @@ export function GalleryView() {
   const gallery = useStudio((s) => s.gallery);
   const setLightbox = useStudio((s) => s.setLightbox);
   const toggleFav = useStudio((s) => s.toggleGalleryFavorite);
+  const videoPick = useStudio((s) => s.videoPick);
+  const toggleVideo = useStudio((s) => s.toggleVideoPick);
   const [q, setQ] = useState("");
   const [onlyFav, setOnlyFav] = useState(false);
 
@@ -77,15 +79,33 @@ export function GalleryView() {
           {items.map((item) => (
             <article
               key={item.id}
-              className="group overflow-hidden rounded-xl bg-surface p-1 shadow-[var(--shadow-border)] transition-[box-shadow,transform] duration-150 hover:-translate-y-0.5 hover:shadow-[var(--shadow-border-hover)]"
+              className="group relative overflow-hidden rounded-xl bg-surface p-1 shadow-[var(--shadow-border)]"
             >
+              {item.kind === "video" ? (
+                <span className="absolute top-2 left-2 z-10 flex size-7 items-center justify-center rounded-full bg-ink/80 text-bg">
+                  <Clapperboard className="size-3.5" />
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => toggleVideo(item.id)}
+                  className={cn(
+                    "absolute top-2 left-2 z-10 flex size-7 items-center justify-center rounded-full",
+                    videoPick.includes(item.id) ? "bg-stamp text-stamp-fg" : "bg-surface/90 text-ink",
+                  )}
+                  aria-label={copy.videoPick}
+                  aria-pressed={videoPick.includes(item.id)}
+                >
+                  {videoPick.includes(item.id) ? <Check className="size-3.5" /> : <Clapperboard className="size-3.5" />}
+                </button>
+              )}
               <button
                 type="button"
                 className="block w-full overflow-hidden rounded-lg"
                 onClick={() => setLightbox(item.id)}
               >
                 <StoredImage
-                  id={item.id}
+                  id={item.kind === "video" && item.sourceImageId ? item.sourceImageId : item.id}
                   alt={`#${item.styleNumber} ${item.theme}`}
                   className="aspect-square w-full"
                 />

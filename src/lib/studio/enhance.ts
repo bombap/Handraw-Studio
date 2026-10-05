@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import type { EnhanceLevel, Lang } from "./types";
+import { getXaiApiKey } from "./xai-key";
 
 const MODEL = "grok-4.5";
 
@@ -60,7 +61,7 @@ function cleanTheme(text: string): string {
 export const enhanceTheme = createServerFn({ method: "POST" })
   .validator((input: EnhanceInput) => input)
   .handler(async ({ data }): Promise<EnhanceResult> => {
-    const apiKey = process.env.XAI_API_KEY?.trim();
+    const apiKey = await getXaiApiKey();
     if (!apiKey) return { ok: false, error: "unavailable" };
 
     const theme = data.theme.trim();

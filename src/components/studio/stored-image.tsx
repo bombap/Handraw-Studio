@@ -41,3 +41,49 @@ export function StoredImage({
 
   return <img src={url} alt={alt} className={cn("img-outline object-cover", className)} />;
 }
+
+export function StoredVideo({
+  id,
+  className,
+  controls = true,
+}: {
+  id: string;
+  className?: string;
+  controls?: boolean;
+}) {
+  const [url, setUrl] = useState<string | undefined>(() => peekImageObjectUrl(id));
+
+  useEffect(() => {
+    let alive = true;
+    const load = () => {
+      const cached = peekImageObjectUrl(id);
+      if (cached) {
+        setUrl(cached);
+        return;
+      }
+      void getImageObjectUrl(id).then((next) => {
+        if (alive) setUrl(next);
+      });
+    };
+    load();
+    const unsub = subscribeImageCache((changed) => {
+      if (changed === id) load();
+    });
+    return () => {
+      alive = false;
+      unsub();
+    };
+  }, [id]);
+
+  if (!url) return <div className={cn("animate-pulse bg-line", className)} aria-hidden />;
+  return (
+    <video
+      src={url}
+      className={cn("bg-ink object-contain", className)}
+      controls={controls}
+      muted={!controls}
+      playsInline
+      preload="metadata"
+    />
+  );
+}

@@ -3,7 +3,7 @@
     "id": "SC-001",
     "category": "social-card",
     "nameZh": "上文下图社媒卡",
-    "nameEn": "Text above, image below",
+    "nameEn": "Text-Above-Image Social Card",
     "nameVi": "Chữ trên, ảnh dưới",
     "keywords": [
       "上文下图",
@@ -19,7 +19,7 @@
     "id": "SC-002",
     "category": "social-card",
     "nameZh": "文案主导底部辅助图卡",
-    "nameEn": "Copy-led, small image at bottom",
+    "nameEn": "Text-Dominant Bottom-Graphic Card",
     "nameVi": "Chữ chủ, ảnh phụ dưới",
     "keywords": [
       "文字主视觉",
@@ -35,7 +35,7 @@
     "id": "SC-003",
     "category": "social-card",
     "nameZh": "上下双格图文卡",
-    "nameEn": "Two stacked image-text frames",
+    "nameEn": "Two-Panel Stacked Card",
     "nameVi": "Hai khung chồng dọc",
     "keywords": [
       "上下两宫格",
@@ -51,7 +51,7 @@
     "id": "SC-004",
     "category": "social-card",
     "nameZh": "上下双格图文分区卡",
-    "nameEn": "Two stacked split frames",
+    "nameEn": "Two-Panel Split Section Card",
     "nameVi": "Hai khung tách chữ/ảnh",
     "keywords": [
       "上下两宫格",
@@ -67,7 +67,7 @@
     "id": "SC-005",
     "category": "social-card",
     "nameZh": "气泡文字思考IP卡",
-    "nameEn": "Thought-bubble character card",
+    "nameEn": "Thought-Bubble Character Card",
     "nameVi": "Bong bóng nghĩ + nhân vật",
     "keywords": [
       "气泡文字",
@@ -84,7 +84,7 @@
     "id": "SC-006",
     "category": "social-card",
     "nameZh": "三层标题辅助图卡",
-    "nameEn": "Three-band title card",
+    "nameEn": "Three-Tier Headline Graphic Card",
     "nameVi": "Ba tầng tiêu đề",
     "keywords": [
       "三层结构",
@@ -101,7 +101,7 @@
     "id": "SC-007",
     "category": "social-card",
     "nameZh": "引号关键词文字卡",
-    "nameEn": "Quoted keyword type card",
+    "nameEn": "Quote Keyword Typography Card",
     "nameVi": "Thẻ chữ có ngoặc kép",
     "keywords": [
       "文字型",
@@ -118,7 +118,7 @@
     "id": "SC-008",
     "category": "social-card",
     "nameZh": "图上文下留白卡",
-    "nameEn": "Image above, text below",
+    "nameEn": "Image-Above-Text Whitespace Card",
     "nameVi": "Ảnh trên, chữ dưới",
     "keywords": [
       "图上文下",
@@ -135,7 +135,7 @@
     "id": "SC-009",
     "category": "social-card",
     "nameZh": "居中文字右下辅助图卡",
-    "nameEn": "Centered type, corner accent",
+    "nameEn": "Centered Text Corner Graphic Card",
     "nameVi": "Chữ giữa, họa tiết góc",
     "keywords": [
       "文字主体",
@@ -151,7 +151,7 @@
     "id": "SC-010",
     "category": "social-card",
     "nameZh": "上下双格标题列表卡",
-    "nameEn": "Two stacked title-list cards",
+    "nameEn": "Two-Panel List & Graphic Card",
     "nameVi": "Hai khung tiêu đề + list",
     "keywords": [
       "上下双格",
@@ -168,7 +168,7 @@
     "id": "SC-011",
     "category": "social-card",
     "nameZh": "中心主图多场景信息卡",
-    "nameEn": "Center hero, multi-scene notes",
+    "nameEn": "Central Hero Multi-Scene Card",
     "nameVi": "Ảnh lớn giữa, nhiều cảnh",
     "keywords": [
       "主标题",
@@ -185,7 +185,7 @@
     "id": "SC-012",
     "category": "social-card",
     "nameZh": "中心标题上下图标卡",
-    "nameEn": "Centered title, icon rings",
+    "nameEn": "Center Title Top-Bottom Icon Card",
     "nameVi": "Tiêu đề giữa, icon vòng quanh",
     "keywords": [
       "垂直居中标题",
@@ -202,7 +202,7 @@
     "id": "SC-014",
     "category": "social-card",
     "nameZh": "留白驱动主视觉信息卡",
-    "nameEn": "Whitespace-led hero card",
+    "nameEn": "Whitespace-Driven Hero Information Card",
     "nameVi": "Ảnh lớn, chú thích thưa",
     "keywords": [
       "顶部短标题",
@@ -219,7 +219,7 @@
     "id": "SC-015",
     "category": "social-card",
     "nameZh": "上下双区递进短句卡",
-    "nameEn": "Two-zone short-line card",
+    "nameEn": "Two-Tier Progressive Short-Phrase Card",
     "nameVi": "Hai vùng câu ngắn",
     "keywords": [
       "上下双区",
@@ -236,7 +236,7 @@
     "id": "SC-016",
     "category": "social-card",
     "nameZh": "极简大字小图点缀卡",
-    "nameEn": "Huge type, tiny accent",
+    "nameEn": "Minimalist Big-Type Accent Card",
     "nameVi": "Chữ rất lớn, họa tiết nhỏ",
     "keywords": [
       "大面积留白",
@@ -253,7 +253,7 @@
     "id": "SC-017",
     "category": "social-card",
     "nameZh": "自由标注留白信息卡",
-    "nameEn": "Free labels on whitespace",
+    "nameEn": "Freely Annotated Whitespace Card",
     "nameVi": "Nhãn tự do trên nền trống",
     "keywords": [
       "主标题",
@@ -270,7 +270,7 @@
     "id": "SC-018",
     "category": "social-card",
     "nameZh": "中心主视觉环绕信息卡",
-    "nameEn": "Hero center, orbiting notes",
+    "nameEn": "Center Hero Surrounding Info Card",
     "nameVi": "Ảnh giữa, chú thích vòng",
     "keywords": [
       "两级短标题",
@@ -287,7 +287,7 @@
     "id": "SC-019",
     "category": "social-card",
     "nameZh": "中央人物细线标注卡",
-    "nameEn": "Figure with callout lines",
+    "nameEn": "Central Character Leader-Line Card",
     "nameVi": "Nhân vật + đường chỉ chú",
     "keywords": [
       "顶部短标题",
@@ -304,7 +304,7 @@
     "id": "SC-020",
     "category": "social-card",
     "nameZh": "一大一组非对称信息卡",
-    "nameEn": "One large, one cluster",
+    "nameEn": "Asymmetric Hero & Group Cluster Card",
     "nameVi": "Một ảnh lớn, một cụm info",
     "keywords": [
       "顶部短标题",
@@ -318,10 +318,36 @@
     "promptEn": "Xiaohongshu social-media card. Use an asymmetrical “one large visual plus one group” structure. Place a prominent one- or two-line short headline in a dedicated top title area, clearly separated from the body below. In the middle, place one large primary visual occupying most of the content area and weighted toward one side; concentrate 4–6 much smaller information units in one continuous, compact secondary group on the opposite side. The primary visual may be on the left or right, with the information group mirrored accordingly rather than fixed to one direction. Do not scatter the small units around the hero or across both sides. Arrange them with staggered rows, interleaved columns, or varied density; each unit consists of a small visual element and extremely short text. Let the primary visual occupy about 55%–70% of the middle content area and the information group about 25%–40%, separating them through whitespace rather than divider lines, uniform card frames, tables, or regular grids. A very short summary line may appear at the bottom. Emphasize “one large visual block plus one concentrated small information cluster”: asymmetrical but stable, avoiding radial layouts, all-around placement, even distribution, or scattered elements across the whole canvas."
   },
   {
+    "id": "SC-021",
+    "category": "social-card",
+    "nameZh": "自适应双拼照片转译社媒卡",
+    "nameEn": "Adaptive Split Photo-to-Art Social Card",
+    "nameVi": "Thẻ ảnh đôi chuyển style",
+    "keywords": [
+      "自适应双拼照片转译社媒卡",
+      "Adaptive Split Photo-to-Art Social Card"
+    ],
+    "promptZh": "小红书社媒卡。排版：自适应双拼照片艺术转译型。支持纯文本主题直出（由生图模型一体化生成）与上传照片垫图转绘。拼接时严禁修改或拉伸原图比例；完整画布由两块等大区域精准拼接：若为竖版原图采用左右 1:1 双拼横向并排，画布保持原图高度不变，总宽度精确为原图宽度的两倍（原图占左 50%，艺术转译区占右 50%）；若为横版原图/默认画幅采用上下 1:1 双拼纵向堆叠，画布保持原图宽度不变，总高度精确为原图高度的两倍（原图占上 50%，艺术转译区占下 50%）。由生图模型自主完成“真实摄影呈现 × 同一主体艺术风格转译”的前后虚实对照：<br><br>【真实摄影区（横版默认上方 / 竖版左侧）】：<br>由生图模型根据主题生成超写实、高质感的单反摄影真实照片（若用户上传了参考图则以其为准）。严格保持原图原始宽高比例与构图完整性，严禁拉伸变形或裁切。保持摄影真实景深、自然光线、真实皮肤/毛发质感与现场抓拍氛围，不做插画化重绘，作为风格转译前的真实摄影基准。<br><br>【艺术转译区（横版默认下方 / 竖版右侧）—— 彻底去写实与单义构图转译】：<br>1. 彻底去写实化与画风从零重绘（坚决杜绝照片套滤镜）：<br>艺术转译侧必须与摄影侧形成极具冲击力的跨媒介反差！坚决不要在原照片的写实五官与光影体积上直接套滤镜或贴材质。必须“只提取摄影区人物的五官标志特征、姿态神态与场景大轮廓”，在画风上完全按所选风格从零重绘为纯粹的 2D 手绘/艺术插画，让所选风格的笔触、线条、专属配色与质感辨识度最大化释放。<br><br>2. 坚决彻底剔除原片环境杂质（留白是第一原则，严禁照抄全景背景）：<br>严禁把摄影区的杂乱场景（如整面石墙、地面小路、大片树丛天空等）机械复制到转译区！转译侧画面四周边缘必须保留充足、干净的 40%–80% 负空间/呼吸留白底色（暖象牙白、米白棉麻纸纹），主体与文字向内部收拢，绝不贴边、绝不爆框。<br><br>3. 单一明确的构图转译语法与轮替机制（严格 Round-Robin 轮替，严禁千篇一律与多选平铺）：<br>若用户未显式指定构图，AI 提示词生成器（Prompter Agent）在每次生成时必须按顺序在以下五大核心玩法中进行严格轮替（Round-Robin 轮替抽卡，严禁连续输出同一玩法），并为选定的唯一玩法生成单义、排他的执行指令：<br>- 【玩法一：越界破框型】：在纯白底色中设置单枚低饱和几何色块/容器，主体大部分在色块内，但关键部位（头部/手部/枝叶）自然突破色块边缘伸出，形成空间穿透感；<br>- 【玩法二：微缩浮岛型】：主体大幅微缩为占画面 10%–25% 的精致纸面小景，仅由一抹清淡色带或基座承托，四周呈现大片静谧空旷留白；<br>- 【玩法三：记忆图谱平铺型】：打破单一场景，居中放置主体，并在留白中错落平铺 3–6 枚原图记忆特征贴纸（带 NO. 编号），间距透光；<br>- 【玩法四：经典悬浮落地型】：主体尺度适中（占 40%–55%），居中或微偏心站立，底部仅用一条极简地面摩擦线提示空间；<br>- 【玩法五：正负形咬合型】：主体高度提炼为几何剪影，与背景正负形相互转换咬合。<br><br>4. 编辑式微排版（文字优雅嵌入负空间）：<br>在空白负空间中巧妙排布 1–2 组与主题相关的精致微排版（手绘艺术标题、英文短句、编号标签或随笔小文案），字迹纤细克制。<br><br>整体要求：拼接时严禁修改原图比例；加上艺术转译区后，整张图片宽度精确为原图宽度的两倍（左右双拼）或高度精确为原图高度的两倍（上下双拼）；双拼两区在中线处平齐无缝拼接，无多余边框；艺术转译侧四周确保留出充足负空间与呼吸边距；由生图模型自主完成“极致真实摄影 × 极致纯正手绘艺术”对比鲜明、四周留白舒展的高级艺术画报。",
+    "promptEn": "Xiaohongshu social-media card. Layout: Adaptive split photo-to-art translation layout. Supports both direct text-prompt generation (fully synthesized by the image generation model) and image-to-image photo translation. Strictly preserve the original photo's native aspect ratio without stretching or distortion; the complete canvas is formed by seamlessly joining two equal halves: for portrait photos using a 1:1 side-by-side vertical split, the canvas maintains the photo's original height with total width exactly twice (2×) the original photo's width (source photo on left 50%, art panel on right 50%); for landscape photos / default using a 1:1 stacked horizontal split, the canvas maintains the photo's original width with total height exactly twice (2×) the original photo's height (source photo on upper 50%, art panel on lower 50%). The image generation model autonomously renders a cohesive before-and-after dialogue between \"Authentic Photography × Stylized Artwork\":<br><br>[Authentic Photography Panel (Upper for Landscape / Left for Portrait)]:<br>The image model generates an ultra-realistic photograph matching the theme (or follows the uploaded photo if provided), strictly preserving the original aspect ratio and composition without stretching, distortion, or cropping. Maintains photographic depth of field, natural lighting, authentic skin/fur textures, and snapshot atmosphere without illustration redraws, establishing the realistic photographic baseline.<br><br>[Artistic Translation Panel (Lower for Landscape / Right for Portrait) — Radical De-Photorealism & Singular Compositional Transfer]:<br>1. Radical De-Photorealism & Style Redraw (Strictly NOT a Photo Filter):<br>The translated panel must form a dramatic cross-medium contrast with the photography panel! Strictly avoid slapping filters, grain, or shading onto the photo's 3D anatomy. Extract only the subject's iconic facial features, posture, and scene contours, redrawing them entirely from scratch in the chosen artistic style as pure 2D hand-drawn illustration with maximized stylistic linework, brushwork, and palette fidelity.<br><br>2. Strict Elimination of Environmental Clutter (Negative Space is Essential; Never Copy Full Background):<br>Strictly avoid duplicating the photographic background (e.g. full stone walls, pathways, dense trees, skies) into the translated panel! The translated panel MUST preserve generous, clean negative space and breathing margins (40%–80%) around all four outer edges on warm ivory/oatmeal paper ground. Hero subjects and typography must breathe inward, strictly never touching or bleeding over borders.<br><br>3. Singular Compositional Syntax & Round-Robin Rotation Policy (Strict Round-Robin; Never Monotonous):<br>When the user does not explicitly specify a composition, the AI prompt generator MUST rotate through the 5 core playstyles in strict Round-Robin order (prohibiting consecutive repeats) and emit a singular, deterministic, exclusive instruction:<br>- [Playstyle 1: Boundary Break / Out-of-Bounds]: Subject is mostly framed inside a single geometric color block, with iconic parts (head, limbs, branches) naturally breaking out past the borders to create spatial penetration;<br>- [Playstyle 2: Miniature Diorama / Floating Island]: Subject is drastically scaled down to 10%–25% as a delicate paper-relief vignette resting on a gestural ribbon or pedestal, surrounded by vast serene negative space;<br>- [Playstyle 3: Memory Knolling / Fragment Collage]: Deconstructs single scenes; places the main subject alongside 3–6 deconstructed memory stickers/artifacts with NO. index tags and breathing gaps;<br>- [Playstyle 4: Classic Suspended / Grounded Hero]: Balanced scale (40%–55%), centered or slightly off-center, anchored solely by a single gestural ground friction line;<br>- [Playstyle 5: Gestalt Positive-Negative Interlock]: Highly stylized silhouette interlocked with background negative forms.<br><br>4. Editorial Micro-Typography in Negative Space:<br>Embed subtle editorial typography (hand-lettered artistic headline, delicate English phrases, edition/number tags, or poetic captions) within the open negative space.<br><br>Overall Requirement: Strictly preserve the original photograph's aspect ratio without stretching; with the artistic translation panel added, the final canvas is exactly twice the width (side-by-side) or twice the height (stacked) of the original photo. The two split panels must join seamlessly at the midpoint with zero gaps or extra borders; the artistic translation panel must maintain generous negative space and breathing margins around all four outer edges, fully synthesized by the image generation model as an elegant, high-contrast visual dialogue between authentic photography and stylized artistic minimalism with generous perimeter breathing room."
+  },
+  {
+    "id": "SC-022",
+    "category": "social-card",
+    "nameZh": "姓名四款签名设计展示卡",
+    "nameEn": "Name-to-Four-Signature Showcase Card",
+    "nameVi": "Bốn kiểu chữ ký theo tên",
+    "keywords": [
+      "姓名四款签名设计展示卡",
+      "Name-to-Four-Signature Showcase Card"
+    ],
+    "promptZh": "【中文姓名】：{例如：唐伯虎}<br>【姓名拼音】：{例如：TANG BOHU}<br>【顶部背景色】：{例如：深钴蓝}<br>【画幅比例】：9:16<br><br>将输入的【中文姓名】制作成一张“姓名 → 四种签名方案”的竖版设计稿。<br><br>## 一、整体排版<br><br>画面比例为 9:16。<br><br>上方约占画面 40%，用于展示原始姓名。<br><br>下方约占画面 60%，用于展示同一个姓名的四种不同签名方案。<br><br>---<br><br>## 二、顶部姓名区<br><br>顶部使用【顶部背景色】。<br><br>顶部中央放置小字：<br><br>NAME TO SIGNATURE<br><br>画面中部展示【中文姓名】。<br><br>姓名必须使用普通印刷字体，不使用手写、连笔、签名字体或艺术变形，用于明确表示原始输入姓名。<br><br>中文姓名下方显示：<br><br>【姓名拼音】<br><br>姓名拼音使用大写英文字母。<br><br>顶部区域不添加其他文案、Logo、编号或图形。<br><br>---<br><br>## 三、底部签名区<br><br>底部划分为 2×2 四个区域。<br><br>使用细虚线进行横向和纵向分隔，不需要外边框。<br><br>四格分别展示同一个【中文姓名】的四种签名设计：<br><br>左上：飘逸<br>右上：锋势<br>左下：回环<br>右下：极简<br><br>每格只包含：<br><br>1. 一个大尺寸签名<br>2. 下方一个小字号风格名称<br><br>四个签名都必须来源于同一个【中文姓名】，但不能只是把完整姓名换四种相似写法。<br><br>允许对姓名进行：<br><br>省笔、合笔、连笔、共享笔画、压缩、拉长、缩写、拆解、重组、符号化。<br><br>不要求每一个中文字都完整可辨。<br><br>重点是保留姓名的部分结构特征，同时形成四种明显不同的签名骨架。<br><br>---<br><br>## 四、四种签名笔势<br><br>### 1. 飘逸<br><br>整体横向展开。<br><br>姓名高度压缩，多个字之间可以连续连写、共享笔画。<br><br>以连续曲线为主，笔势流畅。<br><br>可以使用一至两条跨度较大的长线，将整个签名串联起来。<br><br>允许出现较长的横向拖尾。<br><br>整体结构强调：<br><br>长线、曲线、连续、舒展、流动。<br><br>减少过多尖角和短促折线。<br><br>---<br><br>### 2. 锋势<br><br>整体具有明显向右推进的趋势。<br><br>大量使用：<br><br>斜线、尖角、高竖笔、快速切线、短促折笔。<br><br>姓名可以高度压缩，只保留主要骨架。<br><br>整体允许明显右倾。<br><br>主笔可以形成较强的上挑、下切、斜向穿插关系。<br><br>减少大面积圆形和柔软回环。<br><br>整体结构强调：<br><br>斜向、锐角、切线、速度、力量。<br><br>---<br><br>### 3. 回环<br><br>以一个或多个大型回环结构作为签名主体。<br><br>可以使用：<br><br>开放圆环、椭圆曲线、大型 S 曲线、连续回转线、包围结构。<br><br>将姓名压缩后的主要笔画嵌入回环内部，或让姓名笔画穿过回环。<br><br>最后一笔可以突破主体，形成较长收尾。<br><br>回环不能过于规则，应保留自然手写产生的不对称。<br><br>整体结构强调：<br><br>回旋、包围、穿插、连续曲线、大尺度手势。<br><br>---<br><br>### 4. 极简<br><br>不完整书写整个姓名。<br><br>从【中文姓名】中提取约 4–6 个最有识别价值的主要笔画，例如：<br><br>长横、主竖、折笔、斜线、撇捺、点笔。<br><br>重新组合成一个简化的个人签名标记。<br><br>允许大幅度省略原姓名结构。<br><br>整体笔画数量明显少于其他三款。<br><br>避免添加与姓名无关的装饰图形。<br><br>整体结构强调：<br><br>少笔画、大留白、强骨架、符号化。<br><br>---<br><br>## 五、四款差异控制<br><br>四种方案必须在以下方面产生明显区别：<br><br>- 笔画数量<br>- 横向或斜向趋势<br>- 曲线与直线比例<br>- 是否存在大型回环<br>- 是否完整保留姓名<br>- 重心位置<br>- 连笔方式<br>- 收尾方向<br>- 整体轮廓<br><br>四款不能只是修改同一个签名的尾笔。<br><br>应形成四种不同结构：<br><br>飘逸：长曲线 + 连续连写<br>锋势：斜线 + 尖角 + 强方向性<br>回环：大型曲线 + 包围结构<br>极简：少量核心笔画 + 高度符号化<br><br>最终只需要保留姓名、拼音、四个签名和四个风格名称，不添加其他内容。",
+    "promptEn": "[Chinese Name]: {e.g., Tang Bohu}<br>[Name Pinyin]: {e.g., TANG BOHU}<br>[Top Background Color]: {e.g., Deep Cobalt Blue}<br>[Aspect Ratio]: 9:16<br><br>Render the input [Chinese Name] into a vertical design presentation titled \"Name to Four Signature Concepts\".<br><br>## 1. Overall Layout<br><br>Aspect ratio: 9:16 vertical poster layout.<br><br>The top ~40% of the canvas presents the original source name.<br><br>The bottom ~60% of the canvas presents four distinct signature design concepts created for the exact same name.<br><br>---<br><br>## 2. Top Name Header Area<br><br>The top section uses [Top Background Color].<br><br>Small header text centered near the very top:<br><br>NAME TO SIGNATURE<br><br>The center of the top section features [Chinese Name].<br><br>The name must strictly use clean, standard printed typography (serif or sans-serif)—no handwriting, cursive ligatures, artistic distortion, or signature fonts—to clearly establish the original baseline name.<br><br>Directly beneath the Chinese name, display:<br><br>[Name Pinyin]<br><br>The name pinyin must be rendered in clean uppercase Latin letters.<br><br>No additional copy, logos, numbers, or graphics in the top area.<br><br>---<br><br>## 3. Bottom Signature Grid Area<br><br>The bottom area is divided into a 2×2 four-quadrant grid.<br><br>Use thin, subtle dashed dividing lines horizontally and vertically; no outer framing border.<br><br>The four quadrants display four signature design concepts for the exact same [Chinese Name]:<br><br>Top-left: 飘逸 (Flowing / Elegant)<br>Top-right: 锋势 (Sharp / Dynamic)<br>Bottom-left: 回环 (Looping / Enclosing)<br>Bottom-right: 极简 (Minimalist / Symbolic)<br><br>Each quadrant contains strictly:<br>1. One prominent, large-scale signature design<br>2. One small-sized style name label underneath<br><br>All four signatures must be derived from the exact same [Chinese Name], but must never be mere slight variations of the same handwriting.<br><br>Permitted transformations on the name:<br>Stroke omission, stroke merging, cursive ligatures, shared strokes, compression, elongation, abbreviation, deconstruction, recombination, and symbolization.<br><br>It is NOT required for every Chinese character to remain fully legible.<br>The key objective is to preserve partial structural identity of the name while establishing four fundamentally distinct signature structural skeletons.<br><br>---<br><br>## 4. Four Signature Gestural Styles<br><br>### 1. 飘逸 (Flowing / Elegant)<br><br>Overall horizontal expansive posture.<br>The name characters are highly compressed and continuously joined with shared strokes across characters.<br>Dominated by fluid continuous curves with smooth gestural momentum.<br>May utilize one or two sweeping long strokes that unify the entire signature.<br>Allows an extended horizontal trailing flourish.<br>Structural emphasis:<br>Long strokes, fluid curves, continuous ligatures, expansive rhythm, dynamic flow.<br>Minimize sharp angles and abrupt hard turns.<br><br>---<br><br>### 2. 锋势 (Sharp / Dynamic)<br><br>Pronounced rightward thrust and forward momentum.<br>Heavily utilizes:<br>Diagonal slashes, acute angles, tall vertical strokes, rapid cutting strokes, and brisk geometric angular folds.<br>Name characters can be highly compressed, retaining only core skeleton strokes.<br>The entire signature may lean noticeably to the right.<br>Primary strokes form bold upward slashes, downward cuts, and diagonal interlocks.<br>Minimize large circular curves and soft loops.<br>Structural emphasis:<br>Diagonal thrust, acute angles, swift cutting lines, speed, and sharp tension.<br><br>---<br><br>### 3. 回环 (Looping / Enclosing)<br><br>Built around one or more large enclosing loops as the primary signature gesture.<br>May incorporate:<br>Open rings, elliptical loops, grand S-curves, continuous whirling lines, and protective surrounding structures.<br>The compressed primary strokes of the name are nestled inside the loops or pierced by the sweeping loop trajectory.<br>The final finishing stroke may break free of the main body with an expressive outward trail.<br>Loops must not look mechanically circular; preserve the organic asymmetry of natural swift calligraphy.<br>Structural emphasis:<br>Whirling loops, enclosure, penetration, continuous curves, large-scale gestures.<br><br>---<br><br>### 4. 极简 (Minimalist / Symbolic)<br><br>Does NOT write out the entire name.<br>Extracts only ~4–6 most recognizable structural strokes from [Chinese Name], such as:<br>A long horizontal bar, a dominant vertical, an angular fold, a swift diagonal, a slash/press stroke, or an anchor dot.<br>Recombines them into an ultra-clean, modernized personal signature mark / monogram.<br>Permits radical omission of conventional character anatomy.<br>Stroke count is drastically fewer than the other three concepts.<br>Avoid decorative geometric graphics unrelated to the name.<br>Structural emphasis:<br>Few strokes, generous breathing whitespace, bold essential skeleton, high symbolic abstraction.<br><br>---<br><br>## 5. Differentiation Control<br><br>The four concepts must exhibit striking, undeniable structural differences across:<br>- Stroke density and stroke count<br>- Horizontal vs. diagonal directional momentum<br>- Curve-to-straight line ratio<br>- Presence vs. absence of large enclosing loops<br>- Degree of name legibility vs. radical abbreviation<br>- Center of visual gravity<br>- Ligature connection logic<br>- Terminal flourish direction<br>- Overall silhouette profile<br><br>The four designs must not simply be one signature with four different tail endings.<br>They must establish four distinct structural philosophies:<br>Flowing: Long curves + continuous ligatures<br>Sharp: Diagonals + acute angles + decisive directional thrust<br>Looping: Monumental curves + enclosing loop architecture<br>Minimalist: Sparse core strokes + radical symbolic abstraction<br><br>Final image strictly retains only the name, pinyin, four signatures, and four style labels; no extraneous decorative elements."
+  },
+  {
     "id": "IG-001",
     "category": "infographic",
     "nameZh": "标题金字塔图标信息图",
-    "nameEn": "Titled pyramid icons",
+    "nameEn": "Pyramid Hierarchy Icon Infographic",
     "nameVi": "Kim tự tháp có tiêu đề",
     "keywords": [
       "带标题",
@@ -337,7 +363,7 @@
     "id": "IG-002",
     "category": "infographic",
     "nameZh": "中心主图标注信息图",
-    "nameEn": "Center figure with callouts",
+    "nameEn": "Central Hero Callout Infographic",
     "nameVi": "Ảnh giữa có chú thích",
     "keywords": [
       "中心主图",
@@ -352,8 +378,8 @@
   {
     "id": "IG-003",
     "category": "infographic",
-    "nameZh": "多行左右对比信息图",
-    "nameEn": "Row-by-row left-right compare",
+    "nameZh": "多行左文右图信息图",
+    "nameEn": "Multi-Row Left-Text Right-Image Infographic",
     "nameVi": "So sánh trái-phải từng hàng",
     "keywords": [
       "多行对比",
@@ -363,14 +389,14 @@
       "逐行比较",
       "信息图"
     ],
-    "promptZh": "小红书信息图。排版：顶部设置主标题，主体由多行对比内容组成，每一行采用左侧文字、右侧图片的固定结构，保持各行对齐并形成清晰的逐行比较关系。",
-    "promptEn": "Xiaohongshu infographic. Layout: place a main headline at the top, then build the body from multiple comparison rows. Each row uses a consistent left-text and right-image structure, with aligned rows that create a clear line-by-line comparison."
+    "promptZh": "小红书信息图。高泛用性多层/多行图文并列结构。排版：顶部设置醒目的主标题区（可包含主标题、副标题、日期/标签或分类标语）；主体由多行（通常 3–5 层）垂直等距对齐的横向模块组成，每一行采用左侧文字信息（时间点/小标题/标签与要点说明）、右侧对应配图（场景插图/实物/产品图）的并列结构，各行保持整齐统一的水平对齐；底部可配置总结提示、实用贴士备忘或简短结语。该版式通用于各类横向分层条目展示，包括但不限于每日行程路线安排、图鉴速览、分类清单、步骤流程、多维度对照或对比等场景。",
+    "promptEn": "Xiaohongshu infographic. Highly versatile multi-row text-and-image structure. Layout: place a prominent headline area at the top (can include main title, subtitle, date/tag, or category slogan). The main body consists of multiple vertically stacked, uniformly spaced item rows (typically 3–5 tiers). Each row uses a consistent side-by-side structure with text information on the left (timestamp, subhead, tags, descriptive bullets) and the corresponding illustration or photo on the right, maintaining neat horizontal alignment across all rows. The bottom section can include summary notes, practical tips, or a brief closing remark. This layout is broadly versatile, seamlessly supporting daily travel itineraries, timeline routes, catalog overviews, curated lists, step-by-step processes, as well as multi-item comparisons."
   },
   {
     "id": "IG-004",
     "category": "infographic",
     "nameZh": "双列多行对比信息图",
-    "nameEn": "Two-column multi-row compare",
+    "nameEn": "Two-Column Multi-Row Comparison",
     "nameVi": "Hai cột so sánh",
     "keywords": [
       "双列对比",
@@ -387,7 +413,7 @@
     "id": "IG-005",
     "category": "infographic",
     "nameZh": "大主视觉下方图鉴信息图",
-    "nameEn": "Giant hero plus catalog",
+    "nameEn": "Hero Visual Catalog Infographic",
     "nameVi": "Ảnh lớn + mục lục dưới",
     "keywords": [
       "超大标题",
@@ -404,7 +430,7 @@
     "id": "IG-006",
     "category": "infographic",
     "nameZh": "多层标题图标对比信息图",
-    "nameEn": "Layered title-icon compare",
+    "nameEn": "Multi-Tier Headline Icon Comparison",
     "nameVi": "So sánh tầng + icon",
     "keywords": [
       "多层对比",
@@ -421,7 +447,7 @@
     "id": "IG-007",
     "category": "infographic",
     "nameZh": "粗体标题标签小图卡",
-    "nameEn": "Bold title, tagged thumbs",
+    "nameEn": "Bold Headline Tag Cards",
     "nameVi": "Tiêu đề đậm + ảnh nhỏ",
     "keywords": [
       "粗体标题",
@@ -437,7 +463,7 @@
     "id": "IG-008",
     "category": "infographic",
     "nameZh": "多路径流程步骤图",
-    "nameEn": "Multi-path process steps",
+    "nameEn": "Multi-Path Process Step Flow",
     "nameVi": "Quy trình nhiều nhánh",
     "keywords": [
       "流程步骤",
@@ -454,7 +480,7 @@
     "id": "IG-009",
     "category": "infographic",
     "nameZh": "时间轴节点信息图",
-    "nameEn": "Timeline nodes",
+    "nameEn": "Timeline Milestone Infographic",
     "nameVi": "Trục thời gian",
     "keywords": [
       "时间轴",
@@ -472,7 +498,7 @@
     "id": "IG-010",
     "category": "infographic",
     "nameZh": "阶段等级进阶信息图",
-    "nameEn": "Stage / rank ladder",
+    "nameEn": "Stage Progression Infographic",
     "nameVi": "Thang cấp / giai đoạn",
     "keywords": [
       "阶段进阶",
@@ -489,7 +515,7 @@
     "id": "IG-011",
     "category": "infographic",
     "nameZh": "前后变化对比信息图",
-    "nameEn": "Before & after",
+    "nameEn": "Before & After Comparison Infographic",
     "nameVi": "Trước và sau",
     "keywords": [
       "Before After",
@@ -507,7 +533,7 @@
     "id": "IG-012",
     "category": "infographic",
     "nameZh": "分层结构型信息图",
-    "nameEn": "Layered structure",
+    "nameEn": "Layered Hierarchy Infographic",
     "nameVi": "Cấu trúc nhiều lớp",
     "keywords": [
       "分层结构",
@@ -524,7 +550,7 @@
     "id": "IG-013",
     "category": "infographic",
     "nameZh": "漏斗转化型信息图",
-    "nameEn": "Funnel conversion",
+    "nameEn": "Conversion Funnel Infographic",
     "nameVi": "Phễu chuyển đổi",
     "keywords": [
       "漏斗型",
@@ -542,7 +568,7 @@
     "id": "IG-014",
     "category": "infographic",
     "nameZh": "四象限矩阵信息图",
-    "nameEn": "Four-quadrant matrix",
+    "nameEn": "Four-Quadrant Matrix Infographic",
     "nameVi": "Ma trận 4 ô",
     "keywords": [
       "矩阵型",
@@ -559,7 +585,7 @@
     "id": "IG-015",
     "category": "infographic",
     "nameZh": "坐标散点型信息图",
-    "nameEn": "Scatter plot space",
+    "nameEn": "Coordinate Scatter Plot Infographic",
     "nameVi": "Điểm rải trên tọa độ",
     "keywords": [
       "坐标散点",
@@ -576,7 +602,7 @@
     "id": "IG-016",
     "category": "infographic",
     "nameZh": "分类树状型信息图",
-    "nameEn": "Classification tree",
+    "nameEn": "Categorical Tree Hierarchy Infographic",
     "nameVi": "Cây phân loại",
     "keywords": [
       "分类树",
@@ -593,7 +619,7 @@
     "id": "IG-017",
     "category": "infographic",
     "nameZh": "思维导图型信息图",
-    "nameEn": "Mind map",
+    "nameEn": "Mind Map Radial Infographic",
     "nameVi": "Sơ đồ tư duy",
     "keywords": [
       "思维导图",
@@ -610,7 +636,7 @@
     "id": "IG-018",
     "category": "infographic",
     "nameZh": "关系网络型信息图",
-    "nameEn": "Relationship network",
+    "nameEn": "Relationship Network Infographic",
     "nameVi": "Mạng quan hệ",
     "keywords": [
       "关系网络",
@@ -627,7 +653,7 @@
     "id": "IG-019",
     "category": "infographic",
     "nameZh": "循环闭环型信息图",
-    "nameEn": "Closed loop cycle",
+    "nameEn": "Closed-Loop Cycle Infographic",
     "nameVi": "Vòng tuần hoàn",
     "keywords": [
       "循环闭环",
@@ -644,7 +670,7 @@
     "id": "IG-020",
     "category": "infographic",
     "nameZh": "路径地图型信息图",
-    "nameEn": "Path / quest map",
+    "nameEn": "Narrative Route Map Infographic",
     "nameVi": "Bản đồ hành trình",
     "keywords": [
       "路径地图",
@@ -661,7 +687,7 @@
     "id": "IG-021",
     "category": "infographic",
     "nameZh": "真实地图标注型信息图",
-    "nameEn": "Real map with pins",
+    "nameEn": "Geographic Map with Annotations",
     "nameVi": "Bản đồ thật có ghim",
     "keywords": [
       "真实地图",
@@ -678,7 +704,7 @@
     "id": "IG-022",
     "category": "infographic",
     "nameZh": "数字大字型信息图",
-    "nameEn": "Giant numbers",
+    "nameEn": "Big Number Stat Highlight Infographic",
     "nameVi": "Số liệu siêu lớn",
     "keywords": [
       "数字大字",
@@ -695,7 +721,7 @@
     "id": "IG-023",
     "category": "infographic",
     "nameZh": "排行榜型信息图",
-    "nameEn": "Leaderboard ranking",
+    "nameEn": "Leaderboard Ranking Infographic",
     "nameVi": "Bảng xếp hạng",
     "keywords": [
       "排行榜",
@@ -712,7 +738,7 @@
     "id": "IG-024",
     "category": "infographic",
     "nameZh": "比例构成型信息图",
-    "nameEn": "Share / pie breakdown",
+    "nameEn": "Part-to-Whole Composition Infographic",
     "nameVi": "Tỷ lệ / biểu đồ tròn",
     "keywords": [
       "比例构成",
@@ -729,7 +755,7 @@
     "id": "IG-025",
     "category": "infographic",
     "nameZh": "尺度比较型信息图",
-    "nameEn": "Scale comparison",
+    "nameEn": "Scale Comparison Infographic",
     "nameVi": "So sánh kích thước",
     "keywords": [
       "尺度比较",
@@ -746,7 +772,7 @@
     "id": "IG-026",
     "category": "infographic",
     "nameZh": "拆解爆炸图型信息图",
-    "nameEn": "Exploded parts diagram",
+    "nameEn": "Exploded Assembly View Infographic",
     "nameVi": "Sơ đồ tháo rời",
     "keywords": [
       "拆解爆炸图",
@@ -763,7 +789,7 @@
     "id": "IG-027",
     "category": "infographic",
     "nameZh": "剖面截面型信息图",
-    "nameEn": "Cutaway / cross-section",
+    "nameEn": "Cutaway Sectional View Infographic",
     "nameVi": "Mặt cắt / mặt bên",
     "keywords": [
       "剖面截面",
@@ -780,7 +806,7 @@
     "id": "IG-028",
     "category": "infographic",
     "nameZh": "连续场景信息图",
-    "nameEn": "Continuous scene story",
+    "nameEn": "Continuous Scene Panoramic Infographic",
     "nameVi": "Chuỗi cảnh liền mạch",
     "keywords": [
       "连续场景",
@@ -797,7 +823,7 @@
     "id": "IG-029",
     "category": "infographic",
     "nameZh": "人物群像标签型信息图",
-    "nameEn": "Crowd with name tags",
+    "nameEn": "Character Ensemble Label Infographic",
     "nameVi": "Dàn nhân vật có nhãn",
     "keywords": [
       "人物群像",
@@ -814,7 +840,7 @@
     "id": "IG-030",
     "category": "infographic",
     "nameZh": "一大多小知识图谱型信息图",
-    "nameEn": "Knowledge graph, one large many small",
+    "nameEn": "Core Hero Knowledge Map Infographic",
     "nameVi": "Đồ thị tri thức 1 lớn nhiều nhỏ",
     "keywords": [
       "核心主图",
@@ -828,10 +854,81 @@
     "promptEn": "Place one large core illustration occupying the main visual area as the primary subject. Distribute several clearly smaller visual units around it, with each unit paired with a very short label, name, or explanation. Let the smaller units form knowledge relationships around the core topic without requiring a rigid grid or perfectly even distribution. Use negative space, position, and light connections to express the overall relationship. Keep characters highly simplified, use a simple composition, and preserve generous negative space."
   },
   {
+    "id": "IG-031",
+    "category": "infographic",
+    "nameZh": "百科全书式信息卡",
+    "nameEn": "Encyclopedic Specimen Information Card",
+    "nameVi": "Thẻ bách khoa tiêu bản",
+    "keywords": [
+      "百科",
+      "标本",
+      "信息卡",
+      "模块",
+      "博物馆"
+    ],
+    "promptZh": "小红书信息图。排版：百科全书式信息卡。采用“顶部主标本展示区 + 中部非对称多模块信息区 + 底部资料来源区”的三段式结构。顶部以主视觉实物/标本为核心，搭配标题、学名/副标题、分类标签与少量基础信息。中部通过细线网格、坐标系统和黄金分割组织6–10个信息模块，混合小标题、短文、图解、对比、数据条、地图、时间轴等形式，整体图文混排、秩序清晰、留白充足。底部设置弱化的编号、注释或来源说明区，整体呈现标本馆档案与现代博物馆导览牌融合的理性设计感。",
+    "promptEn": "Xiaohongshu infographic. Layout: Encyclopedic information card. Structured in three tiers: \"top primary specimen display zone + middle asymmetrical multi-module information zone + bottom source reference zone\". The top is centered around a primary visual object/specimen, accompanied by the main title, scientific name/subtitle, classification tags, and concise foundational details. The middle section organizes 6–10 information modules through hairline grids, coordinate systems, and golden-ratio compositions, integrating subheadings, short paragraphs, diagrams, comparative charts, data bars, maps, and timelines into a well-ordered, generous typographic balance. The bottom contains an understated numbering, footnote, or reference citation area, presenting a rational design aesthetic combining herbarium archival sheets with contemporary museum exhibition boards."
+  },
+  {
+    "id": "IG-032",
+    "category": "infographic",
+    "nameZh": "手绘编辑式知识信息图",
+    "nameEn": "Hand-Drawn Editorial Knowledge Infographic",
+    "nameVi": "Infographic kiến thức vẽ tay",
+    "keywords": [
+      "手绘",
+      "编号",
+      "知识点",
+      "主视觉",
+      "杂志"
+    ],
+    "promptZh": "小红书信息图。排版：手绘编辑式知识信息图。采用“顶部超大标题 + 中部大型核心主视觉 + 周边多个带数字编号的知识点模块 + 底部总结区”的构图。核心主视觉明显大于其他元素，作为全图视觉中心；周围自然环绕分布4–8个知识点模块，每个模块带有清晰醒目的数字序号（如01、02、03、04）建立列表感与阅读动线。每个编号模块包含短标题、简短说明和一个小型视觉解释（如小场景插图、图标、对比、流程、思维泡泡或微型漫画）。模块围绕核心视觉灵活排布，非僵硬规则宫格，允许箭头、标签、对话气泡与手写注释穿插连接。底部设置一句话总结、关键词提炼或checklist清单区收束全图。整体呈现杂志编辑插画、知识信息图与轻漫画叙事融合的生动手绘质感。角色高度概括，构图简洁，较多留白。",
+    "promptEn": "Xiaohongshu infographic. Layout: Hand-drawn editorial knowledge infographic. Structured as \"top oversized headline + central prominent hero visual + surrounding numbered knowledge modules + bottom summary section\". The central hero visual is substantially larger than other elements, serving as the dominant visual focal point. 4 to 8 knowledge modules surround the core illustration naturally, each bearing a prominent numbered badge (such as 01, 02, 03, 04) to establish a clear reading sequence and list structure. Each numbered module contains a concise title, brief explanation, and miniature visual breakdown (such as mini-scene illustrations, icons, comparisons, process flows, thought bubbles, or mini comic panels). Modules flow organically around the core visual rather than adhering to a rigid grid, connected flexibly by arrows, tags, speech bubbles, and handwritten notes. The bottom features a concluding one-line takeaway, keywords, or checklist. The overall composition merges magazine editorial illustration, knowledge infographic diagramming, and light comic narrative into a lively hand-drawn aesthetic. Keep characters highly simplified, use a concise composition, and preserve generous negative space."
+  },
+  {
+    "id": "IG-033",
+    "category": "infographic",
+    "nameZh": "讲义式高密分析信息图",
+    "nameEn": "High-Density Handout Analytical Infographic",
+    "nameVi": "Infographic dày kiểu handout",
+    "keywords": [
+      "讲义式高密分析信息图",
+      "High-Density Handout Analytical Infographic"
+    ],
+    "promptZh": "小红书信息图。排版：讲义式高密分析信息图。一页高信息密度的讲义式分析排版，整体呈现“先总览、再分解、再总结”的清晰结构。顶部设置主标题栏与核心要点/速览区；中部为主体分析区，由多个带编号的独立分析卡片模块组成，各模块包含要点小标题、项目符号清单、公式框与局部图解说明，并穿插表格容器、步骤流程区与思维导图/流程连接区，通过不同大小的内容区形成丰富的视觉节奏；底部设置通栏重点结论区与易错提醒/避坑说明区，辅以边缘补充说明区与角落批注小框。版面遵循从上到下、从左到右的严谨阅读顺序，分区明确、容器边框分明，不做海报式单一视觉中心布局，不做机械均分网格，不添加知识点以外的纯装饰性图像元素。",
+    "promptEn": "Xiaohongshu infographic. Layout: High-density handout analytical infographic. A single-page, high-density structured study handout layout following a clear \"overview, breakdown, and summary\" visual hierarchy. The top features a prominent main header bar paired with a core key takeaways/overview panel. The middle section serves as the core analytical body, composed of multiple sequentially numbered modular cards featuring subheadings, bullet points, formula containers, and localized diagrammatic explanations, flexibly interspersed with structured table containers, step-by-step procedure sequences, and flowchart/decision-tree connection zones to create an engaging visual rhythm across varied block sizes. The bottom anchors the page with full-width key conclusion and warning/error-alert callout sections, complemented by marginal annotations and compact corner callout boxes. The layout follows a strict top-to-bottom, left-to-right reading order with distinct container boundaries and structured card frames; avoids single-focal-point poster composition, avoids rigid equal grids, and strictly excludes decorative imagery outside essential informational diagrams."
+  },
+  {
+    "id": "IG-034",
+    "category": "infographic",
+    "nameZh": "编辑式等距轴测全景地图信息图",
+    "nameEn": "Editorial Isometric Illustrated Map Infographic",
+    "nameVi": "Bản đồ isometric toàn cảnh",
+    "keywords": [
+      "编辑式等距轴测全景地图信息图",
+      "Editorial Isometric Illustrated Map Infographic"
+    ],
+    "promptZh": "小红书信息图。排版：编辑式等距轴测全景地图信息图。采用纵向长幅构图，以一个连续展开的等距轴测微缩世界作为画面主体。主视觉像一座沿纵向自然生长的小型城市、主题乐园或幻想产业园，由多个大小差异明显、造型各异的独立场景节点组成。整个轴测世界集中在画面中央区域，但不要铺满画布，四周保留大量纯净背景和呼吸空间。场景节点不要按照规则网格排列，也不要切成等大的流程模块。建筑、设施、商店、工厂、交通工具、特殊装置等以不规则方式错落组合，通过道路、车辆、传送结构、空间方向或视觉动线产生联系。构图强调“一张完整世界地图”，而不是“多个步骤依次排开的流程图”。可以存在流程关系，但流程隐藏在空间叙事之中，不使用明显的大箭头串联所有节点。核心节点可以明显放大，次要节点缩小，局部甚至可以出现非常夸张的大型标志物、广告牌、纪念碑式装置、特殊建筑或巨型物件，以制造视觉节奏和幽默感。文字信息不要覆盖整个画面。标题、编号、简短说明、小型图例和局部注释主要放在画面外围留白区域，与附近场景进行弱连接。避免大量白色信息卡、统一尺寸说明框、规则章节标题和密集参数表。整体采用极简的二维轴测线稿插画语言：辅助色A细线轮廓、辅助色B建筑主体、主色背景及少量主色填色，基本限制在三色体系。无渐变、无真实材质、无复杂光影。建筑与设备保持高度概括、图标化和卡通化，不追求工程结构准确度；加入大量非常小的人物、动物、车辆和幽默互动细节，使整个世界具有“主题乐园地图 / 杂志插画地图 / 品牌世界观海报”的感觉。重点：大留白、中央连续轴测世界、不规则节点、大小强对比、外围零散注释、趣味叙事。避免：满版工业园、规则分区、标准流程卡、密集文字框、大量流程箭头、写实工厂、工程制图感、所有节点尺寸一致。",
+    "promptEn": "Xiaohongshu infographic. Layout: Editorial Isometric Illustrated Map Infographic. A vertical long-format composition featuring a continuously unfolding isometric miniature world as the core visual subject. The main visual resembles a vertically growing miniature city, theme park, or fantasy industrial park, composed of multiple independent scene nodes varying noticeably in scale and form. The entire isometric world is centered in the canvas without filling the edges, reserving ample clean background and breathing room around the perimeter. Scene nodes are not arranged in a rigid grid or divided into uniform process modules; instead, architecture, facilities, shops, workshops, vehicles, and quirky contraptions are arranged irregularly, linked via roads, vehicles, conveyor structures, spatial orientation, and visual flow lines. The composition emphasizes \"a complete world map\" rather than a step-by-step flowchart; procedural relations may exist, but are seamlessly woven into spatial storytelling without prominent oversized arrows. Core nodes are visibly enlarged while secondary nodes are scaled down, with occasional exaggerated landmarks, billboards, monumental contraptions, or giant whimsical props creating visual rhythm and humor. Text does not cover the canvas: title, numbers, brief descriptions, small legends, and localized annotations are placed in the surrounding negative space with subtle connections to nearby scenes, avoiding bulky white cards, uniform callout boxes, rigid chapter headers, and dense spec sheets. The entire piece adopts a minimalist 2D isometric line-illustration aesthetic: secondary color A fine outlines, secondary color B architectural bodies, primary color background with restrained accent fills, strictly confined to a three-color palette with no gradients, realistic textures, or complex lighting. Buildings and machinery are highly abstracted, iconified, and cartoonish rather than technically accurate, filled with tiny characters, animals, vehicles, and humorous interactions to deliver a \"theme park map / magazine editorial map / brand world poster\" aesthetic. Focus: generous whitespace, central continuous isometric world, irregular nodes, high scale contrast, scattered peripheral annotations, engaging narrative. Avoid: edge-to-edge industrial zones, rigid partitions, standard process cards, dense text containers, heavy flowchart arrows, realistic factories, blueprints, uniform node sizes."
+  },
+  {
+    "id": "IG-035",
+    "category": "infographic",
+    "nameZh": "2.5D等距轴测微缩场景",
+    "nameEn": "2.5D Isometric Miniature Scene",
+    "nameVi": "Cảnh thu nhỏ 2.5D",
+    "keywords": [
+      "2.5D等距轴测微缩场景",
+      "2.5D Isometric Miniature Scene"
+    ],
+    "promptZh": "排版：2.5D等距轴测微缩场景。2.5D视角，等距轴测构图，微缩场景表现。",
+    "promptEn": "Layout: 2.5D Isometric Miniature Scene. 2.5D perspective, isometric composition, miniature scene."
+  },
+  {
     "id": "SB-001",
     "category": "comic-storyboard",
     "nameZh": "规则网格",
-    "nameEn": "Regular grid",
+    "nameEn": "Regular Grid",
     "nameVi": "Lưới đều",
     "keywords": [
       "漫画分镜",
@@ -847,7 +944,7 @@
     "id": "SB-002",
     "category": "comic-storyboard",
     "nameZh": "四格起承转合",
-    "nameEn": "Four-panel setup",
+    "nameEn": "Four-Panel Kishōtenketsu",
     "nameVi": "Bốn ô khởi-thừa-chuyển-hợp",
     "keywords": [
       "漫画分镜",
@@ -863,7 +960,7 @@
     "id": "SB-003",
     "category": "comic-storyboard",
     "nameZh": "大格 + 小格",
-    "nameEn": "One large + smalls",
+    "nameEn": "Hero Panel + Inset Panels",
     "nameVi": "Ô lớn + ô nhỏ",
     "keywords": [
       "漫画分镜",
@@ -879,7 +976,7 @@
     "id": "SB-004",
     "category": "comic-storyboard",
     "nameZh": "顶部大格开场",
-    "nameEn": "Wide top opener",
+    "nameEn": "Top Splash Panel Opening",
     "nameVi": "Ô ngang mở đầu",
     "keywords": [
       "漫画分镜",
@@ -895,7 +992,7 @@
     "id": "SB-005",
     "category": "comic-storyboard",
     "nameZh": "底部大格收尾",
-    "nameEn": "Wide bottom closer",
+    "nameEn": "Bottom Climax Panel Ending",
     "nameVi": "Ô ngang kết",
     "keywords": [
       "漫画分镜",
@@ -911,7 +1008,7 @@
     "id": "SB-006",
     "category": "comic-storyboard",
     "nameZh": "中央大格爆发",
-    "nameEn": "Center burst panel",
+    "nameEn": "Center Focal Panel",
     "nameVi": "Ô nổ ở giữa",
     "keywords": [
       "漫画分镜",
@@ -927,7 +1024,7 @@
     "id": "SB-007",
     "category": "comic-storyboard",
     "nameZh": "对角切割",
-    "nameEn": "Diagonal cut",
+    "nameEn": "Diagonal Dynamic Split",
     "nameVi": "Cắt chéo",
     "keywords": [
       "漫画分镜",
@@ -943,7 +1040,7 @@
     "id": "SB-008",
     "category": "comic-storyboard",
     "nameZh": "Z 字阅读",
-    "nameEn": "Z-path reading",
+    "nameEn": "Z-Pattern Reading Flow",
     "nameVi": "Đọc chữ Z",
     "keywords": [
       "漫画分镜",
@@ -959,7 +1056,7 @@
     "id": "SB-009",
     "category": "comic-storyboard",
     "nameZh": "S 型阅读",
-    "nameEn": "S-curve reading",
+    "nameEn": "S-Curve Narrative Flow",
     "nameVi": "Đọc chữ S",
     "keywords": [
       "漫画分镜",
@@ -975,7 +1072,7 @@
     "id": "SB-010",
     "category": "comic-storyboard",
     "nameZh": "螺旋阅读",
-    "nameEn": "Spiral inward",
+    "nameEn": "Spiral Inward Flow",
     "nameVi": "Xoắn ốc vào tâm",
     "keywords": [
       "漫画分镜",
@@ -991,7 +1088,7 @@
     "id": "SB-011",
     "category": "comic-storyboard",
     "nameZh": "放射型分镜",
-    "nameEn": "Radial burst",
+    "nameEn": "Radial Converging Panels",
     "nameVi": "Tỏa tâm",
     "keywords": [
       "漫画分镜",
@@ -1007,7 +1104,7 @@
     "id": "SB-012",
     "category": "comic-storyboard",
     "nameZh": "碎片面板",
-    "nameEn": "Shattered panels",
+    "nameEn": "Shattered Glass Panels",
     "nameVi": "Mảnh vỡ",
     "keywords": [
       "漫画分镜",
@@ -1023,7 +1120,7 @@
     "id": "SB-013",
     "category": "comic-storyboard",
     "nameZh": "破框构图",
-    "nameEn": "Break-the-panel",
+    "nameEn": "Border Break",
     "nameVi": "Phá khung",
     "keywords": [
       "漫画分镜",
@@ -1039,7 +1136,7 @@
     "id": "SB-014",
     "category": "comic-storyboard",
     "nameZh": "跨格人物",
-    "nameEn": "Character across panels",
+    "nameEn": "Multi-Panel Spanning Character",
     "nameVi": "Nhân vật xuyên ô",
     "keywords": [
       "漫画分镜",
@@ -1055,7 +1152,7 @@
     "id": "SB-015",
     "category": "comic-storyboard",
     "nameZh": "跨格背景",
-    "nameEn": "Shared background",
+    "nameEn": "Continuous Background Across Panels",
     "nameVi": "Nền dùng chung",
     "keywords": [
       "漫画分镜",
@@ -1071,7 +1168,7 @@
     "id": "SB-016",
     "category": "comic-storyboard",
     "nameZh": "一镜到底",
-    "nameEn": "One continuous shot",
+    "nameEn": "Single Continuous Take",
     "nameVi": "Một take dài",
     "keywords": [
       "漫画分镜",
@@ -1087,7 +1184,7 @@
     "id": "SB-017",
     "category": "comic-storyboard",
     "nameZh": "电影胶片式",
-    "nameEn": "Film-strip sequence",
+    "nameEn": "Cinematic Filmstrip",
     "nameVi": "Cuộn phim",
     "keywords": [
       "漫画分镜",
@@ -1103,7 +1200,7 @@
     "id": "SB-018",
     "category": "comic-storyboard",
     "nameZh": "宽银幕横格",
-    "nameEn": "Widescreen rows",
+    "nameEn": "Widescreen Horizontal Panels",
     "nameVi": "Ô ngang cinemascope",
     "keywords": [
       "漫画分镜",
@@ -1119,7 +1216,7 @@
     "id": "SB-019",
     "category": "comic-storyboard",
     "nameZh": "竖向长格",
-    "nameEn": "Tall vertical panels",
+    "nameEn": "Vertical Skyscraper Panels",
     "nameVi": "Ô dọc cao",
     "keywords": [
       "漫画分镜",
@@ -1135,7 +1232,7 @@
     "id": "SB-020",
     "category": "comic-storyboard",
     "nameZh": "超窄反应格",
-    "nameEn": "Ultra-thin reaction",
+    "nameEn": "Ultra-Slim Reaction Insets",
     "nameVi": "Ô phản ứng siêu hẹp",
     "keywords": [
       "漫画分镜",
@@ -1151,7 +1248,7 @@
     "id": "SB-021",
     "category": "comic-storyboard",
     "nameZh": "眼睛特写链",
-    "nameEn": "Eye close-up chain",
+    "nameEn": "Eye Close-Up Sequence",
     "nameVi": "Chuỗi cận mắt",
     "keywords": [
       "漫画分镜",
@@ -1167,7 +1264,7 @@
     "id": "SB-022",
     "category": "comic-storyboard",
     "nameZh": "手部动作链",
-    "nameEn": "Hands action chain",
+    "nameEn": "Hand Action Sequence",
     "nameVi": "Chuỗi cận tay",
     "keywords": [
       "漫画分镜",
@@ -1183,7 +1280,7 @@
     "id": "SB-023",
     "category": "comic-storyboard",
     "nameZh": "由远到近",
-    "nameEn": "Far to close",
+    "nameEn": "Long Shot to Extreme Close-Up",
     "nameVi": "Xa tới gần",
     "keywords": [
       "漫画分镜",
@@ -1199,7 +1296,7 @@
     "id": "SB-024",
     "category": "comic-storyboard",
     "nameZh": "由近到远",
-    "nameEn": "Close to far",
+    "nameEn": "Extreme Close-Up to Wide Reveal",
     "nameVi": "Gần tới xa",
     "keywords": [
       "漫画分镜",
@@ -1215,7 +1312,7 @@
     "id": "SB-025",
     "category": "comic-storyboard",
     "nameZh": "正反打",
-    "nameEn": "Shot / reverse shot",
+    "nameEn": "Shot-Reverse-Shot",
     "nameVi": "Cắt ngược góc",
     "keywords": [
       "漫画分镜",
@@ -1231,7 +1328,7 @@
     "id": "SB-026",
     "category": "comic-storyboard",
     "nameZh": "三连特写",
-    "nameEn": "Triple close-up",
+    "nameEn": "Triple Rapid Close-Ups",
     "nameVi": "Ba cận liên tiếp",
     "keywords": [
       "漫画分镜",
@@ -1247,7 +1344,7 @@
     "id": "SB-027",
     "category": "comic-storyboard",
     "nameZh": "动作分解",
-    "nameEn": "Action breakdown",
+    "nameEn": "Action Breakdown",
     "nameVi": "Phân rã động tác",
     "keywords": [
       "漫画分镜",
@@ -1263,7 +1360,7 @@
     "id": "SB-028",
     "category": "comic-storyboard",
     "nameZh": "连续动作残影",
-    "nameEn": "Motion afterimages",
+    "nameEn": "Motion Trail Strobe Sequence",
     "nameVi": "Bóng dư chuyển động",
     "keywords": [
       "漫画分镜",
@@ -1279,7 +1376,7 @@
     "id": "SB-029",
     "category": "comic-storyboard",
     "nameZh": "静止重复",
-    "nameEn": "Stillness repeat",
+    "nameEn": "Static Panel Repetition",
     "nameVi": "Lặp khung tĩnh",
     "keywords": [
       "漫画分镜",
@@ -1295,7 +1392,7 @@
     "id": "SB-030",
     "category": "comic-storyboard",
     "nameZh": "节奏骤停",
-    "nameEn": "Hard stop",
+    "nameEn": "Sudden Pacing Halt",
     "nameVi": "Dừng đột ngột",
     "keywords": [
       "漫画分镜",
@@ -1311,7 +1408,7 @@
     "id": "SB-031",
     "category": "comic-storyboard",
     "nameZh": "爆发后留白",
-    "nameEn": "Burst then silence",
+    "nameEn": "Post-Climax Negative Space",
     "nameVi": "Nổ rồi khoảng trắng",
     "keywords": [
       "漫画分镜",
@@ -1327,7 +1424,7 @@
     "id": "SB-032",
     "category": "comic-storyboard",
     "nameZh": "上下镜像",
-    "nameEn": "Vertical mirror",
+    "nameEn": "Vertical Mirroring",
     "nameVi": "Gương trên-dưới",
     "keywords": [
       "漫画分镜",
@@ -1343,7 +1440,7 @@
     "id": "SB-033",
     "category": "comic-storyboard",
     "nameZh": "左右对峙",
-    "nameEn": "Left-right standoff",
+    "nameEn": "Split-Side Confrontation",
     "nameVi": "Đối đầu trái-phải",
     "keywords": [
       "漫画分镜",
@@ -1359,7 +1456,7 @@
     "id": "SB-034",
     "category": "comic-storyboard",
     "nameZh": "双线并行",
-    "nameEn": "Parallel dual plot",
+    "nameEn": "Dual Parallel Storylines",
     "nameVi": "Hai tuyến song song",
     "keywords": [
       "漫画分镜",
@@ -1375,7 +1472,7 @@
     "id": "SB-035",
     "category": "comic-storyboard",
     "nameZh": "交叉剪辑",
-    "nameEn": "Cross-cutting",
+    "nameEn": "Cross-Cutting Parallel Action",
     "nameVi": "Cắt xen kẽ",
     "keywords": [
       "漫画分镜",
@@ -1391,7 +1488,7 @@
     "id": "SB-036",
     "category": "comic-storyboard",
     "nameZh": "闪回嵌套",
-    "nameEn": "Flashback nest",
+    "nameEn": "Inset Memory Flashback",
     "nameVi": "Lồng hồi tưởng",
     "keywords": [
       "漫画分镜",
@@ -1407,7 +1504,7 @@
     "id": "SB-037",
     "category": "comic-storyboard",
     "nameZh": "想象嵌套",
-    "nameEn": "Imagination nest",
+    "nameEn": "Inset Fantasy Bubble",
     "nameVi": "Lồng tưởng tượng",
     "keywords": [
       "漫画分镜",
@@ -1423,7 +1520,7 @@
     "id": "SB-038",
     "category": "comic-storyboard",
     "nameZh": "监控屏幕式",
-    "nameEn": "Surveillance screens",
+    "nameEn": "Multi-CCTV Security Grid",
     "nameVi": "Màn hình giám sát",
     "keywords": [
       "漫画分镜",
@@ -1439,7 +1536,7 @@
     "id": "SB-039",
     "category": "comic-storyboard",
     "nameZh": "手机聊天式",
-    "nameEn": "Chat-app bubbles",
+    "nameEn": "Smartphone Chat Overlay",
     "nameVi": "Bong bóng chat",
     "keywords": [
       "漫画分镜",
@@ -1455,7 +1552,7 @@
     "id": "SB-040",
     "category": "comic-storyboard",
     "nameZh": "档案拼贴式",
-    "nameEn": "Evidence board collage",
+    "nameEn": "Detective Case File Collage",
     "nameVi": "Bảng chứng cứ",
     "keywords": [
       "漫画分镜",
@@ -1471,7 +1568,7 @@
     "id": "SB-041",
     "category": "comic-storyboard",
     "nameZh": "杂志编辑式",
-    "nameEn": "Magazine editorial",
+    "nameEn": "Editorial Magazine Layout",
     "nameVi": "Trang tạp chí",
     "keywords": [
       "漫画分镜",
@@ -1487,7 +1584,7 @@
     "id": "SB-042",
     "category": "comic-storyboard",
     "nameZh": "信息图漫画",
-    "nameEn": "Infographic comic",
+    "nameEn": "Infographic Comic Hybrid",
     "nameVi": "Truyện tranh infographic",
     "keywords": [
       "漫画分镜",
@@ -1503,7 +1600,7 @@
     "id": "SB-043",
     "category": "comic-storyboard",
     "nameZh": "地图路线式",
-    "nameEn": "Map route comic",
+    "nameEn": "Map & Trail Journey",
     "nameVi": "Truyện theo bản đồ",
     "keywords": [
       "漫画分镜",
@@ -1519,7 +1616,7 @@
     "id": "SB-044",
     "category": "comic-storyboard",
     "nameZh": "时间轴式",
-    "nameEn": "Timeline comic",
+    "nameEn": "Chronological Timeline Progression",
     "nameVi": "Truyện theo timeline",
     "keywords": [
       "漫画分镜",
@@ -1535,7 +1632,7 @@
     "id": "SB-045",
     "category": "comic-storyboard",
     "nameZh": "时钟式",
-    "nameEn": "Clock / countdown",
+    "nameEn": "Clock Face Radial Layout",
     "nameVi": "Đồng hồ đếm",
     "keywords": [
       "漫画分镜",
@@ -1551,7 +1648,7 @@
     "id": "SB-046",
     "category": "comic-storyboard",
     "nameZh": "中心物件式",
-    "nameEn": "Object in the center",
+    "nameEn": "Central Anchor Prop",
     "nameVi": "Vật thể ở tâm",
     "keywords": [
       "漫画分镜",
@@ -1567,7 +1664,7 @@
     "id": "SB-047",
     "category": "comic-storyboard",
     "nameZh": "中心人物式",
-    "nameEn": "Character in the center",
+    "nameEn": "Central Anchor Protagonist",
     "nameVi": "Nhân vật ở tâm",
     "keywords": [
       "漫画分镜",
@@ -1583,7 +1680,7 @@
     "id": "SB-048",
     "category": "comic-storyboard",
     "nameZh": "环形阅读",
-    "nameEn": "Circular reading",
+    "nameEn": "Circular Loop Narrative",
     "nameVi": "Đọc vòng tròn",
     "keywords": [
       "漫画分镜",
@@ -1599,7 +1696,7 @@
     "id": "SB-049",
     "category": "comic-storyboard",
     "nameZh": "上下坠落式",
-    "nameEn": "Vertical fall",
+    "nameEn": "Downward Plunge Flow",
     "nameVi": "Rơi dọc",
     "keywords": [
       "漫画分镜",
@@ -1615,7 +1712,7 @@
     "id": "SB-050",
     "category": "comic-storyboard",
     "nameZh": "阶梯式",
-    "nameEn": "Staircase panels",
+    "nameEn": "Stepped Staircase Progression",
     "nameVi": "Bậc thang",
     "keywords": [
       "漫画分镜",
@@ -1631,7 +1728,7 @@
     "id": "SB-051",
     "category": "comic-storyboard",
     "nameZh": "波浪式",
-    "nameEn": "Wave rhythm",
+    "nameEn": "Undulating Wave Flow",
     "nameVi": "Sóng nhịp",
     "keywords": [
       "漫画分镜",
@@ -1647,7 +1744,7 @@
     "id": "SB-052",
     "category": "comic-storyboard",
     "nameZh": "自由漂浮式",
-    "nameEn": "Free-floating panels",
+    "nameEn": "Free-Floating Unframed Panels",
     "nameVi": "Ô trôi tự do",
     "keywords": [
       "漫画分镜",
@@ -1663,7 +1760,7 @@
     "id": "SB-053",
     "category": "comic-storyboard",
     "nameZh": "无边框分镜",
-    "nameEn": "Borderless panels",
+    "nameEn": "Frameless Organic Narrative",
     "nameVi": "Không viền",
     "keywords": [
       "漫画分镜",
@@ -1679,7 +1776,7 @@
     "id": "SB-054",
     "category": "comic-storyboard",
     "nameZh": "白场分镜",
-    "nameEn": "White-space page",
+    "nameEn": "Generous Negative Space",
     "nameVi": "Trang nhiều khoảng trắng",
     "keywords": [
       "漫画分镜",
@@ -1695,7 +1792,7 @@
     "id": "SB-055",
     "category": "comic-storyboard",
     "nameZh": "满版冲击格",
-    "nameEn": "Full-bleed impact",
+    "nameEn": "Full-Bleed Splash Page",
     "nameVi": "Ô full-bleed",
     "keywords": [
       "漫画分镜",
@@ -1711,7 +1808,7 @@
     "id": "SB-056",
     "category": "comic-storyboard",
     "nameZh": "跨页式单页模拟",
-    "nameEn": "Simulated splash spread",
+    "nameEn": "Simulated Double-Page Spread",
     "nameVi": "Giả trang trải",
     "keywords": [
       "漫画分镜",
@@ -1727,7 +1824,7 @@
     "id": "SB-057",
     "category": "comic-storyboard",
     "nameZh": "海报式漫画",
-    "nameEn": "Poster-style comic",
+    "nameEn": "Poster-Style Narrative",
     "nameVi": "Trang poster",
     "keywords": [
       "漫画分镜",
@@ -1743,7 +1840,7 @@
     "id": "SB-058",
     "category": "comic-storyboard",
     "nameZh": "封面式叙事页",
-    "nameEn": "Cover-style story page",
+    "nameEn": "Magazine Cover Narrative",
     "nameVi": "Trang bìa",
     "keywords": [
       "漫画分镜",
@@ -1759,7 +1856,7 @@
     "id": "SB-059",
     "category": "comic-storyboard",
     "nameZh": "舞台式分镜",
-    "nameEn": "Stage blocking",
+    "nameEn": "Fixed Proscenium Stage",
     "nameVi": "Sân khấu",
     "keywords": [
       "漫画分镜",
@@ -1775,7 +1872,7 @@
     "id": "SB-060",
     "category": "comic-storyboard",
     "nameZh": "横卷式分镜",
-    "nameEn": "Horizontal scroll",
+    "nameEn": "Horizontal Continuous Scroll",
     "nameVi": "Cuộn ngang",
     "keywords": [
       "漫画分镜",
@@ -1791,7 +1888,7 @@
     "id": "SB-061",
     "category": "comic-storyboard",
     "nameZh": "竖卷式分镜",
-    "nameEn": "Vertical scroll",
+    "nameEn": "Vertical Hanging Scroll",
     "nameVi": "Cuộn dọc",
     "keywords": [
       "漫画分镜",
@@ -1807,7 +1904,7 @@
     "id": "SB-062",
     "category": "comic-storyboard",
     "nameZh": "镜面反射式",
-    "nameEn": "Mirror reflection",
+    "nameEn": "Mirror Reflection Dualism",
     "nameVi": "Phản chiếu gương",
     "keywords": [
       "漫画分镜",
@@ -1823,7 +1920,7 @@
     "id": "SB-063",
     "category": "comic-storyboard",
     "nameZh": "窗口式分镜",
-    "nameEn": "Window frames",
+    "nameEn": "Architectural Window Framing",
     "nameVi": "Khung cửa sổ",
     "keywords": [
       "漫画分镜",
@@ -1839,7 +1936,7 @@
     "id": "SB-064",
     "category": "comic-storyboard",
     "nameZh": "物件遮挡式",
-    "nameEn": "Foreground occlusion",
+    "nameEn": "Foreground Silhouette Framing",
     "nameVi": "Che bởi vật thể",
     "keywords": [
       "漫画分镜",
@@ -1855,7 +1952,7 @@
     "id": "SB-065",
     "category": "comic-storyboard",
     "nameZh": "文字主导式",
-    "nameEn": "Type-led page",
+    "nameEn": "Typographic Scaffold Layout",
     "nameVi": "Chữ dẫn trang",
     "keywords": [
       "漫画分镜",
@@ -1871,7 +1968,7 @@
     "id": "SB-066",
     "category": "comic-storyboard",
     "nameZh": "音效主导式",
-    "nameEn": "SFX-led page",
+    "nameEn": "Onomatopoeia Trail",
     "nameVi": "Hiệu ứng âm thanh dẫn",
     "keywords": [
       "漫画分镜",
@@ -1887,7 +1984,7 @@
     "id": "SB-067",
     "category": "comic-storyboard",
     "nameZh": "色块主导式",
-    "nameEn": "Color-block page",
+    "nameEn": "Color Block Panel Partitions",
     "nameVi": "Mảng màu dẫn",
     "keywords": [
       "漫画分镜",
@@ -1903,7 +2000,7 @@
     "id": "SB-068",
     "category": "comic-storyboard",
     "nameZh": "几何分割式",
-    "nameEn": "Geometric splits",
+    "nameEn": "Non-Rectangular Geometric Mosaic",
     "nameVi": "Cắt hình học",
     "keywords": [
       "漫画分镜",
@@ -1914,5 +2011,486 @@
     ],
     "promptZh": "漫画分镜。排版：几何分割式，使用圆形、三角形、多边形等非矩形面板构成页面。让该分镜机制决定页面结构、阅读顺序、主次画格和镜头节奏；输出一张完整单页漫画页面，画格共同讲述连续情节，角色外观在各格保持一致。",
     "promptEn": "Comic storyboard. Layout: Non-Rectangular Geometric Mosaic, circular, triangular, and polygon panels dividing page, creating stylized geometric rhythm. Let this storyboard mechanism determine the page structure, reading flow, panel hierarchy, and pacing; output a complete single-page comic where panels tell a continuous story with consistent characters."
+  },
+  {
+    "id": "IP-001",
+    "category": "ip-character",
+    "nameZh": "IP定位卡",
+    "nameEn": "IP Positioning Card",
+    "nameVi": "Thẻ định vị IP",
+    "keywords": [
+      "IP定位卡",
+      "IP Positioning Card"
+    ],
+    "promptZh": "IP定位卡。<br>核心目的：回答 IP 为什么存在与商业/情绪定位。<br>卡片内容：IP名称（中/英）、一句话定位（身份 + 核心价值 + 情绪作用）、3个核心调性标签、目标受众画像。<br>画面构成：角色全身主形象居中或偏侧大图展示，视觉记忆点用小图标注，搭配大字排版的名称与定位金句，背景留白充足，具备品牌封面感。纯色背景。<br>IP网感强，形象高度概括，用色克制，如果风格是2d则线条简洁，如果风格不是2d则材质、配件和装饰数量使用克制。小图情况下也有较高辨识度。<br>默认从主题获取设计需求后先设计视觉隐喻，再设计一个好玩的 ip形象。<br>默认使用2d 简笔画风，如果有风格指定，则以指定风格优先。<br>IP默认采用非人的吉祥物形象。<br>避免：额外的道具（除非是IP形象固定部分），和IP无关的氛围感元素。<br>主题：{这里是主题描述}，请帮我设计一个好玩的ip形象",
+    "promptEn": "IP Positioning Card.<br>Core purpose: Answer why the IP exists and define its commercial and emotional positioning.<br>Card content: IP name (Chinese/English), one-sentence positioning (identity + core value + emotional effect), 3 core tone tags, target audience profile.<br>Composition: Full-body primary character displayed prominently in the center or off-center, with small annotated callouts highlighting its visual signature, paired with large bold typography for the name and positioning slogan, with generous whitespace and a brand cover feel. Solid-color clean background.<br>High internet presence, highly generalized silhouette, restrained color palette: clean lines if 2D, restrained materials, accessories, and ornaments if not 2D. High recognizability even at thumbnail scale.<br>Default workflow: Analyze design requirements from the theme, design visual metaphors first, then design a fun IP character.<br>Default style: 2D doodle / sketch style; if a specific style is designated, prioritize the designated style.<br>Default IP character: Non-human mascot character.<br>Avoid: Extraneous props (unless they are a fixed part of the IP character), atmospheric decorative elements unrelated to the IP.<br>Theme: {theme description}, please design a fun IP character for me."
+  },
+  {
+    "id": "IP-002",
+    "category": "ip-character",
+    "nameZh": "角色形象三视图基准图",
+    "nameEn": "Character Model Sheet & Turnaround",
+    "nameVi": "Ba góc nhân vật",
+    "keywords": [
+      "角色形象三视图基准图",
+      "Character Model Sheet & Turnaround"
+    ],
+    "promptZh": "排版：角色三视图与头像基准图。画面呈现角色设定基准图，整齐水平排列展示。左侧为脖子以上的头像特写近照（HEADSHOT）；右侧依次为角色的全身正视图（FRONT VIEW）、全身侧视图（SIDE VIEW）、全身背视图（BACK VIEW）。各视图人物保持标准中立直立站姿，视角水平平视，身体比例与高度一致，下方附有简短视图标签。避免：不要歪头，不要拿道具，不要插兜，无倾斜动作。",
+    "promptEn": "Layout: Character Model Sheet & Turnaround Sheet. A horizontal character reference model sheet with views arranged neatly side by side. On the left is a close-up headshot showing the neck and above (HEADSHOT); on the right, sequentially arranged, are the full-body front view (FRONT VIEW), full-body side view (SIDE VIEW), and full-body back view (BACK VIEW). The character maintains a standard neutral upright standing pose at eye level across all views with consistent proportions and height, accompanied by brief view labels underneath. Avoid: no tilted head, no props, no hands in pockets, no dynamic leaning poses."
+  },
+  {
+    "id": "IP-003",
+    "category": "ip-character",
+    "nameZh": "16宫格角色微信表情包",
+    "nameEn": "16-Grid Character WeChat Sticker Sheet",
+    "nameVi": "Sticker 16 ô",
+    "keywords": [
+      "16宫格角色微信表情包",
+      "16-Grid Character WeChat Sticker Sheet"
+    ],
+    "promptZh": "请用16宫格设计角色的微信表情包。",
+    "promptEn": "Design a 16-grid WeChat emoji and sticker sheet for the character."
+  },
+  {
+    "id": "IP-004",
+    "category": "ip-character",
+    "nameZh": "IP服装与道具卡",
+    "nameEn": "IP Outfit & Props Card",
+    "nameVi": "Trang phục và đạo cụ IP",
+    "keywords": [
+      "IP服装与道具卡",
+      "IP Outfit & Props Card"
+    ],
+    "promptZh": "这是IP形象设计之服装与道具卡：在参考图角色的基础上做视觉延展，展示多张常服搭配与专属随身道具。你来帮我设计。",
+    "promptEn": "This is the IP Character Design Outfit & Props Card: Perform visual extension based on the character in the reference image, showcasing multiple everyday outfit variations and iconic personal props. Design it for me."
+  },
+  {
+    "id": "IP-005",
+    "category": "ip-character",
+    "nameZh": "IP内容传播示范卡",
+    "nameEn": "IP Content Communication Showcase Card",
+    "nameVi": "Mẫu lan truyền nội dung IP",
+    "keywords": [
+      "IP内容传播示范卡",
+      "IP Content Communication Showcase Card"
+    ],
+    "promptZh": "这是IP形象设计之内容传播示范卡。核心目的：示范该IP的多张社交平台单图宣传与封面传播。你来帮我设计。",
+    "promptEn": "This is the IP Character Design Content Social Showcase Card. Core purpose: Demonstrate multiple single-image social media promotional posters and cover showcases for this IP. Design it for me."
+  },
+  {
+    "id": "IP-006",
+    "category": "ip-character",
+    "nameZh": "IP角色家族卡",
+    "nameEn": "IP Character Family Lineup Card",
+    "nameVi": "Gia đình nhân vật IP",
+    "keywords": [
+      "IP角色家族卡",
+      "IP Character Family Lineup Card"
+    ],
+    "promptZh": "这是IP形象设计之家族卡，以参考图做视觉延展，设计多个同家族的其他IP形象。",
+    "promptEn": "This is the IP Character Design Family Lineup Card: Uses the reference image for visual extension to design multiple other IP characters from the same family."
+  },
+  {
+    "id": "IP-007",
+    "category": "ip-character",
+    "nameZh": "IP商业应用卡",
+    "nameEn": "IP Commercial Mockup Card",
+    "nameVi": "Mockup thương mại IP",
+    "keywords": [
+      "IP商业应用卡",
+      "IP Commercial Mockup Card"
+    ],
+    "promptZh": "这是IP形象设计之商业应用卡。 核心目的：展示实体周边产品的落地质感。卡片内容：核心衍生品类。你来帮我设计。",
+    "promptEn": "This is the IP Character Design Commercial Application Card. Core purpose: Showcase the tangible physical quality of branded merchandise and derivatives. Card content: Core derivative product categories. Design it for me."
+  },
+  {
+    "id": "IP-008",
+    "category": "ip-character",
+    "nameZh": "IP角色关系卡",
+    "nameEn": "IP Character Relationship Card",
+    "nameVi": "Quan hệ nhân vật IP",
+    "keywords": [
+      "IP角色关系卡",
+      "IP Character Relationship Card"
+    ],
+    "promptZh": "这是IP形象设计之角色关系卡。 核心目的：展现角色与伙伴/对手的相处机制。卡片内容：主角与搭档姓名、一句话互动模式。",
+    "promptEn": "This is the IP Character Design Character Relationship Card. Core purpose: Demonstrate the interaction dynamics between the protagonist and their companion/rival. Card content: Protagonist and partner names, one-sentence interaction mode."
+  },
+  {
+    "id": "IP-009",
+    "category": "ip-character",
+    "nameZh": "IP角色一日生活相册",
+    "nameEn": "IP Character A Day in the Life Photo Album",
+    "nameVi": "Một ngày của nhân vật",
+    "keywords": [
+      "IP角色一日生活相册",
+      "IP Character A Day in the Life Photo Album"
+    ],
+    "promptZh": "请显示该角色真实的iphone相册截屏，如果主题没有指定默认角色一天的生活。竖屏。避免：手机框。",
+    "promptEn": "Show a realistic iPhone Photos app album screenshot of this character; if no specific theme is provided, default to a full day in the life of the character. Vertical aspect ratio. Avoid: phone frame."
+  },
+  {
+    "id": "IP-010",
+    "category": "ip-character",
+    "nameZh": "IP角色社交圈动态卡",
+    "nameEn": "IP Character Social Feed Moments Card",
+    "nameVi": "Bảng tin mạng xã hội IP",
+    "keywords": [
+      "IP角色社交圈动态卡",
+      "IP Character Social Feed Moments Card"
+    ],
+    "promptZh": "请显示该角色的微信朋友圈截屏，展示角色的朋友们发的朋友圈内容。避免：该角色自己发的内容。",
+    "promptEn": "Show a WeChat Moments feed screenshot for this character, displaying Moments posts published by the character's friends. Avoid: posts published by the character itself."
+  },
+  {
+    "id": "IP-011",
+    "category": "ip-character",
+    "nameZh": "IP角色微信群聊界面卡",
+    "nameEn": "IP Character WeChat Group Chat Interface Card",
+    "nameVi": "Giao diện chat nhóm IP",
+    "keywords": [
+      "IP角色微信群聊界面卡",
+      "IP Character WeChat Group Chat Interface Card"
+    ],
+    "promptZh": "请显示该角色与朋友的微信聊天界面截屏。",
+    "promptEn": "Show a WeChat chat interface screenshot of this character with friends."
+  },
+  {
+    "id": "IP-012",
+    "category": "ip-character",
+    "nameZh": "IP角色小红书主页卡",
+    "nameEn": "IP Character Xiaohongshu Profile Interface Card",
+    "nameVi": "Trang hồ sơ Xiaohongshu IP",
+    "keywords": [
+      "IP角色小红书主页卡",
+      "IP Character Xiaohongshu Profile Interface Card"
+    ],
+    "promptZh": "请显示该角色的小红书账号界面截屏。避免：手机框。",
+    "promptEn": "Show a Xiaohongshu account profile interface screenshot for this character. Avoid: phone frame."
+  },
+  {
+    "id": "IP-013",
+    "category": "ip-character",
+    "nameZh": "IP招牌体态与动态力线卡",
+    "nameEn": "IP Signature Poses & Action Lines Card",
+    "nameVi": "Dáng đặc trưng và đường động",
+    "keywords": [
+      "IP招牌体态与动态力线卡",
+      "IP Signature Poses & Action Lines Card"
+    ],
+    "promptZh": "在参考图角色的基础上做视觉延展，展示多张角色的招牌体态与动态力线。你来帮我设计。",
+    "promptEn": "Perform visual extension based on the character in the reference image, showcasing multiple signature poses and dynamic action lines of the character. Design it for me."
+  },
+  {
+    "id": "EC-001",
+    "category": "ecommerce",
+    "nameZh": "单品主图",
+    "nameEn": "Single Product Hero Image",
+    "nameVi": "Ảnh hero một sản phẩm",
+    "keywords": [
+      "单品主图",
+      "Single Product Hero Image"
+    ],
+    "promptZh": "电商单品主图。核心任务：第一眼看清商品。受众：{由用户输入，或根据商品与用户资料总结图片受众}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。必须保留的商品识别信息：{由根据参考图或资料总结；如无特殊要求则留空}。其余画面表现请围绕“主体清晰、商品突出、第一眼看懂商品”完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce single product hero image. Core task: Clearly present the product at first glance. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Mandatory product identification features: {Summarized based on reference image or data; leave blank if no special requirements}. Render the rest of the visual presentation around \"clear subject, prominent product, immediately understandable at first glance\". Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-002",
+    "category": "ecommerce",
+    "nameZh": "多角度展示图",
+    "nameEn": "Multi-Angle Display Image",
+    "nameVi": "Nhiều góc sản phẩm",
+    "keywords": [
+      "多角度展示图",
+      "Multi-Angle Display Image"
+    ],
+    "promptZh": "电商多角度展示图。核心任务：让用户快速看清商品整体结构与不同视角。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。需要重点展示的角度或结构：{由用户指定；若未指定，由根据商品形态判断最有信息价值的视角}。其余多视角组织方式与画面表现请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce multi-angle display image. Core task: Allow users to quickly see the overall product structure and different perspectives. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Angles or structures to emphasize: {Specified by user; if unspecified, determine the most informative angles based on product morphology}. Autonomously arrange the multi-angle composition and visual presentation. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-003",
+    "category": "ecommerce",
+    "nameZh": "细节特写图",
+    "nameEn": "Detail Closeup Image",
+    "nameVi": "Cận chi tiết",
+    "keywords": [
+      "细节特写图",
+      "Detail Closeup Image"
+    ],
+    "promptZh": "电商细节特写图。核心任务：突出商品最值得关注的局部细节、做工或质感。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。重点细节：{由用户指定；若未指定，由根据商品资料提炼最值得展示的真实细节}。其余特写视角、取景、光线与质感表现请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce detail closeup image. Core task: Highlight the product's most notable local details, craftsmanship, or material texture. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Key details: {Specified by user; if unspecified, extract the most valuable authentic details based on product data}. Autonomously determine the closeup angles, framing, lighting, and texture rendering. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-004",
+    "category": "ecommerce",
+    "nameZh": "包装 / 套装 / 内容物展示图",
+    "nameEn": "Packaging / Set / Contents Display Image",
+    "nameVi": "Bao bì / bộ / thành phần",
+    "keywords": [
+      "包装 / 套装 / 内容物展示图",
+      "Packaging / Set / Contents Display Image"
+    ],
+    "promptZh": "电商包装、套装与内容物展示图。核心任务：让用户快速看清购买后实际获得的商品、包装、配件或组合内容。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品与内容物：{从用户输入、商品清单或参考资料中提取，不得补造不存在的配件或赠品}。其余陈列方式、层级关系与视觉组织请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce packaging, set, and contents display image. Core task: Let users quickly see what is actually included upon purchase—products, packaging, accessories, or bundled items. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product and contents: {Extracted from user input, product list, or reference data; do not invent non-existent accessories or gifts}. Autonomously arrange display composition, hierarchical relations, and visual layout. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-005",
+    "category": "ecommerce",
+    "nameZh": "卖点标注图",
+    "nameEn": "Feature Callout Image",
+    "nameVi": "Chú thích điểm bán",
+    "keywords": [
+      "卖点标注图",
+      "Feature Callout Image"
+    ],
+    "promptZh": "电商卖点标注图。核心任务：快速传达商品最重要的购买理由。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。核心卖点：{优先使用用户提供内容；若未明确，从商品资料中提炼 3～5 个真实卖点}。卖点优先级：{由根据目标受众与购买决策价值排序}。其余标注方式、视觉层级与画面表现请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce feature callout image. Core task: Quickly communicate the most compelling reasons to buy. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Core selling points: {Prioritize user-provided content; if not specified, extract 3-5 authentic selling points from product data}. Priority of selling points: {Rank based on target audience and purchase decision value}. Autonomously determine annotation methods, visual hierarchy, and overall presentation. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-006",
+    "category": "ecommerce",
+    "nameZh": "功能演示图",
+    "nameEn": "Function Demonstration Image",
+    "nameVi": "Minh họa chức năng",
+    "keywords": [
+      "功能演示图",
+      "Function Demonstration Image"
+    ],
+    "promptZh": "电商功能演示图。核心任务：直观表现商品能做什么，以及核心功能如何作用。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。核心功能：{从用户输入或商品资料提取}。功能作用对象与结果：{仅根据可确认资料总结，不得虚构效果}。其余动作设计、状态表现、功能可视化方式与画面表现请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce function demonstration image. Core task: Intuitively demonstrate what the product does and how its core functions operate. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Core function: {Extracted from user input or product data}. Function target and result: {Summarized strictly from verifiable data, do not fabricate effects}. Autonomously design the action, state representation, function visualization method, and overall visual presentation. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-007",
+    "category": "ecommerce",
+    "nameZh": "参数尺寸图",
+    "nameEn": "Specification & Dimension Image",
+    "nameVi": "Thông số và kích thước",
+    "keywords": [
+      "参数尺寸图",
+      "Specification & Dimension Image"
+    ],
+    "promptZh": "电商参数尺寸图。核心任务：让用户快速理解影响购买决策的关键规格与尺寸。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。关键参数：{从用户资料中提取真实的尺寸、容量、重量、规格等；没有资料时不得猜测}。参数优先级：{由根据商品类别与购买决策价值筛选}。其余测量关系、信息组织与视觉表达请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce specification and dimension image. Core task: Let users quickly understand critical specifications and dimensions that influence buying decisions. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Key specifications: {Extract genuine dimensions, capacity, weight, specs, etc., from user data; do not guess if data is missing}. Specification priority: {Filter based on product category and purchase decision value}. Autonomously design measurement relations, information layout, and visual presentation. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-008",
+    "category": "ecommerce",
+    "nameZh": "材质 / 结构解析图",
+    "nameEn": "Material / Structure Exploded Image",
+    "nameVi": "Chất liệu / cấu trúc",
+    "keywords": [
+      "材质 / 结构解析图",
+      "Material / Structure Exploded Image"
+    ],
+    "promptZh": "电商材质与结构解析图。核心任务：解释商品由什么构成，以及材质、结构或组成为什么重要。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。材质、组成或结构信息：{从用户输入或商品资料中提取；可根据商品类型自动理解为配方、面料、部件、层级、内部结构等}。其余剖面、分层、局部放大、爆炸展开等视觉表达方式请自主选择。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce material and structure analysis image. Core task: Explain what the product is made of, and why its materials, structure, or composition matter. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Material, composition, or structural information: {Extracted from user input or product data; interpret appropriately as ingredients, fabrics, components, layers, or internal structure depending on product type}. Autonomously select visual techniques such as cross-sections, exploded views, layering, or callout blowups. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-009",
+    "category": "ecommerce",
+    "nameZh": "生活方式场景图",
+    "nameEn": "Lifestyle Scenario Image",
+    "nameVi": "Cảnh lifestyle",
+    "keywords": [
+      "生活方式场景图",
+      "Lifestyle Scenario Image"
+    ],
+    "promptZh": "电商生活方式场景图。核心任务：让用户自然想象拥有和使用商品后的生活状态。受众：{由用户输入，或根据商品定位与资料总结}。主题：{由用户输入，或根据商品资料与受众总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。生活情境：{若用户已指定则使用；否则由根据商品用途、受众和品牌调性概括最合适的生活情境}。其余人物、环境、时间、光线、道具和氛围请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce lifestyle scenario image. Core task: Enable users to naturally envision their lifestyle after owning and using the product. Audience: {Input by user, or summarized based on product positioning and data}. Theme: {Input by user, or summarized based on product data and audience}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Lifestyle setting: {Use if specified by user; otherwise summarize the most suitable setting based on product use, audience, and brand tone}. Autonomously design the characters, environment, time of day, lighting, props, and overall atmosphere. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-010",
+    "category": "ecommerce",
+    "nameZh": "人物使用图",
+    "nameEn": "In-Use Demonstration Image",
+    "nameVi": "Người đang dùng",
+    "keywords": [
+      "人物使用图",
+      "In-Use Demonstration Image"
+    ],
+    "promptZh": "电商人物使用图。核心任务：清晰展示人与商品之间的真实使用关系。受众：{由用户输入，或根据商品定位与资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。使用者：{由用户指定；未指定时由根据目标受众概括}。使用动作：{由用户指定，或根据商品真实用途总结}。其余人物姿态、镜头、场景和交互表现请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce in-use demonstration image. Core task: Clearly showcase the genuine usage relationship between user and product. Audience: {Input by user, or summarized based on product positioning and data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. User persona: {Specified by user; if unspecified, summarize based on target audience}. Usage action: {Specified by user, or summarized based on genuine product usage}. Autonomously design character pose, camera framing, scene setting, and interactive expression. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-011",
+    "category": "ecommerce",
+    "nameZh": "多场景适用图",
+    "nameEn": "Multi-Scenario Application Image",
+    "nameVi": "Nhiều bối cảnh dùng",
+    "keywords": [
+      "多场景适用图",
+      "Multi-Scenario Application Image"
+    ],
+    "promptZh": "电商多场景适用图。核心任务：展示同一商品在多个典型场景中的适用性。受众：{由用户输入，或根据商品定位与资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。主要使用场景：{优先使用用户提供场景；未提供时由根据商品用途和目标受众总结 3～5 个最典型场景}。其余场景组织、画面节奏与统一视觉表现请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce multi-scenario application image. Core task: Showcase the versatility and applicability of the same product across multiple representative scenarios. Audience: {Input by user, or summarized based on product positioning and data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Key usage scenarios: {Prioritize user-provided scenarios; if not provided, summarize 3-5 typical scenarios based on product utility and target audience}. Autonomously determine scene arrangement, visual rhythm, and cohesive presentation. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-012",
+    "category": "ecommerce",
+    "nameZh": "使用步骤 / 教程图",
+    "nameEn": "Usage Steps / Tutorial Image",
+    "nameVi": "Các bước sử dụng",
+    "keywords": [
+      "使用步骤 / 教程图",
+      "Usage Steps / Tutorial Image"
+    ],
+    "promptZh": "电商使用步骤或教程图。核心任务：让用户快速理解商品如何正确使用。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。使用步骤：{从用户说明、说明书或商品资料中提取并整理为清晰顺序；不得编造关键操作}。注意事项：{仅提取有依据的信息}。其余步骤画面、动作视角与流程组织请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce usage steps or tutorial image. Core task: Allow users to quickly grasp how to use the product properly. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Usage steps: {Extract from user instructions, manuals, or product data into a clear sequence; do not fabricate key actions}. Precautions: {Extract only verifiable information}. Autonomously design step illustrations, action perspectives, and workflow layout. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-013",
+    "category": "ecommerce",
+    "nameZh": "对比优势图",
+    "nameEn": "Comparative Advantage Image",
+    "nameVi": "So sánh lợi thế",
+    "keywords": [
+      "对比优势图",
+      "Comparative Advantage Image"
+    ],
+    "promptZh": "电商对比优势图。核心任务：让用户快速理解本商品与其他方案之间的关键差异。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。本商品：{由用户指定、参考图识别或商品资料提取}。对比对象：{由用户指定；未指定时只能基于用户资料中已有的对比对象进行总结，不得虚构竞品信息}。比较维度：{从资料中提取真实差异，并根据购买决策价值排序}。其余对比结构与视觉表达请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce comparative advantage image. Core task: Allow users to quickly understand key differentiators between this product and alternative options. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. This product: {Specified by user, recognized from reference image, or extracted from product data}. Comparison target: {Specified by user; if unspecified, summarize only from existing comparison targets in user data, do not fabricate competitor info}. Comparison criteria: {Extract genuine differences from data and rank by purchase decision value}. Autonomously design comparison layout structure and visual expression. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-014",
+    "category": "ecommerce",
+    "nameZh": "型号 / SKU 差异图",
+    "nameEn": "Model / SKU Comparison Image",
+    "nameVi": "Khác biệt mẫu / SKU",
+    "keywords": [
+      "型号 / SKU 差异图",
+      "Model / SKU Comparison Image"
+    ],
+    "promptZh": "电商型号与 SKU 差异图。核心任务：帮助用户快速区分不同颜色、尺寸、容量、配置或型号。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。SKU / 型号列表：{从用户资料中提取}。各版本主要差异：{由根据真实资料整理，不得推测不存在的区别}。其余版本陈列、分组与信息层级请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce model and SKU comparison image. Core task: Help users quickly distinguish between different colors, sizes, capacities, configurations, or models. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. SKU / model list: {Extracted from user data}. Key differences between versions: {Organized based on authentic data; do not infer non-existent differences}. Autonomously arrange version showcase, grouping, and information hierarchy. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-015",
+    "category": "ecommerce",
+    "nameZh": "适配 / 选择指南图",
+    "nameEn": "Fit / Selection Guide Image",
+    "nameVi": "Hướng dẫn chọn",
+    "keywords": [
+      "适配 / 选择指南图",
+      "Fit / Selection Guide Image"
+    ],
+    "promptZh": "电商适配与选择指南图。核心任务：帮助用户判断哪一种商品、规格或版本最适合自己。受众：{由用户输入，或根据商品定位与资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。用户条件：{由用户输入，或根据目标受众总结常见选择条件}。选择维度：{从真实资料中提取，如尺码、容量、设备、使用场景、需求等}。推荐关系：{根据用户资料中的规则整理；无依据时不得自行建立硬性推荐关系}。其余选择路径与视觉表达请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce fit and selection guide image. Core task: Help users determine which product, specification, or edition best suits their needs. Audience: {Input by user, or summarized based on product positioning and data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. User conditions: {Input by user, or summarized based on common conditions of target audience}. Selection dimensions: {Extracted from genuine data, such as sizing, capacity, compatible devices, usage scenarios, needs, etc.}. Recommendation logic: {Organized based on rules in user data; do not establish rigid recommendations without evidence}. Autonomously design selection pathways and visual representation. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-016",
+    "category": "ecommerce",
+    "nameZh": "FAQ / 注意事项图",
+    "nameEn": "FAQ / Precautions Image",
+    "nameVi": "FAQ / lưu ý",
+    "keywords": [
+      "FAQ / 注意事项图",
+      "FAQ / Precautions Image"
+    ],
+    "promptZh": "电商 FAQ 与注意事项图。核心任务：集中解决购买前最重要的疑问、限制条件与注意事项。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。问题与答案：{优先使用用户提供内容；未提供时只能根据已有商品资料整理可确认的问题与答案，不得虚构政策、承诺或功能}。重点注意事项：{从资料中提取}。其余信息分组与视觉表达请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce FAQ and precautions image. Core task: Centrally address the most crucial pre-purchase questions, constraints, and precautions. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Q&A content: {Prioritize user-provided content; if not provided, compile only verifiable questions and answers from existing product data; do not fabricate policies, promises, or features}. Key precautions: {Extracted from data}. Autonomously organize information grouping and visual layout. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-017",
+    "category": "ecommerce",
+    "nameZh": "品质 / 工艺说明图",
+    "nameEn": "Quality & Craftsmanship Explanatory Image",
+    "nameVi": "Chất lượng và tay nghề",
+    "keywords": [
+      "品质 / 工艺说明图",
+      "Quality & Craftsmanship Explanatory Image"
+    ],
+    "promptZh": "电商品质与工艺说明图。核心任务：通过真实工艺、制造过程或品质细节建立价值感。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。品质与工艺信息：{从用户资料中提取并整理为最有说服力的真实信息}。其余工艺呈现方式、细节表现与画面组织请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce quality and craftsmanship explanatory image. Core task: Establish a sense of value through authentic craftsmanship, manufacturing processes, or quality details. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Quality and craftsmanship information: {Extracted from user data and organized into the most persuasive authentic information}. Autonomously design the craftsmanship presentation, detail rendering, and visual arrangement. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-018",
+    "category": "ecommerce",
+    "nameZh": "认证 / 数据证明图",
+    "nameEn": "Certification & Data Proof Image",
+    "nameVi": "Chứng nhận và số liệu",
+    "keywords": [
+      "认证 / 数据证明图",
+      "Certification & Data Proof Image"
+    ],
+    "promptZh": "电商认证与数据证明图。核心任务：用可验证的认证、检测结果、性能数据或实验信息建立可信度。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。认证 / 数据：{仅从用户资料或明确来源中提取；没有可确认资料时必须留空或提示用户补充，不得生成虚假认证、数值或实验结论}。重点结论：{基于真实资料压缩总结}。其余数据视觉化方式请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce certification and data proof image. Core task: Build credibility using verifiable certifications, test results, performance metrics, or experimental data. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Certification / data: {Extracted solely from user data or clear sources; leave blank or prompt user if unverifiable, never fabricate certifications, numbers, or lab findings}. Key conclusion: {Compressed summary based on authentic data}. Autonomously determine data visualization methods. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-019",
+    "category": "ecommerce",
+    "nameZh": "评价 / 口碑图",
+    "nameEn": "Review & Word-of-Mouth Image",
+    "nameVi": "Đánh giá / truyền miệng",
+    "keywords": [
+      "评价 / 口碑图",
+      "Review & Word-of-Mouth Image"
+    ],
+    "promptZh": "电商评价与口碑图。核心任务：通过真实用户反馈建立社会证明。受众：{由用户输入，或根据商品与用户资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。评价内容：{仅使用用户提供的真实评价、平台资料或明确可用的口碑信息，不得虚构用户名、评分、销量或评价}。口碑关键词：{从真实评价中提炼}。其余评价呈现形式与视觉表达请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce review and word-of-mouth image. Core task: Establish social proof through authentic customer feedback. Audience: {Input by user, or summarized based on product and user data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Review content: {Use only genuine user reviews, platform data, or verified reputation data; do not fabricate usernames, ratings, sales counts, or reviews}. Reputation keywords: {Extracted from authentic reviews}. Autonomously determine review presentation formats and visual styling. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-020",
+    "category": "ecommerce",
+    "nameZh": "品牌 / 来源故事图",
+    "nameEn": "Brand & Origin Story Image",
+    "nameVi": "Câu chuyện thương hiệu",
+    "keywords": [
+      "品牌 / 来源故事图",
+      "Brand & Origin Story Image"
+    ],
+    "promptZh": "电商品牌与来源故事图。核心任务：帮助用户理解商品背后的品牌、来源、设计理念或制造背景。受众：{由用户输入，或根据商品与品牌资料总结}。主题：{由用户输入，或根据品牌与商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。品牌 / 来源信息：{从用户资料、品牌资料或商品背景中提取}。故事重点：{筛选最有助于理解商品价值的真实内容}。其余叙事画面与视觉表达请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce brand and origin story image. Core task: Help users understand the brand, origin, design philosophy, or production background behind the product. Audience: {Input by user, or summarized based on product and brand data}. Theme: {Input by user, or summarized based on brand and product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Brand / origin information: {Extracted from user data, brand assets, or product background}. Story focus: {Select authentic content that best communicates product value}. Autonomously design narrative visuals and artistic presentation. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-021",
+    "category": "ecommerce",
+    "nameZh": "新品上市图",
+    "nameEn": "New Arrival Launch Image",
+    "nameVi": "Ra mắt sản phẩm mới",
+    "keywords": [
+      "新品上市图",
+      "New Arrival Launch Image"
+    ],
+    "promptZh": "电商新品上市图。核心任务：明确传达“这是一个值得关注的新商品 / 新版本”。受众：{由用户输入，或根据新品定位与资料总结}。主题：{由用户输入，或根据新品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。新品主体：{由用户指定、参考图识别或商品资料提取}。新品亮点：{由用户提供，或从新品资料中提炼真实变化与核心价值}。发布时间、上市信息：{仅在用户资料明确提供时使用}。其余发布感、视觉冲击与画面表现请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce new arrival launch image. Core task: Clearly communicate that \"this is a noteworthy new product / new release\". Audience: {Input by user, or summarized based on new release positioning and data}. Theme: {Input by user, or summarized based on new release data}. Copy: {Provided by user materials or inferred and designed based on the product}. New product subject: {Specified by user, recognized from reference image, or extracted from product data}. Product highlights: {Provided by user, or extracted as authentic changes and core values from new release data}. Launch date / release info: {Use only when explicitly provided in user data}. Autonomously design the launch energy, visual impact, and graphic presentation. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-022",
+    "category": "ecommerce",
+    "nameZh": "促销活动图",
+    "nameEn": "Promotion & Sales Event Image",
+    "nameVi": "Khuyến mãi",
+    "keywords": [
+      "促销活动图",
+      "Promotion & Sales Event Image"
+    ],
+    "promptZh": "电商促销活动图。核心任务：让用户快速理解活动利益点并产生即时购买动机。受众：{由用户输入，或根据商品和活动资料总结}。主题：{由用户输入，或根据活动资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。活动机制：{从用户资料中提取折扣、满减、赠品、组合、限时等真实活动信息}。活动时间与限制：{仅使用用户明确提供的信息}。其余促销氛围、视觉重点和画面表现请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce promotion and sales event image. Core task: Enable users to immediately grasp promotional benefits and generate purchase intent. Audience: {Input by user, or summarized based on product and campaign data}. Theme: {Input by user, or summarized based on campaign data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Campaign mechanics: {Extract genuine discount, tiered reduction, gifts, bundles, or limited-time campaign rules from user data}. Campaign dates and limits: {Use only explicitly provided user info}. Autonomously design promotional atmosphere, focal points, and visual presentation. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-023",
+    "category": "ecommerce",
+    "nameZh": "内容种草 / UGC 图",
+    "nameEn": "Content Seeding & UGC Image",
+    "nameVi": "Seeding / UGC",
+    "keywords": [
+      "内容种草 / UGC 图",
+      "Content Seeding & UGC Image"
+    ],
+    "promptZh": "电商内容种草与 UGC 图。核心任务：用更自然、更像真实分享的方式传达商品体验与推荐理由。受众：{由用户输入，或根据商品与平台资料总结}。主题：{由用户输入，或根据商品资料总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。使用体验与推荐理由：{优先使用用户提供内容；若无真实体验资料，只能基于商品已知特征总结，不得冒充真实消费者评价}。平台语境：{由用户指定；未指定时可由根据任务判断}。其余随拍感、生活感、镜头和视觉表达请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce content seeding and UGC image. Core task: Convey product experience and recommendation reasons in a natural, organic sharing style. Audience: {Input by user, or summarized based on product and platform data}. Theme: {Input by user, or summarized based on product data}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Experience and recommendation rationale: {Prioritize user-provided content; if absent, summarize based on known product traits without faking customer testimonials}. Platform context: {Specified by user; if unspecified, infer based on task}. Autonomously design the casual snap aesthetic, everyday realism, camera angles, and visual expression. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
+  },
+  {
+    "id": "EC-024",
+    "category": "ecommerce",
+    "nameZh": "广告主视觉 / Hero / KV",
+    "nameEn": "Key Visual & Hero Art (KV)",
+    "nameVi": "Key visual / hero",
+    "keywords": [
+      "广告主视觉 / Hero / KV",
+      "Key Visual & Hero Art (KV)"
+    ],
+    "promptZh": "电商广告主视觉、Hero 或 KV。核心任务：围绕商品建立一个强烈、集中、具有传播力的核心视觉概念。受众：{由用户输入，或根据商品、品牌与传播资料总结}。主题：{由用户输入，或根据商品与传播目标总结}。文案：{由用户提供资料或者根据商品自行推断设计}。商品主体：{由用户指定、参考图识别或商品资料提取}。核心传播信息：{由用户提供，或根据商品卖点、品牌定位和传播目标提炼}。创意方向：{用户指定时优先；未指定时请根据商品属性和核心传播信息自主选择，如超现实、微缩世界、巨型商品、概念隐喻、艺术装置、流体世界、悬浮视觉、材质世界、编辑式广告等}。除事实信息与核心传播信息外，其余视觉创意请自主完成。场景和周边元素可以采用指定画风，但是必须保持商品的写实风格。",
+    "promptEn": "E-commerce key visual, hero shot, or key art (KV). Core task: Build an intense, focused, highly communicable core visual concept around the product. Audience: {Input by user, or summarized based on product, brand, and communication data}. Theme: {Input by user, or summarized based on product and communication goals}. Copy: {Provided by user materials or inferred and designed based on the product}. Product subject: {Specified by user, recognized from reference image, or extracted from product data}. Core message: {Provided by user, or distilled from product selling points, brand positioning, and campaign goals}. Creative direction: {Prioritize user-specified direction; if unspecified, select autonomously based on product attributes and core message, e.g. surrealism, miniature world, colossal product, conceptual metaphor, art installation, fluid world, levitation visual, material realm, editorial advertising, etc.}. Except for factual and core messaging data, design the rest of visual creativity autonomously. Background scenes and surrounding elements may adopt the specified artistic style, but the product itself must strictly maintain a realistic photographic style."
   }
 ]
